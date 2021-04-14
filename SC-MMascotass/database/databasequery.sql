@@ -75,3 +75,25 @@ CREATE TABLE Veterinaria.DetallesVenta(
 	Total FLOAT NOT NULL,
 )
 GO
+
+CREATE TABLE Usuarios.Usuario (
+	id INT NOT NULL IDENTITY (500, 1),
+	nombreCompleto VARCHAR(255) NOT NULL,
+	username VARCHAR(100) NOT NULL,
+	password VARCHAR(100) NOT NULL,
+	estado BIT NOT NULL,
+	CONSTRAINT PK_Usuario_id
+		PRIMARY KEY CLUSTERED (id)
+)
+-- No puede existir nombres de usuarios repetidos
+ALTER TABLE Usuarios.Usuario
+	ADD CONSTRAINT AK_Usuarios_Usuario_username
+	UNIQUE NONCLUSTERED (username)
+GO
+
+-- La contraseña debe contener al menos 6 caracteres
+ALTER TABLE Usuarios.Usuario WITH CHECK
+	ADD CONSTRAINT CHK_Usuarios_Usuario$VerificarLongitudContraseña
+	CHECK (LEN(password) >= 6)
+GO
+
