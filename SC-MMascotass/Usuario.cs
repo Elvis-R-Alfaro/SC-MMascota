@@ -45,22 +45,48 @@ namespace SC_MMascotass
         /// <param name="username">El nombre del usuario</param>
         /// <param name="password">La contrasña del usuario</param>
         /// <returns>Los datos del usuario</returns>
-        //public Usuario IniciarSesion(string username, string password)
-        //{
-            // Crear ibjeto que almacena la información de los resultados
-        //    Usuario usuario = new Usuario();
+        public Usuario BuscarUsuario(string username, string password)
+        {
+            //Crear ibjeto que almacena la información de los resultados
+            Usuario usuario = new Usuario();
 
-         //   try
-         //   {
+            try
+            {
                 //Query de seleccion
-        //        string query = @"SELECT * FROM"
-        //    }
-        //    catch (Exception e)
-        //    {
+                string query = @"SELECT * FROM Usuarios.usuario
+                                WHERE username = @username";
 
-        //        throw e;
-         //   }
-        //}
+               
+
+                //Crear comando SQL
+                SqlCommand sqlCommand = new SqlCommand(query, SqlConnection);
+
+                using (SqlDataReader rdr = sqlCommand.ExecuteReader())
+                {
+                    while (rdr.Read())
+                    {
+                        //Obtener los valores del usuarios si la consulta retorna valores
+                        usuario.Id = Convert.ToInt32(rdr["id"]);
+                        usuario.NombreCompleto = rdr["nombreCompleto"].ToString();
+                        usuario.Username = rdr["username"].ToString();
+                        usuario.Password = rdr["password"].ToString();
+                        usuario.Estado = Convert.ToBoolean(rdr["estado"]);
+                    }
+
+                }
+                //retornar el usuario con los valores
+                return usuario;
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            finally {
+                //Cerrar la seccion
+                SqlConnection.Close();
+            }
+        }
 
     }
 }
