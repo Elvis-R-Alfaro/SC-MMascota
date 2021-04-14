@@ -43,9 +43,8 @@ namespace SC_MMascotass
         /// Verifica si las credenciales de inicio de sesion son correctas.
         /// </summary>
         /// <param name="username">El nombre del usuario</param>
-        /// <param name="password">La contrasña del usuario</param>
         /// <returns>Los datos del usuario</returns>
-        public Usuario BuscarUsuario(string username, string password)
+        public Usuario BuscarUsuario(string username)
         {
             //Crear ibjeto que almacena la información de los resultados
             Usuario usuario = new Usuario();
