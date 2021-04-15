@@ -59,7 +59,7 @@
                         Foreground="Black"
                         FontSize="14"
                         BorderThickness="0"
-                        Name="btnMascotas">
+                        Name="btnMascotas" Click="btnMascotas_Click">
                 <StackPanel Orientation="Horizontal" Width="100">
                     <Image Source="/Imagenes/mascota.png" Width="20" Height="20" Margin="0 0 20 0"/>
                     <TextBlock Text="Mascotas" VerticalAlignment="Center"/>

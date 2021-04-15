@@ -39,5 +39,10 @@ namespace SC_MMascotass
         {
             AgregarForm(new Pages.Clientes());
         }
+
+        private void btnMascotas_Click(object sender, RoutedEventArgs e)
+        {
+            AgregarForm(new Pages.Mascotas());
+        }
     }
 }
