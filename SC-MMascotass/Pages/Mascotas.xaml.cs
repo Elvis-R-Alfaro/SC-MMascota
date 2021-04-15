@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace SC_MMascotass.Pages
 {
     /// <summary>
-    /// Interaction logic for Clientes.xaml
+    /// Interaction logic for Mascotas.xaml
     /// </summary>
-    public partial class Clientes : UserControl
+    public partial class Mascotas : UserControl
     {
-        public Clientes()
+        public Mascotas()
         {
             InitializeComponent();
         }
@@ -28,9 +28,8 @@ namespace SC_MMascotass.Pages
         private void btnNuevo_Click(object sender, RoutedEventArgs e)
         {
             // Mostrar el formulario de menú principal
-            FormCliente cliente = new FormCliente();
-            cliente.Show();
+            FormMascotas mascota = new FormMascotas();
+            mascota.Show();
         }
-
     }
 }

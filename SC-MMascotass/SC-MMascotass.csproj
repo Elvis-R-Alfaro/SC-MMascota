@@ -74,6 +74,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ClientesCS.cs" />
     <Compile Include="MenuPrincipal.xaml.cs">
       <DependentUpon>MenuPrincipal.xaml</DependentUpon>
     </Compile>
@@ -82,6 +83,12 @@
     </Compile>
     <Compile Include="Pages\FormCliente.xaml.cs">
       <DependentUpon>FormCliente.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\FormMascotas.xaml.cs">
+      <DependentUpon>FormMascotas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Mascotas.xaml.cs">
+      <DependentUpon>Mascotas.xaml</DependentUpon>
     </Compile>
     <Compile Include="Usuario.cs" />
     <Page Include="IniciarSesion.xaml">
@@ -105,6 +112,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\FormCliente.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\FormMascotas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Mascotas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -139,6 +154,7 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="database\databasequery.sql" />
+    <Resource Include="Imagenes\iconos\buscarWH.png" />
     <Resource Include="Imagenes\iconos\editar.png" />
     <Resource Include="Imagenes\iconos\eliminar.png" />
     <Resource Include="Imagenes\iconos\guardar.png" />
