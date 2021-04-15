@@ -43,11 +43,14 @@ namespace SC_MMascotass
                 }
                 else {
                     //Verificar si la contraseña coincide con la de la base
-                    if (elUsuario.Password == pwbPassword.Password)
+                    if (elUsuario.Password == pwbPassword.Password && elUsuario.Estado)
                     {
                         MessageBox.Show("Bienvenido al sistema de Mi mascota!");
                     }
-                    else
+                    else if (!elUsuario.Estado)
+                    {
+                        MessageBox.Show("El usuario se encuentra inactivo, comuniquese con el personal de IT");
+                    }else
                     {
                         MessageBox.Show("El usuario o contraseña no es correcta");
                     }
