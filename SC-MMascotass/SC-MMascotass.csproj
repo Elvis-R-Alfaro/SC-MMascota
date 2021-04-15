@@ -80,6 +80,9 @@
     <Compile Include="Pages\Clientes.xaml.cs">
       <DependentUpon>Clientes.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\FormCliente.xaml.cs">
+      <DependentUpon>FormCliente.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Usuario.cs" />
     <Page Include="IniciarSesion.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -98,6 +101,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Clientes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\FormCliente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -132,6 +139,11 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="database\databasequery.sql" />
+    <Resource Include="Imagenes\iconos\editar.png" />
+    <Resource Include="Imagenes\iconos\eliminar.png" />
+    <Resource Include="Imagenes\iconos\guardar.png" />
+    <Resource Include="Imagenes\iconos\nuevo.png" />
+    <Resource Include="Imagenes\iconos\recargar.png" />
     <Resource Include="Imagenes\log-out.png" />
     <Resource Include="Imagenes\icono.png" />
     <Resource Include="Imagenes\letra.png" />

@@ -10,26 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace SC_MMascotass.Pages
 {
     /// <summary>
-    /// Interaction logic for Clientes.xaml
+    /// Interaction logic for FormCliente.xaml
     /// </summary>
-    public partial class Clientes : UserControl
+    public partial class FormCliente : Window
     {
-        public Clientes()
+        public FormCliente()
         {
             InitializeComponent();
-        }
-
-        private void btnNuevo_Click(object sender, RoutedEventArgs e)
-        {
-            // Mostrar el formulario de menú principal
-            FormCliente cliente = new FormCliente();
-            cliente.Show();
         }
     }
 }
