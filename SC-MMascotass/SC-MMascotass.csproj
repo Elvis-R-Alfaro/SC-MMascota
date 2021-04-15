@@ -74,6 +74,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="MenuPrincipal.xaml.cs">
+      <DependentUpon>MenuPrincipal.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Usuario.cs" />
     <Page Include="IniciarSesion.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -87,6 +90,10 @@
       <DependentUpon>IniciarSesion.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="MenuPrincipal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -118,6 +125,15 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="database\databasequery.sql" />
+    <Resource Include="Imagenes\log-out.png" />
+    <Resource Include="Imagenes\icono.png" />
+    <Resource Include="Imagenes\letra.png" />
+    <Resource Include="Imagenes\categoria.png" />
+    <Resource Include="Imagenes\cliente.png" />
+    <Resource Include="Imagenes\inventario.png" />
+    <Resource Include="Imagenes\mascota.png" />
+    <Resource Include="Imagenes\venta.png" />
+    <Resource Include="Imagenes\home.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
