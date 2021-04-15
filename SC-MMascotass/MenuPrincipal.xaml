@@ -45,7 +45,7 @@
                         Foreground="Black"
                         FontSize="14"
                         BorderThickness="0"
-                        Name="btnClientes">
+                        Name="btnClientes" Click="btnClientes_Click">
                 <StackPanel Orientation="Horizontal" Width="100">
                     <Image Source="/Imagenes/cliente.png" Width="20" Height="20" Margin="0 0 20 0"/>
                     <TextBlock Text="Clientes" VerticalAlignment="Center"/>

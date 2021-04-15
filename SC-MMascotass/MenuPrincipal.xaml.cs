@@ -34,5 +34,10 @@ namespace SC_MMascotass
             this.spPrincipal.Children.Clear();
             this.spPrincipal.Children.Add(control);
         }
+
+        private void btnClientes_Click(object sender, RoutedEventArgs e)
+        {
+            AgregarForm(new Pages.Clientes());
+        }
     }
 }
