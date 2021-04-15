@@ -60,7 +60,7 @@ namespace SC_MMascotass.Pages
 
             if (!found)
             {
-                resultStack.Children.Add(new TextBlock() { Text = "No results found." });
+                resultStack.Children.Add(new TextBlock() { Text = "No se ha encontrado" });
             }
         }
 
@@ -95,6 +95,13 @@ namespace SC_MMascotass.Pages
 
             // Add to the panel   
             resultStack.Children.Add(block);
+        }
+
+        private void btnNuevoCliente_Click(object sender, RoutedEventArgs e)
+        {
+            // Mostrar el formulario de menú principal
+            FormCliente cliente = new FormCliente();
+            cliente.Show();
         }
     }
 }

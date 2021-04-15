@@ -71,12 +71,7 @@
                 <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0">
                     <TextBox Width="300" Padding="5, 3, 5, 3"    
                     KeyUp="txtAuCliente_KeyUp" Name="txtAuCliente" />
-
-                    <TextBox Name="txtNombre" FontSize="15" Grid.Column="0" Width="285" Margin="0 4 0 0"/>
-                    <Button Width="50" Grid.Column="1" ToolTip="Buscar Cliente" Background="#14213D">
-                        <Image Source="/Imagenes/iconos/buscarWH.png" Width="20"/>
-                    </Button>
-                    <Button Width="50"  Grid.Column="2" ToolTip="Nuevo Cliente" Background="#FCA311">
+                    <Button Width="50"  Grid.Column="2" ToolTip="Nuevo Cliente" Name="btnNuevoCliente" Background="#FCA311" Click="btnNuevoCliente_Click">
                         <Image Source="/Imagenes/iconos/nuevo.png" Width="20"/>
                     </Button>
                 </StackPanel>
@@ -108,8 +103,8 @@
             </Grid>
         </StackPanel>
         <Border Height="150" BorderBrush="Black"   
-        BorderThickness="1" Margin="389,0,0,144" Grid.Row="2">
-            <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="151,138,-151,-138">
+        BorderThickness="1" Margin="389,35,0,109" Grid.Row="2">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <StackPanel Name="resultStack"></StackPanel>
             </ScrollViewer>
         </Border>
