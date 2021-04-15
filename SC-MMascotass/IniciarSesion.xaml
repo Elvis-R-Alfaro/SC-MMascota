@@ -1,4 +1,4 @@
-﻿<Window x:Class="SC_MMascotass.MainWindow"
+﻿<Window x:Class="SC_MMascotass.IniciarSesion"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -23,10 +23,10 @@
         <Label Content="Nombre de Usuario" Grid.Row="1" FontSize="15" Margin="10"/>
         <Label Content="Contraseña" Grid.Row="2" FontSize="15" Margin="10"/>
 
-        <TextBox Name="txtUsaername" FontSize="15" Grid.Column="1" Grid.Row="1" Margin="0 0 10 0"/>
+        <TextBox Name="txtUsername" FontSize="15" Grid.Column="1" Grid.Row="1" Margin="0 0 10 0"/>
         <PasswordBox Name="pwbPassword" FontSize="15" Grid.Column="1" Grid.Row="2" Margin="0 0 10 0"/>
 
-        <Button Name="btnAceptar" Content="Aceptar" FontSize="15" Grid.Row="3" Width="150" Height="75"/>
-        <Button Name="btnCerrar" Content="Cerrar" FontSize="15" Grid.Row="3" Grid.Column="1" Width="150" Height="75"/>
+        <Button Name="btnAceptar" Content="Aceptar" FontSize="15" Grid.Row="3" Width="150" Height="75" Click="btnAceptar_Click"/>
+        <Button Name="btnCerrar" Content="Cerrar" FontSize="15" Grid.Row="3" Grid.Column="1" Width="150" Height="75" Click="btnCerrar_Click"/>
     </Grid>
 </Window>

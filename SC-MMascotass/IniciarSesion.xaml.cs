@@ -13,16 +13,56 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace SC_MMascotass
 {
     /// <summary>
     /// Lógica de interacción para MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class IniciarSesion : Window
     {
-        public MainWindow()
+        //Objeto de tipo usuario para implementar su funcionalidad
+        private Usuario usuario = new Usuario();
+
+        public IniciarSesion()
         {
             InitializeComponent();
+        }
+
+        private void btnAceptar_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                //Implementar la busqueda del usuario desde la clase usuario
+                Usuario elUsuario = usuario.BuscarUsuario(txtUsername.Text);
+
+                //Verificar si el usuario existe 
+                if (elUsuario.Username == null)
+                {
+                    MessageBox.Show("El usuario o contraseña no es correcta");
+                }
+                else {
+                    //Verificar si la contraseña coincide con la de la base
+                    if (elUsuario.Password == pwbPassword.Password)
+                    {
+                        MessageBox.Show("Bienvenido al sistema de Mi mascota!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("El usuario o contraseña no es correcta");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ha ocurrido un error al momento de realizar la consulta...");
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        private void btnCerrar_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }
