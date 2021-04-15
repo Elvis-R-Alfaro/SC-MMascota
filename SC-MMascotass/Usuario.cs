@@ -55,10 +55,14 @@ namespace SC_MMascotass
                 string query = @"SELECT * FROM Usuarios.usuario
                                 WHERE username = @username";
 
-               
+                SqlConnection.Open();
+
+                //Establecer los valores de los parámetros
+                
 
                 //Crear comando SQL
                 SqlCommand sqlCommand = new SqlCommand(query, SqlConnection);
+                sqlCommand.Parameters.AddWithValue("@username", username);
 
                 using (SqlDataReader rdr = sqlCommand.ExecuteReader())
                 {
