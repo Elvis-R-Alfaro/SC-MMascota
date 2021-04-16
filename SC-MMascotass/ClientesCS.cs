@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 //agregar los namespace necesarios para el uso de conexion a sql
 using System.Data.SqlClient;
 using System.Configuration;
+using SC_MMascotass.Pages;
 
 namespace SC_MMascotass
 {
@@ -18,24 +19,26 @@ namespace SC_MMascotass
 
         //propiedades
         public int Id { get; set; }
-        public string NombreCategoria { get; set; }
+        public int IdCliente { get; private set; }
+        public string NombreCliente { get; set; }
+        public string NumeroTelefono { get; set; }
 
         //creacion del metodo constructor
-        public Categoria() { }
-        public Categoria(int id, string nombrecategoria)
+        public ClientesCS() { }
+        public ClientesCS(int id, string nombrecliente)
         {
             Id = id;
-            NombreCategoria = nombrecategoria;
+            NombreCliente = nombrecliente;
         }
 
         //metodos
-        public void CrearCliente(Cliente cliente)
+        public void CrearCliente(ClientesCS cliente)
         {
             try
             {
                 //Query de insertar
-                string query = @"INSERT INTO Veterinaria.Cliente (NombreCliente) (NumeroTelefono)
-                            VALUES(@NombreCliente)(@NumeroTelefono)";
+                string query = @"INSERT INTO Veterinaria.Cliente (NombreCliente, Telefono)
+                            VALUES(@NombreCliente, @Telefono)";
 
                 //Establecer la conexion
                 sqlConnection.Open();
@@ -44,8 +47,8 @@ namespace SC_MMascotass
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
 
                 //Establecer los valores de los paramawtros
-                sqlCommand.Parameters.AddWithValue("@NombreCliente", Cliente.cliente);
-                sqlCommand.Parameters.AddWithValue("@NumeroTelefono", Cliente.cliente);
+                sqlCommand.Parameters.AddWithValue("@NombreCliente", cliente.NombreCliente);
+                sqlCommand.Parameters.AddWithValue("@Telefono", cliente.NumeroTelefono);
 
                 //ejecutar el comando insertado
                 sqlCommand.ExecuteNonQuery();
@@ -63,15 +66,15 @@ namespace SC_MMascotass
         }
 
 
-        public List<clientes> MonstrarCliente()
+        public List<ClientesCS> MonstrarCliente()
         {
             //Iniciamos la lista vacia de categorias
-            List<Cliente> clientes = new List<Cliente>();
+            List<ClientesCS> clientes = new List<ClientesCS>();
 
             try
             {
                 //Query de seleccion
-                string query = @"SELECT IdCliente, NombreCliente, NumeroCliente
+                string query = @"SELECT IdCliente, NombreCliente, Telefono
                                 FROM Veterinaria.Cliente";
 
                 //Establcer la coneccion
@@ -85,7 +88,7 @@ namespace SC_MMascotass
                 {
                     while (rdr.Read())
                     {
-                        cliente.Add(new Cliente { Id = Convert.ToInt32(rdr["IdCliente"]), NombreCategoria = rdr["NombreCliente"].ToString() });
+                        clientes.Add(new ClientesCS { Id = Convert.ToInt32(rdr["IdCliente"]), NombreCliente = rdr["NombreCliente"].ToString(), NumeroTelefono = rdr["Telefono"].ToString() });
                     }
                 }
                 return clientes;
@@ -102,9 +105,9 @@ namespace SC_MMascotass
             }
         }
 
-        public Cliente BuscarCliente(int id)
+        public ClientesCS BuscarCliente(int id)
         {
-            cliente elCliente = new Cliente();
+            ClientesCS elCliente = new ClientesCS();
 
             try
             {
@@ -144,7 +147,7 @@ namespace SC_MMascotass
             }
         }
 
-        public void EditarCliente(Cliente cliente)
+        public void EditarCliente(ClientesCS cliente)
         {
             try
             {
