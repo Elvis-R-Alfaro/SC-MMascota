@@ -13,7 +13,7 @@ namespace SC_MMascotass
     {
         //Variable Miembro
         private static string connectionString = ConfigurationManager.ConnectionStrings["SC_MMascotass.Properties.Settings.MascotasConnectionString"].ConnectionString;
-        private SqlConnection sqlConnection = new SqlConnection(connectionString);
+        private static SqlConnection sqlConnection = new SqlConnection(connectionString);
 
         //Propiedades
 
@@ -121,6 +121,45 @@ namespace SC_MMascotass
                     }
                 }
                 return mascotas;
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            finally
+            {
+                //Cerrar la conexion
+                sqlConnection.Close();
+            }
+        }
+
+        static public List<string> MonstrarMascotas22()
+        {
+            //Iniciamos la lista vacia de categorias
+            List<string> data = new List<string>();
+
+            try
+            {
+                //Query de seleccion
+                string query = @"SELECT *
+                                FROM Veterinaria.Cliente";
+
+                //Establcer la coneccion
+                sqlConnection.Open();
+
+                //Crear el comando sql
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                //Obtener los datos de las categorias
+                using (SqlDataReader rdr = sqlCommand.ExecuteReader())
+                {
+                    while (rdr.Read())
+                    {
+                        data.Add(rdr["NombreCliente"].ToString());
+                    }
+                }
+                return data;
             }
             catch (Exception e)
             {
