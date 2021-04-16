@@ -91,8 +91,14 @@
     <Compile Include="Pages\FormCliente.xaml.cs">
       <DependentUpon>FormCliente.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\FormInventario.xaml.cs">
+      <DependentUpon>FormInventario.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\FormMascotas.xaml.cs">
       <DependentUpon>FormMascotas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Inventario.xaml.cs">
+      <DependentUpon>Inventario.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Mascotas.xaml.cs">
       <DependentUpon>Mascotas.xaml</DependentUpon>
@@ -130,7 +136,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\FormInventario.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\FormMascotas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Inventario.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
