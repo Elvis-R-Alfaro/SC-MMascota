@@ -21,6 +21,8 @@ namespace SC_MMascotass
     /// </summary>
     public partial class Categorias : UserControl
     {
+        private Categoria categoria = new Categoria();
+        private List<Categoria> categorias;
         public Categorias()
         {
             InitializeComponent();
@@ -30,6 +32,15 @@ namespace SC_MMascotass
         {
             FormCategorias categoria = new FormCategorias();
             categoria.Show();
+        }
+        
+        private void ObtenerCategorias()
+        {
+            categorias = categoria.MonstrarCategorias();
+
+            //var fuente = new BindingSource();
+            //fuente.DataSource = categorias;
+            //dgClientes.DataSource = fuente;
         }
     }
 }
