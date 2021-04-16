@@ -153,8 +153,8 @@ namespace SC_MMascotass.Pages
         private void ObtenerValoresFormulario()
         {
             //categoria.NombreCategoria = txtCategoria.Text;
-            mascota = mascota.ObtenerID(txtAuCliente.Text);
-            MessageBox.Show(mascota);
+            //mascota = mascota.ObtenerID(txtAuCliente.Text);
+            //MessageBox.Show(mascota);
         }
         private void btnGuardar_Click(object sender, RoutedEventArgs e)
         {
