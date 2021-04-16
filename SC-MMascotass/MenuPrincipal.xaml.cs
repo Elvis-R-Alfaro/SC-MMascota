@@ -44,5 +44,10 @@ namespace SC_MMascotass
         {
             AgregarForm(new Pages.Mascotas());
         }
+
+        private void btnCategorias_Click(object sender, RoutedEventArgs e)
+        {
+            AgregarForm(new Categorias());
+        }
     }
 }
