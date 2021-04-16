@@ -26,7 +26,7 @@
                         FontSize="14"
                         BorderThickness="0"
                         Name="btnGuardar"
-                        Padding="10">
+                        Padding="10" Click="btnGuardar_Click">
                 <StackPanel Orientation="Vertical" >
                     <Image Source="/Imagenes/iconos/guardar.png" HorizontalAlignment="Center" Width="25" Height="25"/>
                     <TextBlock Text="Nuevo" HorizontalAlignment="Center"/>
@@ -39,7 +39,7 @@
                         FontSize="14"
                         BorderThickness="0"
                         Name="btnRestablecer"
-                        Padding="10">
+                        Padding="10" Click="btnRestablecer_Click">
                 <StackPanel Orientation="Vertical" >
                     <Image Source="/Imagenes/iconos/recargar.png" HorizontalAlignment="Center" Width="25" Height="25"/>
                     <TextBlock Text="Restablecer" HorizontalAlignment="Center"/>

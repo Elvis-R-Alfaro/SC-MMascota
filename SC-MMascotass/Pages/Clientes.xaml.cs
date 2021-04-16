@@ -31,5 +31,20 @@ namespace SC_MMascotass.Pages
             FormCliente cliente = new FormCliente();
             cliente.Show();
         }
+
+        private void btnEditar_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnEliminar_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnRefrescar_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

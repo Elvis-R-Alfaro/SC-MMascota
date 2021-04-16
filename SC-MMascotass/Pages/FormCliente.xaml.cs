@@ -23,5 +23,15 @@ namespace SC_MMascotass.Pages
         {
             InitializeComponent();
         }
+
+        private void btnGuardar_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnRestablecer_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
