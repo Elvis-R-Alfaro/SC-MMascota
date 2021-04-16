@@ -49,5 +49,10 @@ namespace SC_MMascotass
         {
             AgregarForm(new Categorias());
         }
+
+        private void btnInventario_Click(object sender, RoutedEventArgs e)
+        {
+            AgregarForm(new Pages.Inventario());
+        }
     }
 }

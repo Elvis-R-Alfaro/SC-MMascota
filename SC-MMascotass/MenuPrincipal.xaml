@@ -86,7 +86,7 @@
                         Foreground="Black"
                         FontSize="14"
                         BorderThickness="0"
-                        Name="btnInventario">
+                        Name="btnInventario" Click="btnInventario_Click">
                 <StackPanel Orientation="Horizontal" Width="100">
                     <Image Source="/Imagenes/inventario.png" Width="20" Height="20" Margin="0 0 20 0"/>
                     <TextBlock Text="Inventario" VerticalAlignment="Center"/>
