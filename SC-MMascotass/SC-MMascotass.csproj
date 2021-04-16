@@ -78,7 +78,6 @@
     <Compile Include="Categorias.xaml.cs">
       <DependentUpon>Categorias.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ClientesCS.cs" />
     <Compile Include="Inventario.cs" />
     <Compile Include="MenuPrincipal.xaml.cs">
       <DependentUpon>MenuPrincipal.xaml</DependentUpon>
