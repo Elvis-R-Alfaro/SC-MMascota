@@ -74,12 +74,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Categorias.xaml.cs">
+      <DependentUpon>Categorias.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ClientesCS.cs" />
     <Compile Include="MenuPrincipal.xaml.cs">
       <DependentUpon>MenuPrincipal.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Clientes.xaml.cs">
       <DependentUpon>Clientes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\FormCategorias.xaml.cs">
+      <DependentUpon>FormCategorias.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\FormCliente.xaml.cs">
       <DependentUpon>FormCliente.xaml</DependentUpon>
@@ -91,6 +97,10 @@
       <DependentUpon>Mascotas.xaml</DependentUpon>
     </Compile>
     <Compile Include="Usuario.cs" />
+    <Page Include="Categorias.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="IniciarSesion.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -108,6 +118,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Clientes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\FormCategorias.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
