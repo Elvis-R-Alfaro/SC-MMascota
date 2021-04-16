@@ -9,38 +9,46 @@ using System.Configuration;
 
 namespace SC_MMascotass
 {
-    class Categoria
+    class InventarioC
     {
         //Variable Miembro
         private static string connectionString = ConfigurationManager.ConnectionStrings["SC_MMascotass.Properties.Settings.MascotasConnectionString"].ConnectionString;
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
         //Propiedades
-
+        public int IdCategoria { get; set; }        
+        public string Descripcion { get; set; }
         public int Id { get; set; }
-        public string NombreCategoria { get; set; }
+        public int Stock { get; set; }
+        public double PrecioCosto { get; set; }
+        public double PrecioVenta { get; set; }
 
         //Constructor
-        public Categoria() { }
-        public Categoria(int id, string nombrecategoria)
+        public InventarioC() { }
+        public InventarioC(int idCategoria, string descripcion, int id, int stock, double precioCosto, double precioVenta)
         {
+            IdCategoria = idCategoria;
+            Descripcion = descripcion;
             Id = id;
-            NombreCategoria = nombrecategoria;
+            Stock = stock;
+            PrecioCosto = precioCosto;
+            PrecioVenta = precioVenta;
+            
         }
 
         //Metodos
 
         /// <summary>
-        /// Inserta una Categoria
+        /// Inserta un Producto
         /// </summary>
-        /// <param name="categoria">La informacion de la categoria</param>
-        public void CrearCategoria(Categoria categoria)
+        /// <param name="producto">La informacion del producto</param>
+        public void CrearProducto(InventarioC producto)
         {
             try
             {
                 //Query de insertar
-                string query = @"INSERT INTO Veterinaria.Categoria (NombreCategoria) 
-                            VALUES(@nombrecategoria)";
+                string query = @"INSERT INTO Veterinaria.Inventario (IdCategoria,NombreProducto,PrecioCosto,PrecioVenta,Stock) 
+                            VALUES(@idCategoria,@nombreProducto,@precioCosto,@precioVenta,@stock)";
 
                 //Establecer la conexion
                 sqlConnection.Open();
@@ -49,7 +57,15 @@ namespace SC_MMascotass
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
 
                 //Establecer los valores de los paramawtros
-                sqlCommand.Parameters.AddWithValue("@nombrecategoria", categoria.NombreCategoria);
+                sqlCommand.Parameters.AddWithValue("@idCategoria", producto.IdCategoria);
+
+                sqlCommand.Parameters.AddWithValue("@nombreProducto", producto.Descripcion);
+
+                sqlCommand.Parameters.AddWithValue("@precioCosto", producto.PrecioCosto);
+
+                sqlCommand.Parameters.AddWithValue("@precioVenta", producto.PrecioVenta);
+
+                sqlCommand.Parameters.AddWithValue("@stock", producto.Stock);
 
                 //ejecutar el comando insertado
                 sqlCommand.ExecuteNonQuery();
@@ -67,19 +83,19 @@ namespace SC_MMascotass
         }
 
         /// <summary>
-        /// Monstrar todas las categorias
+        /// Monstrar todos los productos
         /// </summary>
-        /// <returns>Listado de Categorias</returns>
-         public List<Categoria> MonstrarCategorias()
+        /// <returns>Listado de Productos</returns>
+        public List<InventarioC> MonstrarInventario()
         {
             //Iniciamos la lista vacia de categorias
-            List<Categoria> categorias = new List<Categoria>();
+            List<InventarioC> inventarios = new List<InventarioC>();
 
             try
             {
                 //Query de seleccion
-                string query = @"SELECT IdCategoria, NombreCategoria
-                                FROM Veterinaria.Categoria";
+                string query = @"SELECT *
+                                FROM Veterinaria.Inventario";
 
                 //Establcer la coneccion
                 sqlConnection.Open();
@@ -92,10 +108,10 @@ namespace SC_MMascotass
                 {
                     while (rdr.Read())
                     {
-                        categorias.Add(new Categoria { Id = Convert.ToInt32(rdr["IdCategoria"]), NombreCategoria = rdr["NombreCategoria"].ToString() });
+                        inventarios.Add(new InventarioC { Id = Convert.ToInt32(rdr["IdCategoria"]), Descripcion = rdr["Descripcion"].ToString(), PrecioCosto = Convert.ToDouble(rdr["PrecioCosto"]), PrecioVenta = Convert.ToDouble(rdr["PrecioVenta"]), Stock = Convert.ToInt32(rdr["Stock"]) });
                     }
                 }
-                return categorias;
+                return inventarios;
             }
             catch (Exception e)
             {
@@ -110,19 +126,19 @@ namespace SC_MMascotass
         }
 
         /// <summary>
-        /// Obtiene una categoria
+        /// Obtiene productos de inventario
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Categoria BuscarCategoria(int id)
+        public InventarioC BuscarProducto(int id)
         {
-            Categoria laCategoria = new Categoria();
+            InventarioC elProducto = new InventarioC();
 
             try
             {
                 //Query busqueda
-                string query = @"SELECT * From Veterinaria.Categoria
-                                WHERE IdCategoria = @id";
+                string query = @"SELECT * From Veterinaria.Inventario
+                                WHERE IdProducto = @id";
 
                 //Establecer la coneccion
                 sqlConnection.Open();
@@ -137,12 +153,16 @@ namespace SC_MMascotass
                 {
                     while (rdr.Read())
                     {
-                        laCategoria.Id = Convert.ToInt32(rdr["IdCategoria"]);
-                        laCategoria.NombreCategoria = rdr["NombreCategoria"].ToString();
+                        elProducto.Id = Convert.ToInt32(rdr["IdProducto"]);
+                        elProducto.Descripcion = rdr["NombreCategoria"].ToString();
+                        elProducto.IdCategoria = Convert.ToInt32(rdr["IdCategoria"]);
+                        elProducto.PrecioCosto = Convert.ToDouble(rdr["PrecioCosto"]);
+                        elProducto.PrecioVenta = Convert.ToDouble(rdr["PrecioVenta"]);
+                        elProducto.Stock = Convert.ToInt32(rdr["Stock"]);
                     }
                 }
 
-                return laCategoria;
+                return elProducto;
             }
             catch (Exception e)
             {
@@ -155,15 +175,19 @@ namespace SC_MMascotass
                 sqlConnection.Close();
             }
         }
-
-        public void EditarCategoria(Categoria categoria)
+        public void EditarProducto(InventarioC producto)
         {
             try
             {
                 //Query de actualizacion
-                string query = @"UPDATE Veterinaria.Categoria
-                                SET NombreCategoria = @nombrecategoria
-                                WHERE IdCategoria = @id";
+
+                string query = @"UPDATE Veterinaria.Inventario
+                                SET IdCategoria = @idCategoria,
+                                NombreProducto = @nombreProducto,
+                                PrecioCosto = @precioCosto,
+                                PrecioVenta = @precioVenta,
+                                Stock = @stock
+                                WHERE IdProducto = @id";
 
                 //Strablecer la conexion
                 sqlConnection.Open();
@@ -172,8 +196,17 @@ namespace SC_MMascotass
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
 
                 //Establecer los valores de los parametros
-                sqlCommand.Parameters.AddWithValue("@id", categoria.Id);
-                sqlCommand.Parameters.AddWithValue("@nombrecategoria", categoria.NombreCategoria);
+                sqlCommand.Parameters.AddWithValue("@id", producto.Id);
+
+                sqlCommand.Parameters.AddWithValue("@idCategoria", producto.IdCategoria);
+
+                sqlCommand.Parameters.AddWithValue("@nombreProducto", producto.Descripcion);
+
+                sqlCommand.Parameters.AddWithValue("@precioCosto", producto.PrecioCosto);
+
+                sqlCommand.Parameters.AddWithValue("@precioVenta", producto.PrecioVenta);
+
+                sqlCommand.Parameters.AddWithValue("@stock", producto.Stock);
 
                 //Ejecutar el comando de actualizar
                 sqlCommand.ExecuteNonQuery();
@@ -189,13 +222,13 @@ namespace SC_MMascotass
             }
         }
 
-        public void EliminarCategoria(int id)
+        public void EliminarRegistro(int id)
         {
             try
             {
                 //Query de eliminar
-                string query = @"DELETE FROM Veterinaria.Categoria
-                                WHERE IdCategoria = @id";
+                string query = @"DELETE FROM Veterinaria.Inventario
+                                WHERE IdProducto = @id";
 
                 //Establecer la conexion SQL
                 sqlConnection.Open();
@@ -220,24 +253,5 @@ namespace SC_MMascotass
             }
         }
 
-        static public List<string> GetData()
-        {
-            List<string> data = new List<string>();
-
-            data.Add("Comida para perros");
-            data.Add("Comida para Gatos");
-            data.Add("Juguetes");
-            data.Add("Jarabes");
-            data.Add("Pastillas");
-            data.Add("Vitaminas");
-            data.Add("Correas");
-            data.Add("Camas");
-            data.Add("Vacunas");
-            data.Add("En latados");
-            data.Add("Tazones");
-            data.Add("Servicio");
-
-            return data;
-        }
     }
 }

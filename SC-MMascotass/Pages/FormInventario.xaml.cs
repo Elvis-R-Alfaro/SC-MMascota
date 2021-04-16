@@ -19,9 +19,77 @@ namespace SC_MMascotass.Pages
     /// </summary>
     public partial class FormInventario : Window
     {
-        public FormInventario()
+        private InventarioC inventario = new InventarioC();
+        public static int ides;
+        public FormInventario(bool visible)
         {
             InitializeComponent();
+
+            MonstrarBotones(visible);
+
+            if (ides != 0)
+            {
+                inventario = inventario.BuscarProducto(ides);
+
+                txtDescripcion.Text = inventario.Descripcion;
+                txtPrecioCosto.Text = inventario.PrecioCosto.ToString();
+                txtPrecioVenta.Text = inventario.PrecioVenta.ToString();
+                txtStock.Text = inventario.Stock.ToString();
+            }
+
+        }
+
+        private bool VerificarValores()
+        {
+            if (txtAuCategoria.Text == string.Empty)
+            {
+                MessageBox.Show("!Ingrese el Nombre de la Categoría¡");
+                return false;
+            }
+            if (txtDescripcion.Text == string.Empty)
+            {
+                MessageBox.Show("!Ingrese la Descripción del producto¡");
+                return false;
+            }
+            if (txtStock.Text == string.Empty)
+            {
+                MessageBox.Show("!Ingrese Stock para el producto¡");
+                return false;
+            }
+            if (txtPrecioCosto.Text == string.Empty)
+            {
+                MessageBox.Show("!Ingrese el costo¡");
+                return false;
+            }
+            if (txtPrecioVenta.Text == string.Empty)
+            {
+                MessageBox.Show("!Ingrese el precio de venta¡");
+                return false;
+            }
+            return true;
+        }
+
+        private void ObtenerValoresFormulario()
+        {
+            //inventario.IdCategoria = txtAuCategoria.Text; DESVERGUE DESVERGUE
+            inventario.Descripcion = txtDescripcion.Text;
+            inventario.Stock = Convert.ToInt32(txtStock.Text);
+            inventario.PrecioCosto = Convert.ToDouble(txtPrecioCosto.Text);
+            inventario.PrecioVenta = Convert.ToDouble(txtPrecioVenta.Text);
+        }
+
+        private void MonstrarBotones(bool visibles)
+        {
+            if (visibles)
+            {
+                spEditar.Visibility = Visibility.Visible;
+                spGuardar.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                spEditar.Visibility = Visibility.Hidden;
+                spGuardar.Visibility = Visibility.Visible;
+            }
         }
 
         private void txtAuCategoria_KeyUp(object sender, KeyEventArgs e)
@@ -101,6 +169,76 @@ namespace SC_MMascotass.Pages
             // Mostrar el formulario de ingreso de categorias
             FormCategorias categorias = new FormCategorias();
             categorias.Show();
+        }
+
+        private void btnGuardar_Click(object sender, RoutedEventArgs e)
+        {
+            if (VerificarValores())
+            {
+                try
+                {
+                    //Obtener los valores para la habitacion
+                    inventario.Descripcion = txtDescripcion.Text;
+                    inventario.Stock = Convert.ToInt32(txtStock.Text);
+                    inventario.PrecioCosto = Convert.ToDouble(txtPrecioCosto.Text);
+                    inventario.PrecioVenta = Convert.ToDouble(txtPrecioVenta.Text);
+
+                    //Insertar los datos de la habitacion
+                    inventario.CrearProducto(inventario);
+
+                    //Mensaje de inserccion exito
+                    MessageBox.Show("Datos insertados correctamente");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ha ocurrido un error al momento de insertar la habitacion....");
+                    Console.WriteLine(ex.Message);
+                }
+                finally
+                {
+                    txtDescripcion.Text = string.Empty;
+
+                    //Faltan cosas
+                }
+            }
+        }
+
+        private void btnRestablecer_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnAceptar_Click(object sender, RoutedEventArgs e)
+        {
+            if (VerificarValores())
+            {
+                try
+                {
+                    //Obtener los valores para la habitacion desde el formulario
+                    ObtenerValoresFormulario();
+
+                    //Actualizar los valores en la base de datos
+                    inventario.EditarProducto(inventario);
+
+                    //Actualizar el lisbox de habitaciones
+
+                    //Mensaje de actualizacion realizada
+                    MessageBox.Show("Producto modificado correctamente");
+
+                    //Limpiar formulario
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al momento de actualizar el producto....");
+                    Console.WriteLine(ex.Message);
+                }
+            }
+        }
+
+        private void btnCancelar_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
