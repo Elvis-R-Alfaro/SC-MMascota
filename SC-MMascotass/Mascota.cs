@@ -98,7 +98,7 @@ namespace SC_MMascotass
             {
                 //Query de seleccion
                 string query = @"SELECT *
-                                FROM Veterinaria.Categoria";
+                                FROM Veterinaria.Mascota";
 
                 //Establcer la coneccion
                 sqlConnection.Open();
@@ -111,10 +111,16 @@ namespace SC_MMascotass
                 {
                     while (rdr.Read())
                     {
-                        categorias.Add(new Categoria { Id = Convert.ToInt32(rdr["IdCategoria"]), NombreCategoria = rdr["NombreCategoria"].ToString() });
+                        mascotas.Add(new Mascota {  IdMascota = Convert.ToInt32(rdr["IdCliente"]),
+                                                    IdCliente = Convert.ToInt32(rdr["IdCliente"]),
+                                                    AliasMascota = rdr["AliasMascota"].ToString(),
+                                                    Especie = rdr["Especie"].ToString(),
+                                                    Raza = rdr["Raza"].ToString(),
+                                                    ColorPelo = rdr["ColorPelo"].ToString(),
+                                                    Fecha = (DateTime)rdr["Fecha"]});
                     }
                 }
-                return categorias;
+                return mascotas;
             }
             catch (Exception e)
             {
@@ -126,6 +132,152 @@ namespace SC_MMascotass
                 //Cerrar la conexion
                 sqlConnection.Close();
             }
+        }
+
+        /// <summary>
+        /// Obtiene una categoria
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Mascota BuscarMascota(int id)
+        {
+            Mascota laMascota = new Mascota();
+
+            try
+            {
+                //Query busqueda
+                string query = @"SELECT * From Veterinaria.Mascota
+                                WHERE IdMascota = @IdMascota";
+
+                //Establecer la coneccion
+                sqlConnection.Open();
+
+                //Crear el comando SQL
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                //Establecer el valor del parametro
+                sqlCommand.Parameters.AddWithValue("@IdMascota", id);
+
+                using (SqlDataReader rdr = sqlCommand.ExecuteReader())
+                {
+                    while (rdr.Read())
+                    {
+                        laMascota.IdMascota = Convert.ToInt32(rdr["IdMascota"]);
+                        laMascota.IdCliente = Convert.ToInt32(rdr["IdCliente"]);
+                        laMascota.AliasMascota = rdr["AliasMascota"].ToString();
+                        laMascota.Especie = rdr["Especie"].ToString();
+                        laMascota.Raza = rdr["Raza"].ToString();
+                        laMascota.ColorPelo = rdr["ColorPelo"].ToString();
+                        laMascota.Fecha = (DateTime)rdr["Fecha"];
+                    }
+                }
+
+                return laMascota;
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            finally
+            {
+                //Cerrar la conexio
+                sqlConnection.Close();
+            }
+        }
+
+        public void EditarMascota(Mascota mascota)
+        {
+            try
+            {
+                //Query de actualizacion
+                string query = @"UPDATE Veterinaria.Mascota
+                                SET IdCliente = @IdCliente,
+                                    AliasMascota=  @AliasMascota,
+                                    Especie = @Especie,
+                                    Raza = @Raza,
+                                    ColorPelo = @ColorPelo,
+                                    Fecha = @Fecha                                  
+                                WHERE IdMascota = @IdMascota";
+
+                //Strablecer la conexion
+                sqlConnection.Open();
+
+                //Crear el comando SQL
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                //Establecer los valores de los parametros
+                sqlCommand.Parameters.AddWithValue("@IdMascota", mascota.IdMascota);
+                sqlCommand.Parameters.AddWithValue("@IdCliente", mascota.IdCliente);
+                sqlCommand.Parameters.AddWithValue("@AliasMascota", mascota.AliasMascota);
+                sqlCommand.Parameters.AddWithValue("@Especie", mascota.Especie);
+                sqlCommand.Parameters.AddWithValue("@Raza", mascota.Raza);
+                sqlCommand.Parameters.AddWithValue("@ColorPelo", mascota.ColorPelo);
+                sqlCommand.Parameters.AddWithValue("@Fecha", mascota.Fecha);
+
+                //Ejecutar el comando de actualizar
+                sqlCommand.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                //Cerrar conexcion
+                sqlConnection.Close();
+            }
+        }
+
+        public void EliminarMascota(int id)
+        {
+            try
+            {
+                //Query de eliminar
+                string query = @"DELETE FROM Veterinaria.Mascota
+                                WHERE IdMascota = @IdMascota";
+
+                //Establecer la conexion SQL
+                sqlConnection.Open();
+
+                //Establecer el valor del parametro
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                //Establecer el valor del parametro
+                sqlCommand.Parameters.AddWithValue("@IdMascota", id);
+
+                //Ejecutar el comando de eliminacion
+                sqlCommand.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                //CErrar conexion
+                sqlConnection.Close();
+            }
+        }
+
+        static public List<string> GetData()
+        {
+            List<string> data = new List<string>();
+
+            data.Add("Comida para perros");
+            data.Add("Comida para Gatos");
+            data.Add("Juguetes");
+            data.Add("Jarabes");
+            data.Add("Pastillas");
+            data.Add("Vitaminas");
+            data.Add("Correas");
+            data.Add("Camas");
+            data.Add("Vacunas");
+            data.Add("En latados");
+            data.Add("Tazones");
+            data.Add("Servicio");
+
+            return data;
         }
     }
 }

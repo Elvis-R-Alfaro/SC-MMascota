@@ -22,6 +22,9 @@ namespace SC_MMascotass.Pages
         public FormMascotas()
         {
             InitializeComponent();
+
+            var border = (resultStack.Parent as ScrollViewer).Parent as Border;
+            border.Visibility = System.Windows.Visibility.Collapsed;
         }
 
         //Autocompletar TextBox

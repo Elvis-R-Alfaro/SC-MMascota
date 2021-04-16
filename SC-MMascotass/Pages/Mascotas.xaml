@@ -75,8 +75,8 @@
 
             </Button>
         </StackPanel>
-        <StackPanel Grid.Row="2" Name="dgClientes">
-            <DataGrid >
+        <StackPanel Grid.Row="2">
+            <DataGrid Name="dgClientes" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Cliente"/>
                     <DataGridTextColumn Header="Alias Mascota"/>

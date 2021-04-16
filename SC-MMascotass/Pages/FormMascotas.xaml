@@ -103,7 +103,7 @@
             </Grid>
         </StackPanel>
         <Border Height="150" BorderBrush="Black"   
-        BorderThickness="1" Margin="389,35,0,109" Grid.Row="2">
+        BorderThickness="1" Margin="389,35,0,109" Grid.Row="2" Background="White">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <StackPanel Name="resultStack"></StackPanel>
             </ScrollViewer>
