@@ -78,8 +78,8 @@ namespace SC_MMascotass
             try
             {
                 //Query de seleccion
-                string query = @"SELECT id, descripcion
-                                FROM habitaciones.habitacion";
+                string query = @"SELECT IdCategoria, NombreCategoria
+                                FROM Veterinaria.Categoria";
 
                 //Establcer la coneccion
                 sqlConnection.Open();
@@ -87,20 +87,25 @@ namespace SC_MMascotass
                 //Crear el comando sql
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
 
-                //Obtener los datos de las habitaciones
+                //Obtener los datos de las categorias
                 using (SqlDataReader rdr = sqlCommand.ExecuteReader())
                 {
                     while (rdr.Read())
                     {
-                        categorias.Add(new Categoria { NombreCategoria = rdr["NombreCategoria"].ToString() });
+                        categorias.Add(new Categoria { Id = Convert.ToInt32(rdr["IdCategoria"]), NombreCategoria = rdr["NombreCategoria"].ToString() });
                     }
                 }
                 return categorias;
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
-                throw;
+                throw e;
+            }
+            finally
+            {
+                //Cerrar la conexion
+                sqlConnection.Close();
             }
         }
 
@@ -116,8 +121,8 @@ namespace SC_MMascotass
             try
             {
                 //Query busqueda
-                string query = @"SELECT * From Veterinaria.Categorias
-                                WHERE id = @id";
+                string query = @"SELECT * From Veterinaria.Categoria
+                                WHERE IdCategoria = @id";
 
                 //Establecer la coneccion
                 sqlConnection.Open();
@@ -132,7 +137,7 @@ namespace SC_MMascotass
                 {
                     while (rdr.Read())
                     {
-                        laCategoria.Id = Convert.ToInt32(rdr["id"]);
+                        laCategoria.Id = Convert.ToInt32(rdr["IdCategoria"]);
                         laCategoria.NombreCategoria = rdr["NombreCategoria"].ToString();
                     }
                 }
@@ -158,7 +163,7 @@ namespace SC_MMascotass
                 //Query de actualizacion
                 string query = @"UPDATE Veterinaria.Categoria
                                 SET NombreCategoria = @nombrecategoria
-                                WHERE id = @id";
+                                WHERE IdCategoria = @id";
 
                 //Strablecer la conexion
                 sqlConnection.Open();
@@ -180,6 +185,37 @@ namespace SC_MMascotass
             finally
             {
                 //Cerrar conexcion
+                sqlConnection.Close();
+            }
+        }
+
+        public void EliminarCategoria(int id)
+        {
+            try
+            {
+                //Query de eliminar
+                string query = @"DELETE FROM Veterinaria.Categoria
+                                WHERE IdCategoria = @id";
+
+                //Establecer la conexion SQL
+                sqlConnection.Open();
+
+                //Establecer el valor del parametro
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                //Establecer el valor del parametro
+                sqlCommand.Parameters.AddWithValue("@id", id);
+
+                //Ejecutar el comando de eliminacion
+                sqlCommand.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                //CErrar conexion
                 sqlConnection.Close();
             }
         }

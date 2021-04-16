@@ -16,14 +16,14 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         
-        <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal" Visibility="Visible" Name="spNuevaCategoria">
             <Image Source="/Imagenes/categoria.png" Width="25" Margin="0 0 10 0"></Image>
             <TextBlock Text="Nueva Categoria"
                         FontSize="18"
                        VerticalAlignment="Center"
                         />
         </StackPanel>
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" >
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Visibility="Visible" Name="spButton1">
             <Button     Background="Transparent"
                         Foreground="Black"
                         FontSize="14"
@@ -46,6 +46,42 @@
                 <StackPanel Orientation="Vertical" >
                     <Image Source="/Imagenes/iconos/recargar.png" HorizontalAlignment="Center" Width="25" Height="25"/>
                     <TextBlock Text="Restablecer" HorizontalAlignment="Center"/>
+
+                </StackPanel>
+
+            </Button>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Visibility="Hidden" Name="spEditarCategoria">
+            <Image Source="/Imagenes/categoria.png" Width="25" Margin="0 0 10 0"></Image>
+            <TextBlock Text="Editar Categoria"
+                       FontSize="18"
+                       VerticalAlignment="Center">
+            </TextBlock>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Visibility="Hidden" Name="spButton2">
+            <Button     Background="Transparent"
+                        Foreground="Black"
+                        FontSize="14"
+                        BorderThickness="0"
+                        Name="bntAceptar"
+                        Padding="10" Click="bntAceptar_Click">
+                <StackPanel Orientation="Vertical" >
+                    <Image Source="/Imagenes/iconos/guardar.png" HorizontalAlignment="Center" Width="25" Height="25"/>
+                    <TextBlock Text="Aceptar" HorizontalAlignment="Center"/>
+
+                </StackPanel>
+
+            </Button>
+            <Button     Background="Transparent"
+                        Foreground="Black"
+                        FontSize="14"
+                        BorderThickness="0"
+                        Name="btnCancelar"
+                        Padding="10" Click="btnCancelar_Click">
+                <StackPanel Orientation="Vertical" >
+                    <Image Source="/Imagenes/iconos/recargar.png" HorizontalAlignment="Center" Width="25" Height="25"/>
+                    <TextBlock Text="Cancelar" HorizontalAlignment="Center"/>
 
                 </StackPanel>
 

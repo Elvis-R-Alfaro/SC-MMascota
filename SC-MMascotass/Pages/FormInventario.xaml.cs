@@ -98,9 +98,9 @@ namespace SC_MMascotass.Pages
 
         private void btnNuevoCliente_Click(object sender, RoutedEventArgs e)
         {
-            // Mostrar el formulario de ingreso de categorias
-            FormCategorias categorias = new FormCategorias();
-            categorias.Show();
+            //// Mostrar el formulario de ingreso de categorias
+            //FormCategorias categorias = new FormCategorias();
+            //categorias.Show();
         }
     }
 }
