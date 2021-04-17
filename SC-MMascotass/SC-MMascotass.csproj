@@ -110,6 +110,7 @@
       <DependentUpon>Vacunas.xaml</DependentUpon>
     </Compile>
     <Compile Include="Usuario.cs" />
+    <Compile Include="vacunaciones.cs" />
     <Page Include="Categorias.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

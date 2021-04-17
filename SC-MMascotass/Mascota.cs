@@ -181,6 +181,47 @@ namespace SC_MMascotass
             }
         }
 
+        static public List<string> MonstrarMascotas23()
+        {
+            //Iniciamos la lista vacia de categorias
+            List<string> data = new List<string>();
+
+            try
+            {
+                //Query de seleccion
+                string query = @"SELECT *
+                                FROM Veterinaria.Mascota";
+
+                //Establcer la coneccion
+                sqlConnection.Open();
+
+                //Crear el comando sql
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                //Obtener los datos de las categorias
+                using (SqlDataReader rdr = sqlCommand.ExecuteReader())
+                {
+                    while (rdr.Read())
+                    {
+                        data.Add(rdr["AliasMascota"].ToString());
+                        data.Add(rdr["IdMascota"].ToString());
+                    }
+                }
+
+                return data;
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            finally
+            {
+                //Cerrar la conexion
+                sqlConnection.Close();
+            }
+        }
+
         /// <summary>
         /// Obtiene una categoria
         /// </summary>
@@ -217,6 +258,48 @@ namespace SC_MMascotass
                         laMascota.Raza = rdr["Raza"].ToString();
                         laMascota.ColorPelo = rdr["ColorPelo"].ToString();
                         laMascota.Fecha = (DateTime)rdr["Fecha"];
+                    }
+                }
+
+                return laMascota;
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            finally
+            {
+                //Cerrar la conexio
+                sqlConnection.Close();
+            }
+        }
+
+        public Mascota BuscarMascotaNombre(string AliasMascota)
+        {
+            Mascota laMascota = new Mascota();
+
+            try
+            {
+                //Query busqueda
+                string query = @"SELECT * From Veterinaria.Mascota
+                                WHERE AliasMascota = @AliasMascota";
+
+                //Establecer la coneccion
+                sqlConnection.Open();
+
+                //Crear el comando SQL
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                //Establecer el valor del parametro
+                sqlCommand.Parameters.AddWithValue("@AliasMascota", AliasMascota);
+
+                using (SqlDataReader rdr = sqlCommand.ExecuteReader())
+                {
+                    while (rdr.Read())
+                    {
+                        laMascota.IdMascota = Convert.ToInt32(rdr["IdMascota"]);
+
                     }
                 }
 
