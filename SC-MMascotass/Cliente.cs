@@ -9,7 +9,7 @@ using System.Configuration;
 
 namespace SC_MMascotass
 {
-    class Cliente
+    public class Cliente
     {
         //Variable Miembro
         private static string connectionString = ConfigurationManager.ConnectionStrings["SC_MMascotass.Properties.Settings.MascotasConnectionString"].ConnectionString;
@@ -64,6 +64,51 @@ namespace SC_MMascotass
             finally
             {
                 //Cerrar la conexion
+                sqlConnection.Close();
+            }
+        }
+
+        public Cliente BuscarClientID(string NombreCliente)
+        {
+
+            Cliente elCliente = new Cliente();
+
+            try
+            {
+                //Query busqueda
+                string query = @"SELECT * From Veterinaria.Cliente
+                                WHERE NombreCliente = @NombreCliente";
+
+                //Establecer la coneccion
+                sqlConnection.Open();
+
+                //Crear el comando SQL
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                //Establecer el valor del parametro
+                sqlCommand.Parameters.AddWithValue("@NombreCliente", NombreCliente);
+
+                using (SqlDataReader rdr = sqlCommand.ExecuteReader())
+                {
+                    while (rdr.Read())
+                    {
+                        elCliente.IdCliente = Convert.ToInt32(rdr["IdCliente"]);
+                        elCliente.NombreCliente = rdr["NombreCliente"].ToString();
+                        elCliente.Telefono = rdr["Telefono"].ToString();
+
+                    }
+                }
+
+                return elCliente;
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            finally
+            {
+                //Cerrar la conexio
                 sqlConnection.Close();
             }
         }

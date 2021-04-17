@@ -114,7 +114,7 @@ namespace SC_MMascotass.Pages
 
         private void btnRestablecer_Click(object sender, RoutedEventArgs e)
         {
-
+            Limpiar();        
         }
 
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
