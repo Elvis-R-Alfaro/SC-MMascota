@@ -98,11 +98,17 @@
     <Compile Include="Pages\FormMascotas.xaml.cs">
       <DependentUpon>FormMascotas.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\FormVentas.xaml.cs">
+      <DependentUpon>FormVentas.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Inventario.xaml.cs">
       <DependentUpon>Inventario.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Mascotas.xaml.cs">
       <DependentUpon>Mascotas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Ventas.xaml.cs">
+      <DependentUpon>Ventas.xaml</DependentUpon>
     </Compile>
     <Compile Include="Usuario.cs" />
     <Page Include="Categorias.xaml">
@@ -145,11 +151,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\FormVentas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Inventario.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Mascotas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Ventas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
