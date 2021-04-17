@@ -74,6 +74,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Cliente.cs" />
+    <Compile Include="ClientesCS.cs" />
     <Compile Include="ClientesCS.cs" />
     <Compile Include="Mascota.cs" />
     <Compile Include="MenuPrincipal.xaml.cs">

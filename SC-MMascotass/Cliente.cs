@@ -3,42 +3,45 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-//agregar los namespace necesarios para el uso de conexion a sql
+//Agregar los namespaces
 using System.Data.SqlClient;
 using System.Configuration;
-using SC_MMascotass.Pages;
 
 namespace SC_MMascotass
 {
-    class ClientesCS
+    class Cliente
     {
-        //creacion de Variables miembro
+        //Variable Miembro
         private static string connectionString = ConfigurationManager.ConnectionStrings["SC_MMascotass.Properties.Settings.MascotasConnectionString"].ConnectionString;
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
-        //propiedades
-        public int Id { get; set; }
-        public int IdCliente { get; private set; }
+        //Propiedades
+        public int IdCliente { get;  set; }
         public string NombreCliente { get; set; }
-        public string NumeroTelefono { get; set; }
+        public string Telefono { get; set; }
 
-        //creacion del metodo constructor
-        public ClientesCS() { }
-        public ClientesCS(int id, string nombrecliente)
+        //Constructor
+        public Cliente() { }
+        public Cliente(int idcliente, string nombrecliente, string telefono)
         {
-            Id = id;
+            IdCliente = idcliente;
             NombreCliente = nombrecliente;
+            Telefono = telefono;
         }
 
-        //metodos
-        public void CrearCliente(ClientesCS cliente)
+        //Metodos
+
+        /// <summary>
+        /// Inserta una Categoria
+        /// </summary>
+        /// <param name="categoria">La informacion de la categoria</param>
+        public void CrearCliente(Cliente cliente)
         {
             try
             {
                 //Query de insertar
-                string query = @"INSERT INTO Veterinaria.Cliente (NombreCliente, Telefono)
-                            VALUES(@NombreCliente, @Telefono)";
+                string query = @"INSERT INTO Veterinaria.Cliente (NombreCliente, Telefono) 
+                            VALUES(@NombreCliente,@Telefono)";
 
                 //Establecer la conexion
                 sqlConnection.Open();
@@ -48,7 +51,7 @@ namespace SC_MMascotass
 
                 //Establecer los valores de los paramawtros
                 sqlCommand.Parameters.AddWithValue("@NombreCliente", cliente.NombreCliente);
-                sqlCommand.Parameters.AddWithValue("@Telefono", cliente.NumeroTelefono);
+                sqlCommand.Parameters.AddWithValue("@Telefono", cliente.Telefono);
 
                 //ejecutar el comando insertado
                 sqlCommand.ExecuteNonQuery();
@@ -65,11 +68,14 @@ namespace SC_MMascotass
             }
         }
 
-
-        public List<ClientesCS> MonstrarCliente()
+        /// <summary>
+        /// Monstrar todas las categorias
+        /// </summary>
+        /// <returns>Listado de Categorias</returns>
+        public List<Cliente> MonstrarCliente()
         {
             //Iniciamos la lista vacia de categorias
-            List<ClientesCS> clientes = new List<ClientesCS>();
+            List<Cliente> clientes = new List<Cliente>();
 
             try
             {
@@ -88,7 +94,7 @@ namespace SC_MMascotass
                 {
                     while (rdr.Read())
                     {
-                        clientes.Add(new ClientesCS { Id = Convert.ToInt32(rdr["IdCliente"]), NombreCliente = rdr["NombreCliente"].ToString(), NumeroTelefono = rdr["Telefono"].ToString() });
+                        clientes.Add(new Cliente { IdCliente = Convert.ToInt32(rdr["IdCliente"]), NombreCliente = rdr["NombreCliente"].ToString(), Telefono = rdr["Telefono"].ToString() });
                     }
                 }
                 return clientes;
@@ -105,9 +111,14 @@ namespace SC_MMascotass
             }
         }
 
-        public ClientesCS BuscarCliente(int id)
+        /// <summary>
+        /// Obtiene una categoria
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Cliente BuscarCliente(int IdCliente)
         {
-            ClientesCS elCliente = new ClientesCS();
+            Cliente elCliente = new Cliente();
 
             try
             {
@@ -122,7 +133,7 @@ namespace SC_MMascotass
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
 
                 //Establecer el valor del parametro
-                sqlCommand.Parameters.AddWithValue("@id", id);
+                sqlCommand.Parameters.AddWithValue("@IdCliente", IdCliente);
 
                 using (SqlDataReader rdr = sqlCommand.ExecuteReader())
                 {
@@ -130,6 +141,8 @@ namespace SC_MMascotass
                     {
                         elCliente.IdCliente = Convert.ToInt32(rdr["IdCliente"]);
                         elCliente.NombreCliente = rdr["NombreCliente"].ToString();
+                        elCliente.Telefono = rdr["Telefono"].ToString();
+
                     }
                 }
 
@@ -147,13 +160,14 @@ namespace SC_MMascotass
             }
         }
 
-        public void EditarCliente(ClientesCS cliente)
+        public void EditarCliente(Cliente cliente)
         {
             try
             {
                 //Query de actualizacion
                 string query = @"UPDATE Veterinaria.Cliente
-                                SET NombreCliente = @NombreCliente
+                                SET NombreCliente = @NombreCliente,
+                                    Telefono =@Telefono
                                 WHERE IdCliente = @IdCliente";
 
                 //Strablecer la conexion
@@ -165,6 +179,7 @@ namespace SC_MMascotass
                 //Establecer los valores de los parametros
                 sqlCommand.Parameters.AddWithValue("@IdCliente", cliente.IdCliente);
                 sqlCommand.Parameters.AddWithValue("@NombreCliente", cliente.NombreCliente);
+                sqlCommand.Parameters.AddWithValue("@Telefono", cliente.Telefono);
 
                 //Ejecutar el comando de actualizar
                 sqlCommand.ExecuteNonQuery();
@@ -179,7 +194,8 @@ namespace SC_MMascotass
                 sqlConnection.Close();
             }
         }
-        public void EliminarCliente(int id)
+
+        public void EliminarCliente(int IdCliente)
         {
             try
             {
@@ -194,7 +210,7 @@ namespace SC_MMascotass
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
 
                 //Establecer el valor del parametro
-                sqlCommand.Parameters.AddWithValue("@IdCliente", id);
+                sqlCommand.Parameters.AddWithValue("@IdCliente", IdCliente);
 
                 //Ejecutar el comando de eliminacion
                 sqlCommand.ExecuteNonQuery();
@@ -210,27 +226,25 @@ namespace SC_MMascotass
             }
         }
 
-        static public List<string> GetData()
-        {
-            List<string> data = new List<string>();
+        //static public List<string> GetData()
+        //{
+        //    List<string> data = new List<string>();
 
-            data.Add("Afzaal");
-            data.Add("Ahmad");
-            data.Add("Zeeshan");
-            data.Add("Daniyal");
-            data.Add("Rizwan");
-            data.Add("John");
-            data.Add("Doe");
-            data.Add("Johanna Doe");
-            data.Add("Pakistan");
-            data.Add("Microsoft");
-            data.Add("Programming");
-            data.Add("Visual Studio");
-            data.Add("Sofiya");
-            data.Add("Rihanna");
-            data.Add("Eminem");
+        //    data.Add("Comida para perros");
+        //    data.Add("Comida para Gatos");
+        //    data.Add("Juguetes");
+        //    data.Add("Jarabes");
+        //    data.Add("Pastillas");
+        //    data.Add("Vitaminas");
+        //    data.Add("Correas");
+        //    data.Add("Camas");
+        //    data.Add("Vacunas");
+        //    data.Add("En latados");
+        //    data.Add("Tazones");
+        //    data.Add("Servicio");
 
-            return data;
-        }
+        //    return data;
+        //}
     }
 }
+
