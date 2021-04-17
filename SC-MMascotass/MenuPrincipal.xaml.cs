@@ -26,7 +26,9 @@ namespace SC_MMascotass
 
         private void btnInicio_Click(object sender, RoutedEventArgs e)
         {
-            
+            MenuPrincipal menu = new MenuPrincipal();
+            menu.Show();
+            this.Close();
         }
 
         //Funcion Agregar el Form para cargar los formularios
@@ -54,6 +56,11 @@ namespace SC_MMascotass
         private void btnInventario_Click(object sender, RoutedEventArgs e)
         {
             AgregarForm(new Pages.Inventario());
+        }
+
+        private void btnCerrarSesion_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

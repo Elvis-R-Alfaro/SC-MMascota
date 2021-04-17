@@ -83,7 +83,7 @@ namespace SC_MMascotass.Pages
                     categoria.CrearCategoria(categoria);
 
                     //Mensaje de inserccion exito
-                    MessageBox.Show("Datos insertados correctamente");
+                    MessageBox.Show("Datos insertados correctamente", "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (Exception ex)
                 {
@@ -117,7 +117,7 @@ namespace SC_MMascotass.Pages
                     //Actualizar el lisbox de habitaciones
 
                     //Mensaje de actualizacion realizada
-                    MessageBox.Show("Habitacion modificada correctamente");
+                    MessageBox.Show("Datos Modificados correctamente", "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     //Limpiar formulario
                     this.Close();

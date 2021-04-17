@@ -76,7 +76,7 @@
             </Button>
         </StackPanel>
         <StackPanel Grid.Row="2">
-            <DataGrid Name="dgClientes" AutoGenerateColumns="True">
+            <DataGrid Name="dgClientes" AutoGenerateColumns="True" IsReadOnly="True">
             </DataGrid>
         </StackPanel>
     </Grid>

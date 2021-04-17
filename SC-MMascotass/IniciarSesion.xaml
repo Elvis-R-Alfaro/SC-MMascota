@@ -18,6 +18,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <Image Source="Imagenes/icono.png" Width="200" Grid.Column="1" ></Image>
         <Label Content="Iniciar Sesión" FontSize="30" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
         <Label Content="Nombre de Usuario" Grid.Row="1" FontSize="15" Margin="10"/>

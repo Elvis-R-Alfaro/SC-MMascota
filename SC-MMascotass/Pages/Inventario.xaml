@@ -75,7 +75,7 @@
             </Button>
         </StackPanel>
         <StackPanel Grid.Row="2">
-            <DataGrid Name="dgInventario" AutoGenerateColumns="True"></DataGrid>
+            <DataGrid Name="dgInventario" AutoGenerateColumns="True" IsReadOnly="True"></DataGrid>
         </StackPanel>
     </Grid>
 </UserControl>

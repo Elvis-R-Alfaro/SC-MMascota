@@ -100,7 +100,7 @@
                         Foreground="Black"
                         FontSize="14"
                         BorderThickness="0"
-                        Name="btnVentas">
+                        Name="btnVentas" Visibility="Hidden">
                 <StackPanel Orientation="Horizontal" Width="100">
                     <Image Source="/Imagenes/venta.png" Width="20" Height="20" Margin="0 0 20 0"/>
                     <TextBlock Text="Ventas" VerticalAlignment="Center"/>
@@ -116,7 +116,7 @@
                         Foreground="Black"
                         FontSize="14"
                         BorderThickness="0"
-                        x:Name="btnCerrarSesion"             >
+                        x:Name="btnCerrarSesion" Click="btnCerrarSesion_Click"             >
                 <StackPanel Orientation="Horizontal" Width="150">
                     <Image Source="/Imagenes/log-out.png" Width="20" Height="20" Margin="0 0 20 0"/>
                     <TextBlock Text="Cerrar Sesion" VerticalAlignment="Center"/>

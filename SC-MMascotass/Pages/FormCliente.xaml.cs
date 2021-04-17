@@ -28,10 +28,11 @@ namespace SC_MMascotass.Pages
 
             //Validacion de cargar datos
             if (ides != 0)
-            {              
+            {
                 cliente = cliente.BuscarCliente(ides);
                 txtNombre.Text = cliente.NombreCliente;
                 txtTelefono.Text = cliente.Telefono;
+                
             }
         }
 
@@ -72,6 +73,8 @@ namespace SC_MMascotass.Pages
                 spButton1.Visibility = Visibility.Hidden;
                 spEditarCategoria.Visibility = Visibility.Visible;
                 spButton2.Visibility = Visibility.Visible;
+                txtApellidos.Visibility = Visibility.Hidden;
+                lblapellido.Visibility = Visibility.Hidden;
             }
             else
             {
@@ -79,6 +82,8 @@ namespace SC_MMascotass.Pages
                 spButton1.Visibility = Visibility.Visible;
                 spEditarCategoria.Visibility = Visibility.Hidden;
                 spButton2.Visibility = Visibility.Hidden;
+                txtApellidos.Visibility = Visibility.Visible;
+                lblapellido.Visibility = Visibility.Visible;
             }
         }
 
@@ -95,7 +100,7 @@ namespace SC_MMascotass.Pages
                     cliente.CrearCliente(cliente);
 
                     //Mensaje de inserccion exito
-                    MessageBox.Show("Datos insertados correctamente");
+                    MessageBox.Show("Datos insertados correctamente","Exito",MessageBoxButton.OK,MessageBoxImage.Information);
                 }
                 catch (Exception ex)
                 {
@@ -137,7 +142,7 @@ namespace SC_MMascotass.Pages
                     //Actualizar el lisbox de habitaciones
 
                     //Mensaje de actualizacion realizada
-                    MessageBox.Show("Cliente modificada correctamente");
+                    MessageBox.Show("Datos modificados correctamente", "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     //Limpiar formulario
                     this.Close();

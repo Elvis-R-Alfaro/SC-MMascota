@@ -96,11 +96,11 @@
                 
 
                 <Label Content="Nombres" Grid.Row="0" FontSize="15" VerticalAlignment="Center" Margin="0 4 0 0"/>
-                <Label Content="Apellidos" Grid.Row="1" FontSize="15" VerticalAlignment="Center" Margin="0 4 0 0"/>
+                <Label Name="lblapellido"  Content="Apellidos" Grid.Row="1" FontSize="15" VerticalAlignment="Center" Margin="0 4 0 0" Visibility="Visible"/>
                 <Label Content="Telefono" Grid.Row="2" FontSize="15" VerticalAlignment="Center" Margin="0 4 0 0"/>
 
                 <TextBox Name="txtNombre" FontSize="15" Grid.Column="1" Grid.Row="0" Margin="0 4 0 0"/>
-                <TextBox Name="txtApellidos" FontSize="15" Grid.Column="1" Grid.Row="1" Margin="0 4 0 0"/>
+                <TextBox Name="txtApellidos" FontSize="15" Grid.Column="1" Grid.Row="1" Margin="0 4 0 0" Visibility="Visible"/>
                 <TextBox Name="txtTelefono" FontSize="15" Grid.Column="1" Grid.Row="2" Margin="0 4 0 0"/>
 
             </Grid>

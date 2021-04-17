@@ -214,7 +214,7 @@ namespace SC_MMascotass.Pages
                     inventario.CrearProducto(inventario);
 
                     //Mensaje de inserccion exito
-                    MessageBox.Show("Datos insertados correctamente");
+                    MessageBox.Show("Datos Insertados Correctamente", "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (Exception ex)
                 {
@@ -250,7 +250,7 @@ namespace SC_MMascotass.Pages
                     //Actualizar el lisbox de habitaciones
 
                     //Mensaje de actualizacion realizada
-                    MessageBox.Show("Producto modificado correctamente");
+                    MessageBox.Show("Datos Modificado Correctamente", "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
 
                     //Limpiar formulario
                     Limpiar();

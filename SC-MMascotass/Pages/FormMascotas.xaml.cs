@@ -198,7 +198,7 @@ namespace SC_MMascotass.Pages
                     mascota.CrearMascota(mascota);
 
                     //Mensaje de inserccion exito
-                    MessageBox.Show("Datos insertados correctamente");
+                    MessageBox.Show("Datos Insertados Correctamente", "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (Exception ex)
                 {
@@ -251,7 +251,7 @@ namespace SC_MMascotass.Pages
                     mascota.EditarMascota(mascota);
 
                     //Mensaje de inserccion exito
-                    MessageBox.Show("Datos Actualizados correctamente");
+                    MessageBox.Show("Datos Modificados Correctamente", "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 catch (Exception ex)
                 {

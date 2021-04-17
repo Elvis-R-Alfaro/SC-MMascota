@@ -61,7 +61,7 @@ namespace SC_MMascotass
             try
             {
                 if (dgClientes.SelectedValue == null)
-                    MessageBox.Show("Por favor selecciona una habitacion desde el listad");
+                    MessageBox.Show("Por favor selecciona una Categoria desde el listad");
                 else
                 {
                     //Monstrar mensaje de confirmacion

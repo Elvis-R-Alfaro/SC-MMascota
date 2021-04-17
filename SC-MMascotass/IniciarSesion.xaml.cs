@@ -45,7 +45,9 @@ namespace SC_MMascotass
                     //Verificar si la contraseña coincide con la de la base
                     if (elUsuario.Password == pwbPassword.Password && elUsuario.Estado)
                     {
-                        MessageBox.Show("Bienvenido al sistema de Mi mascota!");
+                        MenuPrincipal menu = new MenuPrincipal();
+                        menu.Show();
+                        this.Close();
                     }
                     else if (!elUsuario.Estado)
                     {
