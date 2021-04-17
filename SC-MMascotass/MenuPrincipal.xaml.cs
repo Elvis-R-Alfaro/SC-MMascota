@@ -29,6 +29,7 @@ namespace SC_MMascotass
             
         }
 
+        //Funcion Agregar el Form para cargar los formularios
         private void AgregarForm(UserControl control) 
         {
             this.spPrincipal.Children.Clear();
@@ -48,6 +49,11 @@ namespace SC_MMascotass
         private void btnCategorias_Click(object sender, RoutedEventArgs e)
         {
             AgregarForm(new Categorias());
+        }
+
+        private void btnInventario_Click(object sender, RoutedEventArgs e)
+        {
+            AgregarForm(new Pages.Inventario());
         }
     }
 }
