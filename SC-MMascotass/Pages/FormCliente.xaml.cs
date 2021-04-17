@@ -43,11 +43,6 @@ namespace SC_MMascotass.Pages
                 MessageBox.Show("!Ingrese el Nombre del Usuario¡");
                 return false;
             }
-            if (txtApellidos.Text == string.Empty)
-            {
-                MessageBox.Show("!Ingrese el Apellido del Usuario¡");
-                return false;
-            }
             if (txtTelefono.Text == string.Empty)
             {
                 MessageBox.Show("!Ingrese el Telefono¡");

@@ -16,7 +16,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
         <StackPanel>
-            <TextBlock Text="Categorias"
+            <TextBlock Text="Categorías"
                         FontSize="24"
                         />
         </StackPanel>

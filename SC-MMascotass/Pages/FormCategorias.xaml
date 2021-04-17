@@ -18,7 +18,7 @@
         
         <StackPanel Orientation="Horizontal" Visibility="Visible" Name="spNuevaCategoria">
             <Image Source="/Imagenes/categoria.png" Width="25" Margin="0 0 10 0"></Image>
-            <TextBlock Text="Nueva Categoria"
+            <TextBlock Text="Nueva Categoría"
                         FontSize="18"
                        VerticalAlignment="Center"
                         />
@@ -54,7 +54,7 @@
 
         <StackPanel Orientation="Horizontal" Visibility="Hidden" Name="spEditarCategoria">
             <Image Source="/Imagenes/categoria.png" Width="25" Margin="0 0 10 0"></Image>
-            <TextBlock Text="Editar Categoria"
+            <TextBlock Text="Editar Categoría"
                        FontSize="18"
                        VerticalAlignment="Center">
             </TextBlock>
