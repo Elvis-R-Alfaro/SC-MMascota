@@ -16,6 +16,6 @@ Debes utilizar la herramienta Sql Server Management Studio Express y realizar un
 
 Javier Raul Tabora Castejon- sistema de ventas e inventario.
 
-Elvis Rodesno Alfaro- Mascotas.
+Elvis Rodesno Alfaro- control de mascotas.
 
-Francis Joe Lara Chavez- clientes.
+Francis Joe Lara Chavez- control de clientes.
