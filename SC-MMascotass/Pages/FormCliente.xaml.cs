@@ -15,14 +15,9 @@ using System.Windows.Shapes;
 
 namespace SC_MMascotass.Pages
 {
-    /// <summary>
-    /// Interaction logic for FormCliente.xaml
-    /// </summary>
-
-
     public partial class FormCliente : Window
     {
-        private ClientesCS cliente = new ClientesCS();
+        private Cliente cliente = new Cliente();
         public static int ides;
         public FormCliente(bool visible)
         {
@@ -30,56 +25,58 @@ namespace SC_MMascotass.Pages
             MonstrarBotones(visible);
 
             if (ides != 0)
-            {
-               //categoria = categoria.BuscarCategoria(ides);
-              //  txtCategoria.Text = categoria.NombreCategoria;
+            {              
+                cliente = cliente.BuscarCliente(ides);
+                txtNombre.Text = cliente.NombreCliente;
+                txtTelefono.Text = cliente.Telefono;
+                //txtCategoria.Text = categoria.NombreCategoria;
             }
-
         }
 
-        private void MonstrarBotones(bool visibles)
-        {
-            //if (visibles)
-            //{
-            //    spNuevaCategoria.Visibility = Visibility.Hidden;
-            //    spButton1.Visibility = Visibility.Hidden;
-            //    spEditarCategoria.Visibility = Visibility.Visible;
-            //    spButton2.Visibility = Visibility.Visible;
-            //}
-            //else
-            //{
-            //    spNuevaCategoria.Visibility = Visibility.Visible;
-            //    spButton1.Visibility = Visibility.Visible;
-            //    spEditarCategoria.Visibility = Visibility.Hidden;
-            //    spButton2.Visibility = Visibility.Hidden;
-            //}
-        }
         private bool VerificarValores()
         {
-            if(txtNombre.Text == string.Empty)
+            if (txtNombre.Text == string.Empty)
             {
-                MessageBox.Show("!Ingrese el Nombre de la Categoría¡");
+                MessageBox.Show("!Ingrese el Nombre del Usuario¡");
                 return false;
             }
-            else if (txtApellidos.Text == string.Empty)
+            if (txtApellidos.Text == string.Empty)
             {
-                MessageBox.Show("Ingrese apellido");
+                MessageBox.Show("!Ingrese el Apellido del Usuario¡");
                 return false;
             }
-            else if (txtTelefono.Text == string.Empty)
+            if (txtTelefono.Text == string.Empty)
             {
-                MessageBox.Show("ingrese un numero de telefono");
+                MessageBox.Show("!Ingrese el Telefono¡");
                 return false;
             }
             return true;
         }
+
         private void ObtenerValoresFormulario()
         {
-            cliente.NombreCliente = txtNombre.Text;
-            cliente.Id = Convert.ToInt32(ides);
-            cliente.NumeroTelefono = txtTelefono.Text;
+            cliente.NombreCliente = txtNombre.Text + ' ' + txtApellidos.Text;
+            cliente.Telefono = txtTelefono.Text;
+            cliente.IdCliente = Convert.ToInt32(ides);         
         }
 
+        private void MonstrarBotones(bool visibles)
+        {
+            if (visibles)
+            {
+                spNuevaCategoria.Visibility = Visibility.Hidden;
+                spButton1.Visibility = Visibility.Hidden;
+                spEditarCategoria.Visibility = Visibility.Visible;
+                spButton2.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                spNuevaCategoria.Visibility = Visibility.Visible;
+                spButton1.Visibility = Visibility.Visible;
+                spEditarCategoria.Visibility = Visibility.Hidden;
+                spButton2.Visibility = Visibility.Hidden;
+            }
+        }
 
         private void btnGuardar_Click(object sender, RoutedEventArgs e)
         {
@@ -88,10 +85,7 @@ namespace SC_MMascotass.Pages
                 try
                 {
                     //Obtener los valores para la habitacion
-                    cliente.NombreCliente = txtNombre.Text;
-                    cliente.Id = Convert.ToInt32(ides);
-                    cliente.NumeroTelefono = txtTelefono.Text;
-
+                    ObtenerValoresFormulario();
 
                     //Insertar los datos de la habitacion
                     cliente.CrearCliente(cliente);
@@ -106,14 +100,52 @@ namespace SC_MMascotass.Pages
                 }
                 finally
                 {
-                    txtNombre.Text = string.Empty;
-                    txtApellidos.Text = string.Empty;
-                    txtTelefono.Text = string.Empty;
+                    Limpiar();
                 }
             }
         }
 
+        private void Limpiar()
+        {
+            txtApellidos.Text = string.Empty;
+            txtNombre.Text = string.Empty;
+            txtTelefono.Text = string.Empty;
+        }
+
         private void btnRestablecer_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnAceptar_Click(object sender, RoutedEventArgs e)
+        {
+            if (VerificarValores())
+            {
+                try
+                {
+                    //Obtener los valores para la habitacion desde el formulario
+                    ObtenerValoresFormulario();
+
+                    //Actualizar los valores en la base de datos
+                    cliente.EditarCliente(cliente);
+
+                    //Actualizar el lisbox de habitaciones
+
+                    //Mensaje de actualizacion realizada
+                    MessageBox.Show("Cliente modificada correctamente");
+
+                    //Limpiar formulario
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al momento de actualizar la habitacion....");
+                    Console.WriteLine(ex.Message);
+                }
+            }
+        }
+
+        private void btnRegresar_Click(object sender, RoutedEventArgs e)
         {
 
         }
