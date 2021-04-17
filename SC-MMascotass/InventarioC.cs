@@ -108,7 +108,12 @@ namespace SC_MMascotass
                 {
                     while (rdr.Read())
                     {
-                        inventarios.Add(new InventarioC { Id = Convert.ToInt32(rdr["IdCategoria"]), Descripcion = rdr["Descripcion"].ToString(), PrecioCosto = Convert.ToDouble(rdr["PrecioCosto"]), PrecioVenta = Convert.ToDouble(rdr["PrecioVenta"]), Stock = Convert.ToInt32(rdr["Stock"]) });
+                        inventarios.Add(new InventarioC { Id = Convert.ToInt32(rdr["IdProducto"]), 
+                            IdCategoria = Convert.ToInt32(rdr["IdCategoria"]), 
+                            Descripcion = rdr["NombreProducto"].ToString(), 
+                            PrecioCosto = Convert.ToDouble(rdr["PrecioCosto"]), 
+                            PrecioVenta = Convert.ToDouble(rdr["PrecioVenta"]), 
+                            Stock = Convert.ToInt32(rdr["Stock"]) } );
                     }
                 }
                 return inventarios;
@@ -154,7 +159,7 @@ namespace SC_MMascotass
                     while (rdr.Read())
                     {
                         elProducto.Id = Convert.ToInt32(rdr["IdProducto"]);
-                        elProducto.Descripcion = rdr["NombreCategoria"].ToString();
+                        elProducto.Descripcion = rdr["NombreProducto"].ToString();
                         elProducto.IdCategoria = Convert.ToInt32(rdr["IdCategoria"]);
                         elProducto.PrecioCosto = Convert.ToDouble(rdr["PrecioCosto"]);
                         elProducto.PrecioVenta = Convert.ToDouble(rdr["PrecioVenta"]);

@@ -25,12 +25,15 @@ namespace SC_MMascotass.Pages
         public Inventario()
         {
             InitializeComponent();
+
+            ObtenerInventario();
         }
 
         private void btnNuevo_Click(object sender, RoutedEventArgs e)
         {
             // Mostrar el formulario de ingreso de productos
-            FormInventario inventario = new FormInventario(true);
+            FormInventario.ides = '0';
+            FormInventario inventario = new FormInventario(false);
             inventario.Show();
         }
 
@@ -86,7 +89,7 @@ namespace SC_MMascotass.Pages
 
         private void btnRefrescar_Click(object sender, RoutedEventArgs e)
         {
-
+            ObtenerInventario();
         }
     }
 }

@@ -65,7 +65,7 @@
                         FontSize="14"
                         BorderThickness="0"
                         Name="btnRefrescar"
-                        Padding="10">
+                        Padding="10" Click="btnRefrescar_Click">
                 <StackPanel Orientation="Vertical" >
                     <Image Source="/Imagenes/iconos/recargar.png" HorizontalAlignment="Center" Width="25" Height="25"/>
                     <TextBlock Text="Refrescar" HorizontalAlignment="Center"/>

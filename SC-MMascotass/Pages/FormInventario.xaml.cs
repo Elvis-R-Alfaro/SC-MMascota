@@ -20,21 +20,29 @@ namespace SC_MMascotass.Pages
     public partial class FormInventario : Window
     {
         private InventarioC inventario = new InventarioC();
+        private Categoria categoria = new Categoria();
         public static int ides;
         public FormInventario(bool visible)
         {
             InitializeComponent();
 
             MonstrarBotones(visible);
+            var border = (autoCompleteCategorias.Parent as ScrollViewer).Parent as Border;
+            border.Visibility = System.Windows.Visibility.Collapsed;
+            Limpiar();
+
 
             if (ides != 0)
             {
                 inventario = inventario.BuscarProducto(ides);
+                categoria = categoria.BuscarCategoria(inventario.IdCategoria);
 
+                txtAuCategoria.Text = categoria.NombreCategoria;
                 txtDescripcion.Text = inventario.Descripcion;
                 txtPrecioCosto.Text = inventario.PrecioCosto.ToString();
                 txtPrecioVenta.Text = inventario.PrecioVenta.ToString();
                 txtStock.Text = inventario.Stock.ToString();
+                
             }
 
         }
@@ -71,7 +79,7 @@ namespace SC_MMascotass.Pages
 
         private void ObtenerValoresFormulario()
         {
-            //inventario.IdCategoria = txtAuCategoria.Text; DESVERGUE DESVERGUE
+            //inventario.IdCategoria = txtAuCategoria.Text;
             inventario.Descripcion = txtDescripcion.Text;
             inventario.Stock = Convert.ToInt32(txtStock.Text);
             inventario.PrecioCosto = Convert.ToDouble(txtPrecioCosto.Text);
@@ -96,7 +104,7 @@ namespace SC_MMascotass.Pages
         {
             bool found = false;
             var border = (autoCompleteCategorias.Parent as ScrollViewer).Parent as Border;
-            var data = Categoria.GetData();
+            var data = Categoria.MonstrarMascotas22();
 
             string query = (sender as TextBox).Text;
 
@@ -145,6 +153,8 @@ namespace SC_MMascotass.Pages
             // Mouse events   
             block.MouseLeftButtonUp += (sender, e) =>
             {
+                var border = (autoCompleteCategorias.Parent as ScrollViewer).Parent as Border;
+                border.Visibility = System.Windows.Visibility.Collapsed;
                 txtAuCategoria.Text = (sender as TextBlock).Text;
             };
 
@@ -166,9 +176,19 @@ namespace SC_MMascotass.Pages
 
         private void btnNuevoCliente_Click(object sender, RoutedEventArgs e)
         {
-            //// Mostrar el formulario de ingreso de categorias
-            //FormCategorias categorias = new FormCategorias();
-            //categorias.Show();
+            // Mostrar el formulario de ingreso de categorias
+            FormCategorias categorias = new FormCategorias(false);
+            categorias.Show();
+        }
+
+        private void Limpiar()
+        {
+            txtAuCategoria.Text = string.Empty;
+            txtCodigo.Text = string.Empty;
+            txtDescripcion.Text = string.Empty;
+            txtPrecioCosto.Text = string.Empty;
+            txtPrecioVenta.Text = string.Empty;
+            txtStock.Text = string.Empty;
         }
 
         private void btnGuardar_Click(object sender, RoutedEventArgs e)
@@ -178,6 +198,9 @@ namespace SC_MMascotass.Pages
                 try
                 {
                     //Obtener los valores para la habitacion
+                    categoria = categoria.BuscarCategoriasId(txtAuCategoria.Text);
+
+                    inventario.IdCategoria = categoria.Id;
                     inventario.Descripcion = txtDescripcion.Text;
                     inventario.Stock = Convert.ToInt32(txtStock.Text);
                     inventario.PrecioCosto = Convert.ToDouble(txtPrecioCosto.Text);
@@ -196,8 +219,8 @@ namespace SC_MMascotass.Pages
                 }
                 finally
                 {
-                    txtDescripcion.Text = string.Empty;
-
+                    Limpiar();
+                    
                     //Faltan cosas
                 }
             }
@@ -205,7 +228,7 @@ namespace SC_MMascotass.Pages
 
         private void btnRestablecer_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
@@ -226,6 +249,7 @@ namespace SC_MMascotass.Pages
                     MessageBox.Show("Producto modificado correctamente");
 
                     //Limpiar formulario
+                    Limpiar();
                     this.Close();
                 }
                 catch (Exception ex)

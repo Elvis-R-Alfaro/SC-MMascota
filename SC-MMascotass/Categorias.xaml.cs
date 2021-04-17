@@ -89,5 +89,10 @@ namespace SC_MMascotass
                 ObtenerCategorias();
             }
         }
+
+        private void btnRefrescar_Click(object sender, RoutedEventArgs e)
+        {
+            ObtenerCategorias();
+        }
     }
 }
