@@ -25,7 +25,6 @@ namespace SC_MMascotass.Pages
         public Inventario()
         {
             InitializeComponent();
-
             ObtenerInventario();
         }
 

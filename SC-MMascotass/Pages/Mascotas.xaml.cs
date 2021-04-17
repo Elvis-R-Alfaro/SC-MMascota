@@ -27,7 +27,6 @@ namespace SC_MMascotass.Pages
         public Mascotas()
         {
             InitializeComponent();
-
             ObtenerMascotas();
         }
 

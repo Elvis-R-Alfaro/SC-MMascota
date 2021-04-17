@@ -14,31 +14,28 @@ using System.Windows.Shapes;
 
 namespace SC_MMascotass.Pages
 {
-    /// <summary>
-    /// Interaction logic for FormMascotas.xaml
-    /// </summary>
     public partial class FormMascotas : Window
     {
         private Mascota mascota = new Mascota();
-
         private Cliente cliente = new Cliente();
+
+        //Variable de id
         public static int ides;
         public FormMascotas(bool visible)
         {
             InitializeComponent();
 
+            //Muestra u oculta los botones
             MonstrarBotones(visible);
+
+            //Oculta el auto completar al iniiar el fomrulario
             var border = (resultStack.Parent as ScrollViewer).Parent as Border;
             border.Visibility = System.Windows.Visibility.Collapsed;
 
-
-            
-
-
+            //VAlidacion de cargar los datos
             if (ides != 0)
             {
-                mascota = mascota.BuscarMascota(ides);
-                             
+                mascota = mascota.BuscarMascota(ides);            
                 
                 txtAliasMascota.Text = mascota.AliasMascota;
                 txtColorPelo.Text = mascota.ColorPelo;
@@ -53,7 +50,6 @@ namespace SC_MMascotass.Pages
         }
 
         
-
         //Autocompletar TextBox
         private void txtAuCliente_KeyUp(object sender, KeyEventArgs e)
         {
@@ -171,6 +167,7 @@ namespace SC_MMascotass.Pages
             return true;
         }
 
+        //Obtener los valores del fomrulario en variables
         private void ObtenerValoresFormulario()
         {
             mascota = mascota.BuscarMascota(ides);
