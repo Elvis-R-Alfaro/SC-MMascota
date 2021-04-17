@@ -25,13 +25,19 @@ namespace SC_MMascotass.Pages
         {
             InitializeComponent();
 
+            MonstrarBotones(visible);
             var border = (resultStack.Parent as ScrollViewer).Parent as Border;
             border.Visibility = System.Windows.Visibility.Collapsed;
 
             if (ides != 0)
             {
-                //mascota = mascota.BuscarMascota(ides);
+                mascota = mascota.BuscarMascota(ides);
                 //txtAuCliente.Text = mascota.IdCliente;
+                txtAliasMascota.Text = mascota.AliasMascota;
+                txtColorPelo.Text = mascota.ColorPelo;
+                txtEspecie.Text = mascota.Especie;
+                txtRaza.Text = mascota.Raza;
+                dtpFechaNacimiento.Text = mascota.Fecha.ToString();
             }
         }
 
@@ -179,9 +185,71 @@ namespace SC_MMascotass.Pages
                 }
                 finally
                 {
-                    //txtCategoria.Text = string.Empty;
+                    Limpiar();
                 }
             }
+        }
+
+        private void MonstrarBotones(bool visibles)
+        {
+            if (visibles)
+            {
+                spNuevaCategoria.Visibility = Visibility.Hidden;
+                spButton1.Visibility = Visibility.Hidden;
+                spEditarCategoria.Visibility = Visibility.Visible;
+                spButton2.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                spNuevaCategoria.Visibility = Visibility.Visible;
+                spButton1.Visibility = Visibility.Visible;
+                spEditarCategoria.Visibility = Visibility.Hidden;
+                spButton2.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void Limpiar()
+        {
+            txtAliasMascota.Text = string.Empty;
+            txtAuCliente.Text = string.Empty;
+            txtColorPelo.Text = string.Empty;
+            txtEspecie.Text = string.Empty;
+            txtRaza.Text = string.Empty;
+        }
+        private void btnAceptar_Click(object sender, RoutedEventArgs e)
+        {
+            //    if (VerificarValores())
+            //    {
+            //        try
+            //        {
+            //            //Obtener los valores para la habitacion
+            //            categoria.NombreCategoria = txtCategoria.Text;
+
+            //            //Insertar los datos de la habitacion
+            //            categoria.CrearCategoria(categoria);
+
+            //            //Mensaje de inserccion exito
+            //            MessageBox.Show("Datos insertados correctamente");
+            //        }
+            //        catch (Exception ex)
+            //        {
+            //            MessageBox.Show("Ha ocurrido un error al momento de insertar la habitacion....");
+            //            Console.WriteLine(ex.Message);
+            //        }
+            //        finally
+            //        {
+            //            txtCategoria.Text = string.Empty;
+            //        }
+            //    }
+        }
+        private void btnAceptar_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnRegresar_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -15,14 +15,21 @@
             <RowDefinition Height="75"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal" Name="spNuevaCategoria">
             <Image Source="/Imagenes/mascota.png" Width="25" Margin="0 0 10 0"></Image>
             <TextBlock Text="Nueva Mascota"
                         FontSize="18"
                        VerticalAlignment="Center"
                         />
         </StackPanel>
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" >
+        <StackPanel Orientation="Horizontal" Name="spEditarCategoria" Visibility="Hidden">
+            <Image Source="/Imagenes/mascota.png" Width="25" Margin="0 0 10 0"></Image>
+            <TextBlock Text="Editar Mascota"
+                        FontSize="18"
+                       VerticalAlignment="Center"
+                        />
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Name="spButton1">
             <Button     Background="Transparent"
                         Foreground="Black"
                         FontSize="14"
@@ -45,6 +52,34 @@
                 <StackPanel Orientation="Vertical" >
                     <Image Source="/Imagenes/iconos/recargar.png" HorizontalAlignment="Center" Width="25" Height="25"/>
                     <TextBlock Text="Restablecer" HorizontalAlignment="Center"/>
+
+                </StackPanel>
+
+            </Button>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Name="spButton2" Visibility="Hidden">
+            <Button     Background="Transparent"
+                        Foreground="Black"
+                        FontSize="14"
+                        BorderThickness="0"
+                        Name="btnAceptar"
+                        Padding="10" Click="btnAceptar_Click_1">
+                <StackPanel Orientation="Vertical" >
+                    <Image Source="/Imagenes/iconos/guardar.png" HorizontalAlignment="Center" Width="25" Height="25"/>
+                    <TextBlock Text="Aceptar" HorizontalAlignment="Center"/>
+
+                </StackPanel>
+
+            </Button>
+            <Button     Background="Transparent"
+                        Foreground="Black"
+                        FontSize="14"
+                        BorderThickness="0"
+                        Name="btnRegresar"
+                        Padding="10" Click="btnRegresar_Click">
+                <StackPanel Orientation="Vertical" >
+                    <Image Source="/Imagenes/iconos/recargar.png" HorizontalAlignment="Center" Width="25" Height="25"/>
+                    <TextBlock Text="Regresar" HorizontalAlignment="Center"/>
 
                 </StackPanel>
 
