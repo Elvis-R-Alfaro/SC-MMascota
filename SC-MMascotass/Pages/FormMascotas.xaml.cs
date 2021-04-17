@@ -14,22 +14,49 @@ using System.Windows.Shapes;
 
 namespace SC_MMascotass.Pages
 {
-    /// <summary>
-    /// Interaction logic for FormMascotas.xaml
-    /// </summary>
     public partial class FormMascotas : Window
     {
-        public FormMascotas()
+        private Mascota mascota = new Mascota();
+        private Cliente cliente = new Cliente();
+
+        //Variable de id
+        public static int ides;
+        public FormMascotas(bool visible)
         {
             InitializeComponent();
+
+            //Muestra u oculta los botones
+            MonstrarBotones(visible);
+
+            //Oculta el auto completar al iniiar el fomrulario
+            var border = (resultStack.Parent as ScrollViewer).Parent as Border;
+            border.Visibility = System.Windows.Visibility.Collapsed;
+
+            //VAlidacion de cargar los datos
+            if (ides != 0)
+            {
+                mascota = mascota.BuscarMascota(ides);            
+                
+                txtAliasMascota.Text = mascota.AliasMascota;
+                txtColorPelo.Text = mascota.ColorPelo;
+                txtEspecie.Text = mascota.Especie;
+                txtRaza.Text = mascota.Raza;
+                dtpFechaNacimiento.Text = mascota.Fecha.ToString();
+
+                cliente = cliente.BuscarCliente(mascota.IdCliente);
+                txtAuCliente.Text = cliente.NombreCliente;
+            }
+
         }
 
+        
         //Autocompletar TextBox
         private void txtAuCliente_KeyUp(object sender, KeyEventArgs e)
         {
             bool found = false;
             var border = (resultStack.Parent as ScrollViewer).Parent as Border;
-            var data = ClientesCS.GetData();
+            var data = Mascota.MonstrarMascotas22();
+          
 
             string query = (sender as TextBox).Text;
 
@@ -67,6 +94,8 @@ namespace SC_MMascotass.Pages
         private void addItem(string text)
         {
             TextBlock block = new TextBlock();
+            Label id = new Label();
+
 
             // Add the text   
             block.Text = text;
@@ -78,7 +107,11 @@ namespace SC_MMascotass.Pages
             // Mouse events   
             block.MouseLeftButtonUp += (sender, e) =>
             {
+                var border = (resultStack.Parent as ScrollViewer).Parent as Border;
                 txtAuCliente.Text = (sender as TextBlock).Text;
+                cliente = cliente.BuscarClientID(txtAuCliente.Text);
+                border.Visibility = System.Windows.Visibility.Collapsed;
+                ObtenerValoresFormulario();
             };
 
             block.MouseEnter += (sender, e) =>
@@ -100,8 +133,141 @@ namespace SC_MMascotass.Pages
         private void btnNuevoCliente_Click(object sender, RoutedEventArgs e)
         {
             // Mostrar el formulario de menú principal
-            FormCliente cliente = new FormCliente();
+            FormCliente cliente = new FormCliente(false);
             cliente.Show();
+        }
+
+        private bool VerificarValores()
+        {
+            if (txtAuCliente.Text == string.Empty)
+            {
+                MessageBox.Show("!Ingrese el Nombre del Cliente¡");
+                return false;
+            }
+            else if (txtAliasMascota.Text == string.Empty)
+            {
+                MessageBox.Show("!Ingrese el Nombre de la Mascota¡");
+                return false;
+            }
+            else if (txtColorPelo.Text == string.Empty)
+            {
+                MessageBox.Show("!Ingrese el Color de Pelo de la mascota¡");
+                return false;
+            }
+            else if (txtEspecie.Text == string.Empty)
+            {
+                MessageBox.Show("!Ingrese la especie de la Mascota¡");
+                return false;
+            }
+            else if (txtRaza.Text == string.Empty)
+            {
+                MessageBox.Show("!Ingrese la raza de la Mascota¡");
+                return false;
+            }
+            return true;
+        }
+
+        //Obtener los valores del fomrulario en variables
+        private void ObtenerValoresFormulario()
+        {
+            mascota = mascota.BuscarMascota(ides);
+            cliente = cliente.BuscarCliente(ides);
+
+            cliente = cliente.BuscarClientID(txtAuCliente.Text);
+            mascota.IdCliente = cliente.IdCliente;
+            cliente.NombreCliente = txtAuCliente.Text;
+            mascota.AliasMascota = txtAliasMascota.Text;
+            mascota.ColorPelo = txtColorPelo.Text;
+            mascota.Especie = txtEspecie.Text;
+            mascota.Raza = txtRaza.Text;
+            mascota.Fecha = dtpFechaNacimiento.DisplayDate.Date;
+
+        }
+        private void btnGuardar_Click(object sender, RoutedEventArgs e)
+        {
+            if (VerificarValores())
+            {
+                try
+                {
+                    //Obtener los valores para la habitacion
+                    ObtenerValoresFormulario();
+
+
+                    //Insertar los datos de la habitacion
+                    
+                    mascota.CrearMascota(mascota);
+
+                    //Mensaje de inserccion exito
+                    MessageBox.Show("Datos Insertados Correctamente", "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ha ocurrido un error al momento de insertar la habitacion....");
+                    Console.WriteLine(ex.Message);
+                }
+                finally
+                {
+                    Limpiar();
+                }
+            }
+        }
+
+        private void MonstrarBotones(bool visibles)
+        {
+            if (visibles)
+            {
+                spNuevaCategoria.Visibility = Visibility.Hidden;
+                spButton1.Visibility = Visibility.Hidden;
+                spEditarCategoria.Visibility = Visibility.Visible;
+                spButton2.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                spNuevaCategoria.Visibility = Visibility.Visible;
+                spButton1.Visibility = Visibility.Visible;
+                spEditarCategoria.Visibility = Visibility.Hidden;
+                spButton2.Visibility = Visibility.Hidden;
+            }
+        }
+
+        private void Limpiar()
+        {
+            txtAliasMascota.Text = string.Empty;
+            txtAuCliente.Text = string.Empty;
+            txtColorPelo.Text = string.Empty;
+            txtEspecie.Text = string.Empty;
+            txtRaza.Text = string.Empty;
+        }
+        private void btnAceptar_Click(object sender, RoutedEventArgs e)
+        {
+            if (VerificarValores())
+            {
+                try
+                {
+                    //Obtener los valores para la habitacion
+                    ObtenerValoresFormulario();
+
+                    //Insertar los datos de la habitacion
+                    mascota.EditarMascota(mascota);
+
+                    //Mensaje de inserccion exito
+                    MessageBox.Show("Datos Modificados Correctamente", "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ha ocurrido un error al momento de insertar la habitacion....");
+                    Console.WriteLine(ex.Message);
+                }
+                finally
+                {
+                    Limpiar();
+                }
+            }
+        }
+
+        private void btnRegresar_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

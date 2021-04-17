@@ -39,7 +39,7 @@
                         FontSize="14"
                         BorderThickness="0"
                         Name="btnEditar"
-                        Padding="10">
+                        Padding="10" Click="btnEditar_Click">
                 <StackPanel Orientation="Vertical" >
                     <Image Source="/Imagenes/iconos/editar.png" HorizontalAlignment="Center" Width="25" Height="25"/>
                     <TextBlock Text="Editar" HorizontalAlignment="Center"/>
@@ -52,7 +52,7 @@
                         FontSize="14"
                         BorderThickness="0"
                         Name="btnEliminar"
-                        Padding="10">
+                        Padding="10" Click="btnEliminar_Click">
                 <StackPanel Orientation="Vertical" >
                     <Image Source="/Imagenes/iconos/eliminar.png" HorizontalAlignment="Center" Width="25" Height="25"/>
                     <TextBlock Text="Eliminar" HorizontalAlignment="Center"/>
@@ -65,7 +65,7 @@
                         FontSize="14"
                         BorderThickness="0"
                         Name="btnRefrescar"
-                        Padding="10">
+                        Padding="10" Click="btnRefrescar_Click">
                 <StackPanel Orientation="Vertical" >
                     <Image Source="/Imagenes/iconos/recargar.png" HorizontalAlignment="Center" Width="25" Height="25"/>
                     <TextBlock Text="Refrescar" HorizontalAlignment="Center"/>
@@ -74,17 +74,8 @@
 
             </Button>
         </StackPanel>
-        <StackPanel Grid.Row="2" Name="dgClientes">
-            <DataGrid >
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Codigo"/>
-                    <DataGridTextColumn Header="Categoria"/>
-                    <DataGridTextColumn Header="Descripción"/>
-                    <DataGridTextColumn Header="Stock"/>
-                    <DataGridTextColumn Header="Precio Costo"/>
-                    <DataGridTextColumn Header="Precio Venta"/>
-                </DataGrid.Columns>
-            </DataGrid>
+        <StackPanel Grid.Row="2">
+            <DataGrid Name="dgInventario" AutoGenerateColumns="True" IsReadOnly="True"></DataGrid>
         </StackPanel>
     </Grid>
 </UserControl>

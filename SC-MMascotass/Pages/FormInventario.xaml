@@ -13,7 +13,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="75"/>
-            <RowDefinition/>
+            <RowDefinition Height="295.2"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal">
             <Image Source="/Imagenes/inventario.png" Width="25" Margin="0 0 10 0"></Image>
@@ -22,13 +22,41 @@
                        VerticalAlignment="Center"
                         />
         </StackPanel>
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" >
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Name="spEditar" Visibility="Hidden">
+            <Button     Background="Transparent"
+                        Foreground="Black"
+                        FontSize="14"
+                        BorderThickness="0"
+                        Name="btnAceptar"
+                        Padding="10">
+                <StackPanel Orientation="Vertical" >
+                    <Image Source="/Imagenes/iconos/guardar.png" HorizontalAlignment="Center" Width="25" Height="25"/>
+                    <TextBlock Text="Aceptar" HorizontalAlignment="Center"/>
+
+                </StackPanel>
+
+            </Button>
+            <Button     Background="Transparent"
+                        Foreground="Black"
+                        FontSize="14"
+                        BorderThickness="0"
+                        Name="btnCancelar"
+                        Padding="10">
+                <StackPanel Orientation="Vertical" >
+                    <Image Source="/Imagenes/iconos/recargar.png" HorizontalAlignment="Center" Width="25" Height="25"/>
+                    <TextBlock Text="Cancelar" HorizontalAlignment="Center"/>
+
+                </StackPanel>
+
+            </Button>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Name="spGuardar" Visibility="Visible">
             <Button     Background="Transparent"
                         Foreground="Black"
                         FontSize="14"
                         BorderThickness="0"
                         Name="btnGuardar"
-                        Padding="10">
+                        Padding="10" Click="btnGuardar_Click">
                 <StackPanel Orientation="Vertical" >
                     <Image Source="/Imagenes/iconos/guardar.png" HorizontalAlignment="Center" Width="25" Height="25"/>
                     <TextBlock Text="Guardar" HorizontalAlignment="Center"/>
@@ -77,8 +105,8 @@
                     </Button>
                 </StackPanel>
 
-                <Label Content="Código" Grid.Row="1" FontSize="15" VerticalAlignment="Center" Margin="0 4 0 0"/>
-                <TextBox Name="txtCodigo" FontSize="15" Grid.Column="1" Grid.Row="1" Margin="0 4 0 0"/>
+                <Label Content="Código" Grid.Row="1" FontSize="15" VerticalAlignment="Center" Margin="0 4 0 0" Visibility="Hidden"/>
+                <TextBox Name="txtCodigo" FontSize="15" Grid.Column="1" Grid.Row="1" Margin="0 4 0 0" Visibility="Hidden"/>
 
                 <Label Content="Descripción" Grid.Row="2" FontSize="15" VerticalAlignment="Center" Margin="0 4 0 0"/>
                 <TextBox Name="txtDescripcion" FontSize="15" Grid.Column="1" Grid.Row="2" Margin="0 4 0 0"/>
@@ -102,7 +130,7 @@
             </Grid>
         </StackPanel>
         <Border Height="150" BorderBrush="Black"   
-        BorderThickness="1" Margin="389,35,0,109" Grid.Row="2">
+        BorderThickness="1" Margin="389,35,0,109" Grid.Row="2" Background="White">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <StackPanel Name="autoCompleteCategorias"></StackPanel>
             </ScrollViewer>

@@ -19,7 +19,8 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel>
+        <Image Source="Imagenes/icono.png" Width="200" Grid.Column="1" ></Image>
+        <Label Content="Iniciar Sesión" FontSize="30" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
             <Label Content="Iniciar Sesión" FontSize="30"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
             

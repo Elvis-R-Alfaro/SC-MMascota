@@ -9,47 +9,69 @@ using System.Configuration;
 
 namespace SC_MMascotass
 {
-    class Categoria
+    class Mascota
     {
         //Variable Miembro
         private static string connectionString = ConfigurationManager.ConnectionStrings["SC_MMascotass.Properties.Settings.MascotasConnectionString"].ConnectionString;
         private static SqlConnection sqlConnection = new SqlConnection(connectionString);
 
+        private Cliente cliente = new Cliente();
         //Propiedades
 
-        public int Id { get; set; }
-        public string NombreCategoria { get; set; }
+        public int IdMascota { get; set; }
+        public int IdCliente { get; set; }
+        public string AliasMascota { get; set; }
+        public string Especie { get; set; }
+        public string Raza { get; set; }
+        public string ColorPelo { get; set; }
+        public DateTime Fecha { get; set; }
 
         //Constructor
-        public Categoria() { }
-        public Categoria(int id, string nombrecategoria)
+        public Mascota() { }
+        public Mascota(int idmascota, int idcliente, string aliasmascota, string especie, string raza, string colorpelo, DateTime fecha)
         {
-            Id = id;
-            NombreCategoria = nombrecategoria;
+            IdMascota = idmascota;
+            IdCliente = idcliente;
+            AliasMascota = aliasmascota;
+            Especie = especie;
+            Raza = raza;
+            ColorPelo = colorpelo;
+            Fecha = fecha;
         }
 
         //Metodos
 
         /// <summary>
-        /// Inserta una Categoria
+        /// Inserta una Mascota
         /// </summary>
         /// <param name="categoria">La informacion de la categoria</param>
-        public void CrearCategoria(Categoria categoria)
+        public void CrearMascota(Mascota mascota)
         {
             try
             {
                 //Query de insertar
-                string query = @"INSERT INTO Veterinaria.Categoria (NombreCategoria) 
-                            VALUES(@nombrecategoria)";
+                string query = @"INSERT INTO Veterinaria.Mascota
+                                (IdCliente,AliasMascota,Especie
+                                ,Raza,ColorPelo,Fecha)
+                            VALUES
+                                (@IdCliente,@AliasMascota,@Especie
+                                ,@Raza,@ColorPelo,@Fecha)";
 
                 //Establecer la conexion
                 sqlConnection.Open();
+
+                
 
                 //Crear el comando SQL
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
 
                 //Establecer los valores de los paramawtros
-                sqlCommand.Parameters.AddWithValue("@nombrecategoria", categoria.NombreCategoria);
+                sqlCommand.Parameters.AddWithValue("@IdCliente", mascota.IdCliente);
+                sqlCommand.Parameters.AddWithValue("@AliasMascota", mascota.AliasMascota);
+                sqlCommand.Parameters.AddWithValue("@Especie", mascota.Especie);
+                sqlCommand.Parameters.AddWithValue("@Raza", mascota.Raza);
+                sqlCommand.Parameters.AddWithValue("@ColorPelo", mascota.ColorPelo);
+                sqlCommand.Parameters.AddWithValue("@Fecha", mascota.Fecha);
 
                 //ejecutar el comando insertado
                 sqlCommand.ExecuteNonQuery();
@@ -70,16 +92,16 @@ namespace SC_MMascotass
         /// Monstrar todas las categorias
         /// </summary>
         /// <returns>Listado de Categorias</returns>
-         public List<Categoria> MonstrarCategorias()
+        public List<Mascota> MonstrarMascotas()
         {
             //Iniciamos la lista vacia de categorias
-            List<Categoria> categorias = new List<Categoria>();
+            List<Mascota> mascotas = new List<Mascota>();
 
             try
             {
                 //Query de seleccion
-                string query = @"SELECT IdCategoria, NombreCategoria
-                                FROM Veterinaria.Categoria";
+                string query = @"SELECT *
+                                FROM Veterinaria.Mascota";
 
                 //Establcer la coneccion
                 sqlConnection.Open();
@@ -92,10 +114,60 @@ namespace SC_MMascotass
                 {
                     while (rdr.Read())
                     {
-                        categorias.Add(new Categoria { Id = Convert.ToInt32(rdr["IdCategoria"]), NombreCategoria = rdr["NombreCategoria"].ToString() });
+                        mascotas.Add(new Mascota { IdMascota = Convert.ToInt32(rdr["IdMascota"]),
+                            IdCliente = Convert.ToInt32(rdr["IdCliente"]),
+                            AliasMascota = rdr["AliasMascota"].ToString(),
+                            Especie = rdr["Especie"].ToString(),
+                            Raza = rdr["Raza"].ToString(),
+                            ColorPelo = rdr["ColorPelo"].ToString(),
+                            Fecha = (DateTime)rdr["Fecha"] });
                     }
                 }
-                return categorias;
+                return mascotas;
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            finally
+            {
+                //Cerrar la conexion
+                sqlConnection.Close();
+            }
+        }
+        /// <summary>
+        /// muestra una mascota
+        /// </summary>
+        /// <returns></returns>
+        static public List<string> MonstrarMascotas22()
+        {
+            //Iniciamos la lista vacia de categorias
+            List<string> data = new List<string>();
+
+            try
+            {
+                //Query de seleccion
+                string query = @"SELECT *
+                                FROM Veterinaria.Cliente";
+
+                //Establcer la coneccion
+                sqlConnection.Open();
+
+                //Crear el comando sql
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                //Obtener los datos de las categorias
+                using (SqlDataReader rdr = sqlCommand.ExecuteReader())
+                {
+                    while (rdr.Read())
+                    {
+                        data.Add(rdr["NombreCliente"].ToString());
+                        data.Add(rdr["IdCliente"].ToString());
+                    }
+                }
+                
+                return data;
             }
             catch (Exception e)
             {
@@ -113,62 +185,16 @@ namespace SC_MMascotass
         /// Obtiene una categoria
         /// </summary>
         /// <param name="id"></param>
-        /// <returns>retorna la categoria </returns>
-        public Categoria BuscarCategoria(int id)
-        {
-            Categoria laCategoria = new Categoria();
-
-            try
-            {
-                //Query busqueda
-                string query = @"SELECT * From Veterinaria.Categoria
-                                WHERE IdCategoria = @id";
-
-                //Establecer la coneccion
-                sqlConnection.Open();
-
-                //Crear el comando SQL
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-
-                //Establecer el valor del parametro
-                sqlCommand.Parameters.AddWithValue("@id", id);
-
-                using (SqlDataReader rdr = sqlCommand.ExecuteReader())
-                {
-                    while (rdr.Read())
-                    {
-                        laCategoria.Id = Convert.ToInt32(rdr["IdCategoria"]);
-                        laCategoria.NombreCategoria = rdr["NombreCategoria"].ToString();
-                    }
-                }
-
-                return laCategoria;
-            }
-            catch (Exception e)
-            {
-
-                throw e;
-            }
-            finally
-            {
-                //Cerrar la conexio
-                sqlConnection.Close();
-            }
-        }
-        /// <summary>
-        /// busca una categoria
-        /// </summary>
-        /// <param name="NombreCategoria"></param>
         /// <returns></returns>
-        public Categoria BuscarCategoriasId(string NombreCategoria)
+        public Mascota BuscarMascota(int id)
         {
-            Categoria laCategoria = new Categoria();
+            Mascota laMascota = new Mascota();
 
             try
             {
                 //Query busqueda
-                string query = @"SELECT * From Veterinaria.Categoria
-                                WHERE NombreCategoria = @NombreCategoria";
+                string query = @"SELECT * From Veterinaria.Mascota
+                                WHERE IdMascota = @IdMascota";
 
                 //Establecer la coneccion
                 sqlConnection.Open();
@@ -177,18 +203,24 @@ namespace SC_MMascotass
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
 
                 //Establecer el valor del parametro
-                sqlCommand.Parameters.AddWithValue("@NombreCategoria", NombreCategoria);
+                sqlCommand.Parameters.AddWithValue("@IdMascota", id);
 
                 using (SqlDataReader rdr = sqlCommand.ExecuteReader())
                 {
                     while (rdr.Read())
                     {
-                        laCategoria.Id = Convert.ToInt32(rdr["IdCategoria"]);
-                        laCategoria.NombreCategoria = rdr["NombreCategoria"].ToString();
+                        laMascota.IdMascota = Convert.ToInt32(rdr["IdMascota"]);
+                        laMascota.IdCliente = Convert.ToInt32(rdr["IdCliente"]);
+
+                        laMascota.AliasMascota = rdr["AliasMascota"].ToString();
+                        laMascota.Especie = rdr["Especie"].ToString();
+                        laMascota.Raza = rdr["Raza"].ToString();
+                        laMascota.ColorPelo = rdr["ColorPelo"].ToString();
+                        laMascota.Fecha = (DateTime)rdr["Fecha"];
                     }
                 }
 
-                return laCategoria;
+                return laMascota;
             }
             catch (Exception e)
             {
@@ -202,17 +234,22 @@ namespace SC_MMascotass
             }
         }
         /// <summary>
-        /// modifica una categoria
+        /// edita una mascota existente
         /// </summary>
-        /// <param name="categoria"></param>
-        public void EditarCategoria(Categoria categoria)
+        /// <param name="mascota"></param>
+        public void EditarMascota(Mascota mascota)
         {
             try
             {
                 //Query de actualizacion
-                string query = @"UPDATE Veterinaria.Categoria
-                                SET NombreCategoria = @nombrecategoria
-                                WHERE IdCategoria = @id";
+                string query = @"UPDATE Veterinaria.Mascota
+                                SET IdCliente = @IdCliente,
+                                    AliasMascota=  @AliasMascota,
+                                    Especie = @Especie,
+                                    Raza = @Raza,
+                                    ColorPelo = @ColorPelo,
+                                    Fecha = @Fecha                                  
+                                WHERE IdMascota = @IdMascota";
 
                 //Strablecer la conexion
                 sqlConnection.Open();
@@ -221,8 +258,13 @@ namespace SC_MMascotass
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
 
                 //Establecer los valores de los parametros
-                sqlCommand.Parameters.AddWithValue("@id", categoria.Id);
-                sqlCommand.Parameters.AddWithValue("@nombrecategoria", categoria.NombreCategoria);
+                sqlCommand.Parameters.AddWithValue("@IdMascota", mascota.IdMascota);
+                sqlCommand.Parameters.AddWithValue("@IdCliente", mascota.IdCliente);
+                sqlCommand.Parameters.AddWithValue("@AliasMascota", mascota.AliasMascota);
+                sqlCommand.Parameters.AddWithValue("@Especie", mascota.Especie);
+                sqlCommand.Parameters.AddWithValue("@Raza", mascota.Raza);
+                sqlCommand.Parameters.AddWithValue("@ColorPelo", mascota.ColorPelo);
+                sqlCommand.Parameters.AddWithValue("@Fecha", mascota.Fecha);
 
                 //Ejecutar el comando de actualizar
                 sqlCommand.ExecuteNonQuery();
@@ -238,16 +280,17 @@ namespace SC_MMascotass
             }
         }
         /// <summary>
-        /// Elimina una Categoria
+        /// elimina una mascota existente
         /// </summary>
         /// <param name="id"></param>
-        public void EliminarCategoria(int id)
+
+        public void EliminarMascota(int id)
         {
             try
             {
                 //Query de eliminar
-                string query = @"DELETE FROM Veterinaria.Categoria
-                                WHERE IdCategoria = @id";
+                string query = @"DELETE FROM Veterinaria.Mascota
+                                WHERE IdMascota = @IdMascota";
 
                 //Establecer la conexion SQL
                 sqlConnection.Open();
@@ -256,7 +299,7 @@ namespace SC_MMascotass
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
 
                 //Establecer el valor del parametro
-                sqlCommand.Parameters.AddWithValue("@id", id);
+                sqlCommand.Parameters.AddWithValue("@IdMascota", id);
 
                 //Ejecutar el comando de eliminacion
                 sqlCommand.ExecuteNonQuery();
@@ -268,50 +311,6 @@ namespace SC_MMascotass
             finally
             {
                 //CErrar conexion
-                sqlConnection.Close();
-            }
-        }
-        /// <summary>
-        /// Muestra las mascotasa en el list
-        /// </summary>
-        /// <returns></returns>
-        static public List<string> MonstrarMascotas22()
-        {
-            //Iniciamos la lista vacia de categorias
-            List<string> data = new List<string>();
-
-            try
-            {
-                //Query de seleccion
-                string query = @"SELECT *
-                                FROM Veterinaria.Categoria";
-
-                //Establcer la coneccion
-                sqlConnection.Open();
-
-                //Crear el comando sql
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-
-                //Obtener los datos de las categorias
-                using (SqlDataReader rdr = sqlCommand.ExecuteReader())
-                {
-                    while (rdr.Read())
-                    {
-                        data.Add(rdr["NombreCategoria"].ToString());
-                        data.Add(rdr["IdCategoria"].ToString());
-                    }
-                }
-
-                return data;
-            }
-            catch (Exception e)
-            {
-
-                throw e;
-            }
-            finally
-            {
-                //Cerrar la conexion
                 sqlConnection.Close();
             }
         }
