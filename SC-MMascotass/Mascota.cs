@@ -136,7 +136,10 @@ namespace SC_MMascotass
                 sqlConnection.Close();
             }
         }
-
+        /// <summary>
+        /// muestra una mascota
+        /// </summary>
+        /// <returns></returns>
         static public List<string> MonstrarMascotas22()
         {
             //Iniciamos la lista vacia de categorias
@@ -230,7 +233,10 @@ namespace SC_MMascotass
                 sqlConnection.Close();
             }
         }
-
+        /// <summary>
+        /// edita una mascota existente
+        /// </summary>
+        /// <param name="mascota"></param>
         public void EditarMascota(Mascota mascota)
         {
             try
@@ -273,6 +279,10 @@ namespace SC_MMascotass
                 sqlConnection.Close();
             }
         }
+        /// <summary>
+        /// elimina una mascota existente
+        /// </summary>
+        /// <param name="id"></param>
 
         public void EliminarMascota(int id)
         {

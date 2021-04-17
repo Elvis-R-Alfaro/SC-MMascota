@@ -180,6 +180,10 @@ namespace SC_MMascotass
                 sqlConnection.Close();
             }
         }
+        /// <summary>
+        /// edita un producto existente
+        /// </summary>
+        /// <param name="producto"></param>
         public void EditarProducto(InventarioC producto)
         {
             try
@@ -226,6 +230,10 @@ namespace SC_MMascotass
                 sqlConnection.Close();
             }
         }
+        /// <summary>
+        /// elimina un registro existente
+        /// </summary>
+        /// <param name="id"></param>
 
         public void EliminarRegistro(int id)
         {

@@ -113,7 +113,7 @@ namespace SC_MMascotass
         /// Obtiene una categoria
         /// </summary>
         /// <param name="id"></param>
-        /// <returns></returns>
+        /// <returns>retorna la categoria </returns>
         public Categoria BuscarCategoria(int id)
         {
             Categoria laCategoria = new Categoria();
@@ -155,7 +155,11 @@ namespace SC_MMascotass
                 sqlConnection.Close();
             }
         }
-
+        /// <summary>
+        /// busca una categoria
+        /// </summary>
+        /// <param name="NombreCategoria"></param>
+        /// <returns></returns>
         public Categoria BuscarCategoriasId(string NombreCategoria)
         {
             Categoria laCategoria = new Categoria();
@@ -197,7 +201,10 @@ namespace SC_MMascotass
                 sqlConnection.Close();
             }
         }
-
+        /// <summary>
+        /// modifica una categoria
+        /// </summary>
+        /// <param name="categoria"></param>
         public void EditarCategoria(Categoria categoria)
         {
             try
@@ -230,7 +237,10 @@ namespace SC_MMascotass
                 sqlConnection.Close();
             }
         }
-
+        /// <summary>
+        /// Elimina una Categoria
+        /// </summary>
+        /// <param name="id"></param>
         public void EliminarCategoria(int id)
         {
             try
@@ -261,7 +271,10 @@ namespace SC_MMascotass
                 sqlConnection.Close();
             }
         }
-
+        /// <summary>
+        /// Muestra las mascotasa en el list
+        /// </summary>
+        /// <returns></returns>
         static public List<string> MonstrarMascotas22()
         {
             //Iniciamos la lista vacia de categorias

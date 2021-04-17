@@ -25,6 +25,7 @@ namespace SC_MMascotass
         private Categoria categoria = new Categoria();
         private List<Categoria> categorias;
 
+
         public Categorias()
         {
             InitializeComponent();
