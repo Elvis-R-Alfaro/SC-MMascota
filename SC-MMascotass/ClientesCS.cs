@@ -8,6 +8,7 @@ namespace SC_MMascotass
 {
     class ClientesCS
     {
+        //Cadena de ejemplo con un list
         static public List<string> GetData()
         {
             List<string> data = new List<string>();

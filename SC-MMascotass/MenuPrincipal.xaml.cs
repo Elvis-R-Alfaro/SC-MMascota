@@ -29,6 +29,7 @@ namespace SC_MMascotass
             
         }
 
+        //Funcion Agregar el Form para cargar los formularios
         private void AgregarForm(UserControl control) 
         {
             this.spPrincipal.Children.Clear();
