@@ -15,6 +15,7 @@ namespace SC_MMascotass
         private static string connectionString = ConfigurationManager.ConnectionStrings["SC_MMascotass.Properties.Settings.MascotasConnectionString"].ConnectionString;
         private static SqlConnection sqlConnection = new SqlConnection(connectionString);
 
+        private Cliente cliente = new Cliente();
         //Propiedades
 
         public int IdMascota { get; set; }
@@ -59,12 +60,14 @@ namespace SC_MMascotass
                 //Establecer la conexion
                 sqlConnection.Open();
 
+                
+
                 //Crear el comando SQL
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
 
                 //Establecer los valores de los paramawtros
                 sqlCommand.Parameters.AddWithValue("@IdCliente", mascota.IdCliente);
-                sqlCommand.Parameters.AddWithValue("@AliasMascota", mascota.IdMascota);
+                sqlCommand.Parameters.AddWithValue("@AliasMascota", mascota.AliasMascota);
                 sqlCommand.Parameters.AddWithValue("@Especie", mascota.Especie);
                 sqlCommand.Parameters.AddWithValue("@Raza", mascota.Raza);
                 sqlCommand.Parameters.AddWithValue("@ColorPelo", mascota.ColorPelo);
@@ -111,13 +114,13 @@ namespace SC_MMascotass
                 {
                     while (rdr.Read())
                     {
-                        mascotas.Add(new Mascota {  IdMascota = Convert.ToInt32(rdr["IdCliente"]),
-                                                    IdCliente = Convert.ToInt32(rdr["IdCliente"]),
-                                                    AliasMascota = rdr["AliasMascota"].ToString(),
-                                                    Especie = rdr["Especie"].ToString(),
-                                                    Raza = rdr["Raza"].ToString(),
-                                                    ColorPelo = rdr["ColorPelo"].ToString(),
-                                                    Fecha = (DateTime)rdr["Fecha"]});
+                        mascotas.Add(new Mascota { IdMascota = Convert.ToInt32(rdr["IdMascota"]),
+                            IdCliente = Convert.ToInt32(rdr["IdCliente"]),
+                            AliasMascota = rdr["AliasMascota"].ToString(),
+                            Especie = rdr["Especie"].ToString(),
+                            Raza = rdr["Raza"].ToString(),
+                            ColorPelo = rdr["ColorPelo"].ToString(),
+                            Fecha = (DateTime)rdr["Fecha"] });
                     }
                 }
                 return mascotas;
@@ -157,8 +160,10 @@ namespace SC_MMascotass
                     while (rdr.Read())
                     {
                         data.Add(rdr["NombreCliente"].ToString());
+                        data.Add(rdr["IdCliente"].ToString());
                     }
                 }
+                
                 return data;
             }
             catch (Exception e)
@@ -203,6 +208,7 @@ namespace SC_MMascotass
                     {
                         laMascota.IdMascota = Convert.ToInt32(rdr["IdMascota"]);
                         laMascota.IdCliente = Convert.ToInt32(rdr["IdCliente"]);
+
                         laMascota.AliasMascota = rdr["AliasMascota"].ToString();
                         laMascota.Especie = rdr["Especie"].ToString();
                         laMascota.Raza = rdr["Raza"].ToString();

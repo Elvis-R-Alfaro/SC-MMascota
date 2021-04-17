@@ -20,6 +20,8 @@ namespace SC_MMascotass.Pages
     public partial class FormMascotas : Window
     {
         private Mascota mascota = new Mascota();
+
+        private Cliente cliente = new Cliente();
         public static int ides;
         public FormMascotas(bool visible)
         {
@@ -29,18 +31,28 @@ namespace SC_MMascotass.Pages
             var border = (resultStack.Parent as ScrollViewer).Parent as Border;
             border.Visibility = System.Windows.Visibility.Collapsed;
 
+
+            
+
+
             if (ides != 0)
             {
                 mascota = mascota.BuscarMascota(ides);
-                //txtAuCliente.Text = mascota.IdCliente;
+                             
+                
                 txtAliasMascota.Text = mascota.AliasMascota;
                 txtColorPelo.Text = mascota.ColorPelo;
                 txtEspecie.Text = mascota.Especie;
                 txtRaza.Text = mascota.Raza;
                 dtpFechaNacimiento.Text = mascota.Fecha.ToString();
+
+                cliente = cliente.BuscarCliente(mascota.IdCliente);
+                txtAuCliente.Text = cliente.NombreCliente;
             }
+
         }
 
+        
 
         //Autocompletar TextBox
         private void txtAuCliente_KeyUp(object sender, KeyEventArgs e)
@@ -86,6 +98,8 @@ namespace SC_MMascotass.Pages
         private void addItem(string text)
         {
             TextBlock block = new TextBlock();
+            Label id = new Label();
+
 
             // Add the text   
             block.Text = text;
@@ -99,6 +113,7 @@ namespace SC_MMascotass.Pages
             {
                 var border = (resultStack.Parent as ScrollViewer).Parent as Border;
                 txtAuCliente.Text = (sender as TextBlock).Text;
+                cliente = cliente.BuscarClientID(txtAuCliente.Text);
                 border.Visibility = System.Windows.Visibility.Collapsed;
                 ObtenerValoresFormulario();
             };
@@ -122,7 +137,7 @@ namespace SC_MMascotass.Pages
         private void btnNuevoCliente_Click(object sender, RoutedEventArgs e)
         {
             // Mostrar el formulario de menú principal
-            FormCliente cliente = new FormCliente();
+            FormCliente cliente = new FormCliente(false);
             cliente.Show();
         }
 
@@ -158,9 +173,18 @@ namespace SC_MMascotass.Pages
 
         private void ObtenerValoresFormulario()
         {
-            //categoria.NombreCategoria = txtCategoria.Text;
-            //mascota = mascota.ObtenerID(txtAuCliente.Text);
-            //MessageBox.Show(mascota);
+            mascota = mascota.BuscarMascota(ides);
+            cliente = cliente.BuscarCliente(ides);
+
+            cliente = cliente.BuscarClientID(txtAuCliente.Text);
+            mascota.IdCliente = cliente.IdCliente;
+            cliente.NombreCliente = txtAuCliente.Text;
+            mascota.AliasMascota = txtAliasMascota.Text;
+            mascota.ColorPelo = txtColorPelo.Text;
+            mascota.Especie = txtEspecie.Text;
+            mascota.Raza = txtRaza.Text;
+            mascota.Fecha = dtpFechaNacimiento.DisplayDate.Date;
+
         }
         private void btnGuardar_Click(object sender, RoutedEventArgs e)
         {
@@ -170,10 +194,11 @@ namespace SC_MMascotass.Pages
                 {
                     //Obtener los valores para la habitacion
                     ObtenerValoresFormulario();
-                    
+
 
                     //Insertar los datos de la habitacion
-                    //categoria.CrearCategoria(categoria);
+                    
+                    mascota.CrearMascota(mascota);
 
                     //Mensaje de inserccion exito
                     MessageBox.Show("Datos insertados correctamente");
@@ -218,33 +243,29 @@ namespace SC_MMascotass.Pages
         }
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
         {
-            //    if (VerificarValores())
-            //    {
-            //        try
-            //        {
-            //            //Obtener los valores para la habitacion
-            //            categoria.NombreCategoria = txtCategoria.Text;
+            if (VerificarValores())
+            {
+                try
+                {
+                    //Obtener los valores para la habitacion
+                    ObtenerValoresFormulario();
 
-            //            //Insertar los datos de la habitacion
-            //            categoria.CrearCategoria(categoria);
+                    //Insertar los datos de la habitacion
+                    mascota.EditarMascota(mascota);
 
-            //            //Mensaje de inserccion exito
-            //            MessageBox.Show("Datos insertados correctamente");
-            //        }
-            //        catch (Exception ex)
-            //        {
-            //            MessageBox.Show("Ha ocurrido un error al momento de insertar la habitacion....");
-            //            Console.WriteLine(ex.Message);
-            //        }
-            //        finally
-            //        {
-            //            txtCategoria.Text = string.Empty;
-            //        }
-            //    }
-        }
-        private void btnAceptar_Click_1(object sender, RoutedEventArgs e)
-        {
-
+                    //Mensaje de inserccion exito
+                    MessageBox.Show("Datos Actualizados correctamente");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ha ocurrido un error al momento de insertar la habitacion....");
+                    Console.WriteLine(ex.Message);
+                }
+                finally
+                {
+                    Limpiar();
+                }
+            }
         }
 
         private void btnRegresar_Click(object sender, RoutedEventArgs e)
