@@ -14,24 +14,25 @@ using System.Windows.Shapes;
 
 namespace SC_MMascotass.Pages
 {
-    /// <summary>
-    /// Interaction logic for FormInventario.xaml
-    /// </summary>
     public partial class FormInventario : Window
     {
         private InventarioC inventario = new InventarioC();
         private Categoria categoria = new Categoria();
+
+        //Variable de id
         public static int ides;
         public FormInventario(bool visible)
         {
             InitializeComponent();
 
+            //Monstrar botones visibles/invisibles
             MonstrarBotones(visible);
+
+            //Esconde el autocompleta al iniciar el formulario
             var border = (autoCompleteCategorias.Parent as ScrollViewer).Parent as Border;
             border.Visibility = System.Windows.Visibility.Collapsed;
-            Limpiar();
 
-
+            //Validacion de cargar datos
             if (ides != 0)
             {
                 inventario = inventario.BuscarProducto(ides);
@@ -77,15 +78,16 @@ namespace SC_MMascotass.Pages
             return true;
         }
 
+        //Obtener los datos del formulario
         private void ObtenerValoresFormulario()
         {
-            //inventario.IdCategoria = txtAuCategoria.Text;
             inventario.Descripcion = txtDescripcion.Text;
             inventario.Stock = Convert.ToInt32(txtStock.Text);
             inventario.PrecioCosto = Convert.ToDouble(txtPrecioCosto.Text);
             inventario.PrecioVenta = Convert.ToDouble(txtPrecioVenta.Text);
         }
 
+        //Funcion de ocultar botones
         private void MonstrarBotones(bool visibles)
         {
             if (visibles)
@@ -100,6 +102,7 @@ namespace SC_MMascotass.Pages
             }
         }
 
+        //Metodo de Autocmpletar
         private void txtAuCategoria_KeyUp(object sender, KeyEventArgs e)
         {
             bool found = false;
@@ -181,6 +184,7 @@ namespace SC_MMascotass.Pages
             categorias.Show();
         }
 
+        //Funcion limpiar
         private void Limpiar()
         {
             txtAuCategoria.Text = string.Empty;
@@ -228,7 +232,7 @@ namespace SC_MMascotass.Pages
 
         private void btnRestablecer_Click(object sender, RoutedEventArgs e)
         {
-            
+            Limpiar();
         }
 
         private void btnAceptar_Click(object sender, RoutedEventArgs e)

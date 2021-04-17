@@ -14,18 +14,18 @@ using System.Windows.Shapes;
 
 namespace SC_MMascotass.Pages
 {
-    /// <summary>
-    /// Interaction logic for FormCategorias.xaml
-    /// </summary>
     public partial class FormCategorias : Window
     {
         private Categoria categoria = new Categoria();
+
+        //Variable de id
         public static int ides;
         public FormCategorias(bool visible)
         {
             InitializeComponent();
             MonstrarBotones(visible);
 
+            //Validacion de carga de datos
             if (ides != 0)
             {
                 categoria = categoria.BuscarCategoria(ides);
@@ -50,6 +50,7 @@ namespace SC_MMascotass.Pages
             categoria.Id = Convert.ToInt32(ides);
         }
 
+        //Monstrar Ocultal botones
         private void MonstrarBotones(bool visibles)
         {
             if (visibles)

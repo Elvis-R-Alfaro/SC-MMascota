@@ -14,24 +14,19 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace SC_MMascotass.Pages
-{
-    /// <summary>
-    /// Interaction logic for Clientes.xaml
-    /// </summary>
-    public partial class Clientes : UserControl
+{ public partial class Clientes : UserControl
     {
         private Cliente cliente = new Cliente();
         private List<Cliente> clientes;
         public Clientes()
         {
             InitializeComponent();
-
             ObtenerClientes();
         }
 
         private void btnNuevo_Click(object sender, RoutedEventArgs e)
         {
-            //FormClientes.ides = '0';
+            FormCliente.ides = '0';
             FormCliente cliente = new FormCliente(false);
             cliente.Show();
         }
@@ -68,7 +63,7 @@ namespace SC_MMascotass.Pages
 
                     if (result == MessageBoxResult.Yes)
                     {
-                        //Eliminar la habitacion
+                        //Eliminar la Clientes
                         cliente.EliminarCliente(Convert.ToInt32(dgClientes.SelectedValue));
                     }
                 }
@@ -81,7 +76,7 @@ namespace SC_MMascotass.Pages
             }
             finally
             {
-                //Actualizar el listbox de habitaciones
+                //Actualizar el listbox de Clientes
                 ObtenerClientes();
             }
         }

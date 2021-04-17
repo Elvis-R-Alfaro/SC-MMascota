@@ -18,18 +18,20 @@ namespace SC_MMascotass.Pages
     public partial class FormCliente : Window
     {
         private Cliente cliente = new Cliente();
+
+        //Variable de id
         public static int ides;
         public FormCliente(bool visible)
         {
             InitializeComponent();
             MonstrarBotones(visible);
 
+            //Validacion de cargar datos
             if (ides != 0)
             {              
                 cliente = cliente.BuscarCliente(ides);
                 txtNombre.Text = cliente.NombreCliente;
                 txtTelefono.Text = cliente.Telefono;
-                //txtCategoria.Text = categoria.NombreCategoria;
             }
         }
 
@@ -53,6 +55,7 @@ namespace SC_MMascotass.Pages
             return true;
         }
 
+        //Obtener datos del formulario
         private void ObtenerValoresFormulario()
         {
             cliente.NombreCliente = txtNombre.Text + ' ' + txtApellidos.Text;
@@ -60,6 +63,7 @@ namespace SC_MMascotass.Pages
             cliente.IdCliente = Convert.ToInt32(ides);         
         }
 
+        //Vibilidad de los botones
         private void MonstrarBotones(bool visibles)
         {
             if (visibles)
@@ -105,6 +109,7 @@ namespace SC_MMascotass.Pages
             }
         }
 
+        //Metodo Limpiar
         private void Limpiar()
         {
             txtApellidos.Text = string.Empty;
