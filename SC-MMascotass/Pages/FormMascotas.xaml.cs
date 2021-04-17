@@ -133,6 +133,7 @@ namespace SC_MMascotass.Pages
         private void btnNuevoCliente_Click(object sender, RoutedEventArgs e)
         {
             // Mostrar el formulario de menú principal
+            FormCliente.ides = '0';
             FormCliente cliente = new FormCliente(false);
             cliente.Show();
         }
