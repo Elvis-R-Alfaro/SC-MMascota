@@ -32,7 +32,7 @@ namespace SC_MMascotass.Pages
         private void btnNuevo_Click(object sender, RoutedEventArgs e)
         {
             // Mostrar el formulario de menú principal
-            FormCategorias.ides = '0';
+            FormMascotas.ides = '0';
             FormMascotas mascota = new FormMascotas(false);
             mascota.Show();
         }
