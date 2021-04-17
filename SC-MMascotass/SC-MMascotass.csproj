@@ -105,6 +105,9 @@
     <Compile Include="Pages\Mascotas.xaml.cs">
       <DependentUpon>Mascotas.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Vacunas.xaml.cs">
+      <DependentUpon>Vacunas.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Usuario.cs" />
     <Page Include="Categorias.xaml">
       <SubType>Designer</SubType>
@@ -154,6 +157,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Vacunas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -186,6 +193,7 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="database\databasequery.sql" />
+    <Resource Include="Imagenes\injection.png" />
     <Resource Include="Imagenes\iconos\buscarWH.png" />
     <Resource Include="Imagenes\iconos\editar.png" />
     <Resource Include="Imagenes\iconos\eliminar.png" />

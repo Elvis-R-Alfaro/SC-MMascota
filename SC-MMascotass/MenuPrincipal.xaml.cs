@@ -62,5 +62,10 @@ namespace SC_MMascotass
         {
             this.Close();
         }
+
+        private void btnVacunacion_Click(object sender, RoutedEventArgs e)
+        {
+            AgregarForm(new Pages.Vacunas());
+        }
     }
 }
