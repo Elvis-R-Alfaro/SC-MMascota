@@ -20,26 +20,24 @@ namespace SC_MMascotass.Pages
     /// </summary>
     public partial class Clientes : UserControl
     {
-        private ClientesCS cliente = new ClientesCS();
-        private List<ClientesCS> clientes;
+        private Cliente cliente = new Cliente();
+        private List<Cliente> clientes;
 
 
         public Clientes()
         {
-            ObtenerClientes();
-            MessageBox.Show("ola");
+            
             InitializeComponent();
+
+            ObtenerClientes();
 
         }
         private void ObtenerClientes()
         {
             clientes = cliente.MonstrarCliente();
-            var message = string.Join(",",clientes);
-            MessageBox.Show(message);
-           // dgClientes.SelectedValuePath = "Id";
+            dgClientes.SelectedValuePath = "Id";
             dgClientes.ItemsSource = clientes;
 
-            MessageBox.Show(clientes.ToString());
         }
 
         private void btnNuevo_Click(object sender, RoutedEventArgs e)
