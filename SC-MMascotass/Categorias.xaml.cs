@@ -17,9 +17,6 @@ using System.Windows.Shapes;
 
 namespace SC_MMascotass
 {
-    /// <summary>
-    /// Interaction logic for Categorias.xaml
-    /// </summary>
     public partial class Categorias : UserControl
     {
         private Categoria categoria = new Categoria();
@@ -67,12 +64,12 @@ namespace SC_MMascotass
                     MessageBox.Show("Por favor selecciona una habitacion desde el listad");
                 else
                 {
-                    //Monstrar mensjae de confirmacion
+                    //Monstrar mensaje de confirmacion
                     MessageBoxResult result = MessageBox.Show("¿Deseas eliminar la categoria?", "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
                     if (result == MessageBoxResult.Yes)
                     {
-                        //Eliminar la habitacion
+                        //Eliminar la categoria
                         categoria.EliminarCategoria(Convert.ToInt32(dgClientes.SelectedValue));
                     }
                 }
@@ -85,7 +82,7 @@ namespace SC_MMascotass
             }
             finally
             {
-                //Actualizar el listbox de habitaciones
+                //Actualizar el listbox de categorias
                 ObtenerCategorias();
             }
         }

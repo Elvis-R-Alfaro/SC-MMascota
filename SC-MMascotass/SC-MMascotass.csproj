@@ -80,6 +80,7 @@
       <DependentUpon>Categorias.xaml</DependentUpon>
     </Compile>
     <Compile Include="InventarioC.cs" />
+    <Compile Include="Mascota.cs" />
     <Compile Include="MenuPrincipal.xaml.cs">
       <DependentUpon>MenuPrincipal.xaml</DependentUpon>
     </Compile>
