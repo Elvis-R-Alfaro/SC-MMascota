@@ -45,9 +45,17 @@
                     </Button>
                 </StackPanel>
             </Grid>
+
         </StackPanel>
         <StackPanel Grid.Row="2" Margin="0 10 0 0" >
             <DataGrid Name="dgVacunas" AutoGenerateColumns="True" IsReadOnly="True"></DataGrid>
         </StackPanel>
+        <Border BorderBrush="Black"   
+            BorderThickness="1" Margin="225,51,271,10" Grid.Row="1" Background="White">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel Name="aucMascota"></StackPanel>
+            </ScrollViewer>
+        </Border>
     </Grid>
+
 </UserControl>
