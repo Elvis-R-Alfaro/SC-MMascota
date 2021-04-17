@@ -15,6 +15,9 @@ using System.Windows.Shapes;
 
 namespace SC_MMascotass.Pages
 {
+    /// <summary>
+    /// Interaction logic for Clientes.xaml
+    /// </summary>
     public partial class Clientes : UserControl
     {
         private Cliente cliente = new Cliente();
