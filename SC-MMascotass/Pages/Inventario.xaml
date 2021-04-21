@@ -39,7 +39,7 @@
                         FontSize="14"
                         BorderThickness="0"
                         Name="btnEditar"
-                        Padding="10" Click="btnEditar_Click">
+                        Padding="10" Click="btnEditar_Click" Height="75" VerticalAlignment="Top">
                 <StackPanel Orientation="Vertical" >
                     <Image Source="/Imagenes/iconos/editar.png" HorizontalAlignment="Center" Width="25" Height="25"/>
                     <TextBlock Text="Editar" HorizontalAlignment="Center"/>

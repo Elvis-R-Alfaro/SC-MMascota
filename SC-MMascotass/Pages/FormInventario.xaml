@@ -28,7 +28,7 @@
                         FontSize="14"
                         BorderThickness="0"
                         Name="btnAceptar"
-                        Padding="10">
+                        Padding="10" Click="btnAceptar_Click">
                 <StackPanel Orientation="Vertical" >
                     <Image Source="/Imagenes/iconos/guardar.png" HorizontalAlignment="Center" Width="25" Height="25"/>
                     <TextBlock Text="Aceptar" HorizontalAlignment="Center"/>
