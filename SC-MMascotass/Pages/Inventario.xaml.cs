@@ -68,7 +68,7 @@ namespace SC_MMascotass.Pages
 
                     if (result == MessageBoxResult.Yes)
                     {
-                        //Eliminar la habitacion
+                        //Eliminar el inventario
                         inventario.EliminarRegistro(Convert.ToInt32(dgInventario.SelectedValue));
                     }
                 }
@@ -81,7 +81,7 @@ namespace SC_MMascotass.Pages
             }
             finally
             {
-                //Actualizar el listbox de habitaciones
+                //Actualizar el listbox de inventario
                 ObtenerInventario();
             }
         }

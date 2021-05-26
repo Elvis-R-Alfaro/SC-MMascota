@@ -52,27 +52,27 @@ namespace SC_MMascotass.Pages
         {
             if (txtAuCategoria.Text == string.Empty)
             {
-                MessageBox.Show("!Ingrese el Nombre de la Categoría¡");
+                MessageBox.Show("¡Ingrese el Nombre de la Categoría!");
                 return false;
             }
             if (txtDescripcion.Text == string.Empty)
             {
-                MessageBox.Show("!Ingrese la Descripción del producto¡");
+                MessageBox.Show("¡Ingrese la Descripción del producto!");
                 return false;
             }
             if (txtStock.Text == string.Empty)
             {
-                MessageBox.Show("!Ingrese Stock para el producto¡");
+                MessageBox.Show("¡Ingrese Stock para el producto!");
                 return false;
             }
             if (txtPrecioCosto.Text == string.Empty)
             {
-                MessageBox.Show("!Ingrese el costo¡");
+                MessageBox.Show("¡Ingrese el costo!");
                 return false;
             }
             if (txtPrecioVenta.Text == string.Empty)
             {
-                MessageBox.Show("!Ingrese el precio de venta¡");
+                MessageBox.Show("¡Ingrese el precio de venta!");
                 return false;
             }
             return true;
@@ -201,7 +201,7 @@ namespace SC_MMascotass.Pages
             {
                 try
                 {
-                    //Obtener los valores para la habitacion
+                    //Obtener los valores para el inventario
                     categoria = categoria.BuscarCategoriasId(txtAuCategoria.Text);
 
                     inventario.IdCategoria = categoria.Id;
@@ -210,7 +210,7 @@ namespace SC_MMascotass.Pages
                     inventario.PrecioCosto = Convert.ToDouble(txtPrecioCosto.Text);
                     inventario.PrecioVenta = Convert.ToDouble(txtPrecioVenta.Text);
 
-                    //Insertar los datos de la habitacion
+                    //Insertar los datos del inventario
                     inventario.CrearProducto(inventario);
 
                     //Mensaje de inserccion exito
@@ -218,7 +218,7 @@ namespace SC_MMascotass.Pages
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ha ocurrido un error al momento de insertar la habitacion....");
+                    MessageBox.Show("Ha ocurrido un error al momento de insertar los datos en el inventario....");
                     Console.WriteLine(ex.Message);
                 }
                 finally
@@ -241,13 +241,11 @@ namespace SC_MMascotass.Pages
             {
                 try
                 {
-                    //Obtener los valores para la habitacion desde el formulario
+                    //Obtener los valores para el inventario desde el formulario
                     ObtenerValoresFormulario();
 
                     //Actualizar los valores en la base de datos
                     inventario.EditarProducto(inventario);
-
-                    //Actualizar el lisbox de habitaciones
 
                     //Mensaje de actualizacion realizada
                     MessageBox.Show("Datos Modificado Correctamente", "Exito", MessageBoxButton.OK, MessageBoxImage.Information);

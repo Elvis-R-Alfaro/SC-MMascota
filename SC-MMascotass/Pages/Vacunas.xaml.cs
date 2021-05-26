@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +27,9 @@ namespace SC_MMascotass.Pages
         private List<Mascota> mascotas;
         private List<HistorialVacunacion> vacunas;
 
+        private static string connectionString = ConfigurationManager.ConnectionStrings["SC_MMascotass.Properties.Settings.MascotasConnectionString"].ConnectionString;
+        private SqlConnection sqlConnection = new SqlConnection(connectionString);
+
         private vacunaciones Vacunaciones = new vacunaciones();
         private List<vacunaciones> vacunaciones;
         public Vacunas()
@@ -35,6 +40,9 @@ namespace SC_MMascotass.Pages
 
             var border = (autoCompleteCategorias.Parent as ScrollViewer).Parent as Border;
             border.Visibility = System.Windows.Visibility.Collapsed;
+
+            //Cargar el combobox
+            CargarVacunasCombo();
         }
 
         private void btnNuevoCliente_Click(object sender, RoutedEventArgs e)
@@ -45,19 +53,54 @@ namespace SC_MMascotass.Pages
             dgVacunas.ItemsSource = vacunas;
         }
 
+        private void CargarVacunasCombo()
+        {
+            
+            try
+            {
+                string query = "SELECT * FROM Veterinaria.Inventario INNER JOIN Veterinaria.Categoria ON Veterinaria.Categoria.IdCategoria = Veterinaria.Inventario.IdCategoria WHERE Veterinaria.Categoria.NombreCategoria = 'Vacunas'";
+
+                sqlConnection.Open();
+
+                //Crear el comando sql
+                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
+
+                SqlDataReader dr = sqlCommand.ExecuteReader();
+                while (dr.Read())
+                {
+                    cmbVacuna.Items.Add(dr["NombreProducto"].ToString());
+                    cmbVacuna.SelectedValuePath = dr["IdProducto"].ToString();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                //Cerrar la conexion
+                sqlConnection.Close();
+            }
+
+        }
+
+
         private void btnAgregarVacuna_Click(object sender, RoutedEventArgs e)
         {
-           
+            if (txtAuCliente.Text != string.Empty)
+            {
+
+
                 try
                 {
-                    //Obtener los valores para la habitacion
+                    //Obtener los valores para la vacuna
                     mascota = mascota.BuscarMascotaNombre(txtAuCliente.Text);
 
                     Vacunaciones.IdMascota = mascota.IdMascota;
-                    Vacunaciones.IdProducto = '7';
+                    Vacunaciones.IdProducto = Convert.ToInt32(cmbVacuna.SelectedValuePath);
                     Vacunaciones.Fecha = DateTime.Now;
 
-                    //Insertar los datos de la habitacion
+                    //Insertar los datos de la vacuna
                     Vacunaciones.CrearVacuna(Vacunaciones);
 
                     //Mensaje de inserccion exito
@@ -65,14 +108,20 @@ namespace SC_MMascotass.Pages
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ha ocurrido un error al momento de insertar la habitacion....");
+                    MessageBox.Show("Ha ocurrido un error al momento de insertar la Vacuna....");
                     Console.WriteLine(ex.Message);
                 }
                 finally
                 {
-                    
+                    vacunas = vacuna.MonstrarRegistro(txtAuCliente.Text);
+                    dgVacunas.SelectedValuePath = "Mascota";
+                    dgVacunas.ItemsSource = vacunas;
                 }
-            
+            }
+            else
+            {
+                MessageBox.Show("Debe de Buscar el Historia de una Mascota para poder Agregar una Vacuna");
+            }
         }
 
         private void txtAuCliente_TextChanged(object sender, TextChangedEventArgs e)

@@ -71,7 +71,7 @@ namespace SC_MMascotass.Pages
 
                     if (result == MessageBoxResult.Yes)
                     {
-                        //Eliminar la habitacion
+                        //Eliminar la mascotas
                         mascota.EliminarMascota(Convert.ToInt32(dgClientes.SelectedValue));
                     }
                 }
@@ -79,12 +79,12 @@ namespace SC_MMascotass.Pages
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ha ocurrido un error al eliminar la habitacion...");
+                MessageBox.Show("Ha ocurrido un error al eliminar la mascota...");
                 Console.WriteLine(ex.Message);
             }
             finally
             {
-                //Actualizar el listbox de habitaciones
+                //Actualizar el listbox de mascotas
                 ObtenerMascotas();
             }
         }

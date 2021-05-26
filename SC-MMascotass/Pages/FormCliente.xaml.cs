@@ -40,12 +40,12 @@ namespace SC_MMascotass.Pages
         {
             if (txtNombre.Text == string.Empty)
             {
-                MessageBox.Show("!Ingrese el Nombre del Usuario¡");
+                MessageBox.Show("¡Ingrese el Nombre del Usuario!");
                 return false;
             }
-            if (txtTelefono.Text == string.Empty)
+            if (txtTelefono.Text == string.Empty && txtTelefono.MaxLength == 8)
             {
-                MessageBox.Show("!Ingrese el Telefono¡");
+                MessageBox.Show("¡Ingrese el Telefono Corectamente!");
                 return false;
             }
             return true;
@@ -88,23 +88,25 @@ namespace SC_MMascotass.Pages
             {
                 try
                 {
-                    //Obtener los valores para la habitacion
+                    //Obtener los valores para el cliente
                     ObtenerValoresFormulario();
 
-                    //Insertar los datos de la habitacion
+                    //Insertar los datos de el cliente
                     cliente.CrearCliente(cliente);
 
                     //Mensaje de inserccion exito
                     MessageBox.Show("Datos insertados correctamente","Exito",MessageBoxButton.OK,MessageBoxImage.Information);
+
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ha ocurrido un error al momento de insertar la habitacion....");
+                    MessageBox.Show("Ha ocurrido un error al momento de insertar el Cliente....");
                     Console.WriteLine(ex.Message);
                 }
                 finally
                 {
                     Limpiar();
+                    this.Close();             
                 }
             }
         }
@@ -128,13 +130,11 @@ namespace SC_MMascotass.Pages
             {
                 try
                 {
-                    //Obtener los valores para la habitacion desde el formulario
+                    //Obtener los valores para el cliente desde el formulario
                     ObtenerValoresFormulario();
 
                     //Actualizar los valores en la base de datos
                     cliente.EditarCliente(cliente);
-
-                    //Actualizar el lisbox de habitaciones
 
                     //Mensaje de actualizacion realizada
                     MessageBox.Show("Datos modificados correctamente", "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -144,7 +144,7 @@ namespace SC_MMascotass.Pages
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error al momento de actualizar la habitacion....");
+                    MessageBox.Show("Error al momento de actualizar el Cliente....");
                     Console.WriteLine(ex.Message);
                 }
             }

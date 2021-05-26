@@ -212,7 +212,6 @@ namespace SC_MMascotass
             }
             catch (Exception e)
             {
-
                 throw e;
             }
             finally

@@ -141,29 +141,31 @@ namespace SC_MMascotass.Pages
         {
             if (txtAuCliente.Text == string.Empty)
             {
-                MessageBox.Show("!Ingrese el Nombre del Cliente¡");
+                MessageBox.Show("¡Ingrese el Nombre del Cliente!");
                 return false;
             }
             else if (txtAliasMascota.Text == string.Empty)
             {
-                MessageBox.Show("!Ingrese el Nombre de la Mascota¡");
-                return false;
-            }
-            else if (txtColorPelo.Text == string.Empty)
-            {
-                MessageBox.Show("!Ingrese el Color de Pelo de la mascota¡");
+                MessageBox.Show("¡Ingrese el Nombre de la Mascota!");
                 return false;
             }
             else if (txtEspecie.Text == string.Empty)
             {
-                MessageBox.Show("!Ingrese la especie de la Mascota¡");
+                MessageBox.Show("¡Ingrese la especie de la Mascota!");
                 return false;
             }
             else if (txtRaza.Text == string.Empty)
             {
-                MessageBox.Show("!Ingrese la raza de la Mascota¡");
+                MessageBox.Show("¡Ingrese la raza de la Mascota!");
                 return false;
             }
+            else if (txtColorPelo.Text == string.Empty)
+            {
+                MessageBox.Show("¡Ingrese el Color de Pelo de la mascota!");
+                return false;
+            }
+            
+            
             return true;
         }
 
@@ -189,11 +191,9 @@ namespace SC_MMascotass.Pages
             {
                 try
                 {
-                    //Obtener los valores para la habitacion
+                    //Obtener los valores para la mascota
                     ObtenerValoresFormulario();
 
-
-                    //Insertar los datos de la habitacion
                     
                     mascota.CrearMascota(mascota);
 
@@ -202,7 +202,7 @@ namespace SC_MMascotass.Pages
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ha ocurrido un error al momento de insertar la habitacion....");
+                    MessageBox.Show("Ha ocurrido un error al momento de insertar la mascota....");
                     Console.WriteLine(ex.Message);
                 }
                 finally
@@ -244,10 +244,10 @@ namespace SC_MMascotass.Pages
             {
                 try
                 {
-                    //Obtener los valores para la habitacion
+                    //Obtener los valores para la mascota
                     ObtenerValoresFormulario();
 
-                    //Insertar los datos de la habitacion
+                    //Insertar los datos de la mascota
                     mascota.EditarMascota(mascota);
 
                     //Mensaje de inserccion exito
@@ -255,7 +255,7 @@ namespace SC_MMascotass.Pages
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ha ocurrido un error al momento de insertar la habitacion....");
+                    MessageBox.Show("Ha ocurrido un error al momento de insertar la mascota....");
                     Console.WriteLine(ex.Message);
                 }
                 finally

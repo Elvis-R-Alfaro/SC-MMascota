@@ -27,7 +27,8 @@ namespace SC_MMascotass.Pages
         private void btnNuevo_Click(object sender, RoutedEventArgs e)
         {
             FormCliente.ides = '0';
-            FormCliente cliente = new FormCliente(false);
+            FormCliente cliente = new FormCliente(false);          
+           
             cliente.Show();
         }
 
@@ -71,7 +72,7 @@ namespace SC_MMascotass.Pages
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ha ocurrido un error al eliminar la habitacion...");
+                MessageBox.Show("Ha ocurrido un error al eliminar el cliente...");
                 Console.WriteLine(ex.Message);
             }
             finally

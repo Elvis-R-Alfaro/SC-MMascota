@@ -38,7 +38,7 @@ namespace SC_MMascotass.Pages
         {
             if (txtCategoria.Text == string.Empty)
             {
-                MessageBox.Show("!Ingrese el Nombre de la Categoría¡");
+                MessageBox.Show("¡Ingrese el Nombre de la Categoría!");
                 return false;
             }
             return true;
@@ -76,10 +76,10 @@ namespace SC_MMascotass.Pages
             {
                 try
                 {
-                    //Obtener los valores para la habitacion
+                    //Obtener los valores para la categoria
                     categoria.NombreCategoria = txtCategoria.Text;
 
-                    //Insertar los datos de la habitacion
+                    //Insertar los datos de la categoria
                     categoria.CrearCategoria(categoria);
 
                     //Mensaje de inserccion exito
@@ -87,7 +87,7 @@ namespace SC_MMascotass.Pages
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ha ocurrido un error al momento de insertar la habitacion....");
+                    MessageBox.Show("Ha ocurrido un error al momento de insertar la categoria....");
                     Console.WriteLine(ex.Message);
                 }
                 finally
@@ -108,13 +108,11 @@ namespace SC_MMascotass.Pages
             {
                 try
                 {
-                    //Obtener los valores para la habitacion desde el formulario
+                    //Obtener los valores para la categoria desde el formulario
                     ObtenerValoresFormulario();
 
                     //Actualizar los valores en la base de datos
                     categoria.EditarCategoria(categoria);
-
-                    //Actualizar el lisbox de habitaciones
 
                     //Mensaje de actualizacion realizada
                     MessageBox.Show("Datos Modificados correctamente", "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -124,7 +122,7 @@ namespace SC_MMascotass.Pages
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error al momento de actualizar la habitacion....");
+                    MessageBox.Show("Error al momento de actualizar la categoria....");
                     Console.WriteLine(ex.Message);
                 }
             }

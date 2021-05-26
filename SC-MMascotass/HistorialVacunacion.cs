@@ -34,6 +34,7 @@ namespace SC_MMascotass
 
         
 
+
         public List<HistorialVacunacion> MonstrarRegistro(string nombre)
         {
             //Iniciamos la lista vacia de categorias
