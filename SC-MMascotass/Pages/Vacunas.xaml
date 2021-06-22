@@ -33,14 +33,14 @@
                 <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="1">
                     <TextBox Width="300" Padding="5, 3, 5, 3"    
                                KeyUp="txtAuCliente_KeyUp_1" Name="txtAuCliente" />
-                    <Button Width="50"  Grid.Column="2" ToolTip="Nuevo Cliente" Name="btnNuevoCliente" Background="#14213D" Click="btnNuevoCliente_Click">
+                    <Button Width="50"  Grid.Column="2" ToolTip="Buscar Mascota" Name="btnNuevoCliente" Background="#14213D" Click="btnNuevoCliente_Click">
                         <Image Source="/Imagenes/iconos/buscarWH.png" Width="20" Margin="5"/>
                     </Button>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="3" Margin="0 10 0 0">
                     <ComboBox Width="300" Padding="5, 3, 5, 3"    
                     KeyUp="txtVacuna_KeyUp" Name="cmbVacuna" />
-                    <Button Width="50"  Grid.Column="2" ToolTip="Nuevo Cliente" Name="btnAgregarVacuna" Background="#FCA311" Margin="0,0,0,-0.2" Height="33" VerticalAlignment="Top" Click="btnAgregarVacuna_Click" >
+                    <Button Width="50"  Grid.Column="2" ToolTip="Agregar Vacuna" Name="btnAgregarVacuna" Background="#FCA311" Margin="0,0,0,-0.2" Height="33" VerticalAlignment="Top" Click="btnAgregarVacuna_Click" >
                         <Image Source="/Imagenes/iconos/nuevo.png" Width="20" Margin="5"/>
                     </Button>
                 </StackPanel>
@@ -48,7 +48,15 @@
 
         </StackPanel>
         <StackPanel Grid.Row="2" Margin="0 10 0 0" >
-            <DataGrid Name="dgVacunas" AutoGenerateColumns="True" IsReadOnly="True"></DataGrid>
+            <DataGrid Name="dgVacunas" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Source=vacunas}" MaxHeight="310" ColumnWidth="*">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding IdHistorialVacunacion}" Width="50"/>
+                    <DataGridTextColumn Header="Nombre de la Mascota" Binding="{Binding Mascota}" Width="*"/>
+                    <DataGridTextColumn Header="Cliente" Binding="{Binding Cliente}" Width="*"/>
+                    <DataGridTextColumn Header="Nombre de la Vacuna" Binding="{Binding Producto}" Width="*"/>
+                    <DataGridTextColumn Header="Fecha" Binding="{Binding Fecha}" Width="170"/>
+                </DataGrid.Columns>
+            </DataGrid>
         </StackPanel>
         <Border Height="150" BorderBrush="Black"   
         BorderThickness="1" Margin="225,58.6,164,210.6" Grid.Row="1" Background="White" Grid.RowSpan="2">

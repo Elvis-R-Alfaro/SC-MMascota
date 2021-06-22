@@ -30,6 +30,8 @@ namespace SC_MMascotass.Pages
             ObtenerMascotas();
         }
 
+
+
         private void btnNuevo_Click(object sender, RoutedEventArgs e)
         {
             // Mostrar el formulario de menú principal
@@ -49,7 +51,7 @@ namespace SC_MMascotass.Pages
         private void btnEditar_Click(object sender, RoutedEventArgs e)
         {
             if (dgClientes.SelectedValue == null)
-                MessageBox.Show("Por favor selecciona una Mascota");
+                MessageBox.Show("Por favor selecciona una mascota de la lista");
             else
             {
                 FormMascotas.ides = Convert.ToInt32(dgClientes.SelectedValue);
@@ -63,7 +65,7 @@ namespace SC_MMascotass.Pages
             try
             {
                 if (dgClientes.SelectedValue == null)
-                    MessageBox.Show("Por favor selecciona una Mascota desde el listad");
+                    MessageBox.Show("Por favor, seleccione una mascota de la lista");
                 else
                 {
                     //Monstrar mensjae de confirmacion

@@ -32,8 +32,6 @@ namespace SC_MMascotass
 
         }
 
-
-
         public void CrearVacuna(vacunaciones producto)
         {
             try

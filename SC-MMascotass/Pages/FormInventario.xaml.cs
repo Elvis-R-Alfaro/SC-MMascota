@@ -50,27 +50,27 @@ namespace SC_MMascotass.Pages
 
         private bool VerificarValores()
         {
-            if (txtAuCategoria.Text == string.Empty)
+            if (string.IsNullOrWhiteSpace(txtAuCategoria.Text))
             {
                 MessageBox.Show("¡Ingrese el Nombre de la Categoría!");
                 return false;
             }
-            if (txtDescripcion.Text == string.Empty)
+            if (string.IsNullOrWhiteSpace(txtDescripcion.Text))
             {
                 MessageBox.Show("¡Ingrese la Descripción del producto!");
                 return false;
             }
-            if (txtStock.Text == string.Empty)
+            if (string.IsNullOrWhiteSpace(txtStock.Text))
             {
                 MessageBox.Show("¡Ingrese Stock para el producto!");
                 return false;
             }
-            if (txtPrecioCosto.Text == string.Empty)
+            if (string.IsNullOrWhiteSpace(txtPrecioCosto.Text))
             {
                 MessageBox.Show("¡Ingrese el costo!");
                 return false;
             }
-            if (txtPrecioVenta.Text == string.Empty)
+            if (string.IsNullOrWhiteSpace(txtPrecioVenta.Text))
             {
                 MessageBox.Show("¡Ingrese el precio de venta!");
                 return false;
@@ -265,6 +265,11 @@ namespace SC_MMascotass.Pages
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void btnRestablecer_Click_1(object sender, RoutedEventArgs e)
+        {
+            Limpiar();
         }
     }
 }

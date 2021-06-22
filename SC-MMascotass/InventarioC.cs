@@ -19,16 +19,18 @@ namespace SC_MMascotass
         public int IdCategoria { get; set; }        
         public string Descripcion { get; set; }
         public int Id { get; set; }
+        public string Categoria { get; set; }
         public int Stock { get; set; }
         public double PrecioCosto { get; set; }
         public double PrecioVenta { get; set; }
 
         //Constructor
         public InventarioC() { }
-        public InventarioC(int idCategoria, string descripcion, int id, int stock, double precioCosto, double precioVenta)
+        public InventarioC(int idCategoria, string descripcion,string categoria, int id, int stock, double precioCosto, double precioVenta)
         {
             IdCategoria = idCategoria;
             Descripcion = descripcion;
+            Categoria = categoria;
             Id = id;
             Stock = stock;
             PrecioCosto = precioCosto;
@@ -94,8 +96,8 @@ namespace SC_MMascotass
             try
             {
                 //Query de seleccion
-                string query = @"SELECT *
-                                FROM Veterinaria.Inventario";
+                string query = @"SELECT Veterinaria.Inventario.IdProducto, Veterinaria.Inventario.IdCategoria, Veterinaria.Inventario.NombreProducto, Veterinaria.Inventario.PrecioCosto, Veterinaria.Inventario.PrecioVenta, Veterinaria.Inventario.Stock, 
+                  Veterinaria.Categoria.NombreCategoria FROM Veterinaria.Inventario inner join Veterinaria.categoria on Veterinaria.Inventario.IdCategoria = Veterinaria.Categoria.IdCategoria";
 
                 //Establcer la coneccion
                 sqlConnection.Open();
@@ -111,6 +113,7 @@ namespace SC_MMascotass
                         inventarios.Add(new InventarioC { Id = Convert.ToInt32(rdr["IdProducto"]), 
                             IdCategoria = Convert.ToInt32(rdr["IdCategoria"]), 
                             Descripcion = rdr["NombreProducto"].ToString(), 
+                            Categoria = rdr["NombreCategoria"].ToString(),
                             PrecioCosto = Convert.ToDouble(rdr["PrecioCosto"]), 
                             PrecioVenta = Convert.ToDouble(rdr["PrecioVenta"]), 
                             Stock = Convert.ToInt32(rdr["Stock"]) } );

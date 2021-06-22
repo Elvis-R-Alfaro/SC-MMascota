@@ -36,7 +36,7 @@ namespace SC_MMascotass.Pages
 
         private bool VerificarValores()
         {
-            if (txtCategoria.Text == string.Empty)
+            if (string.IsNullOrWhiteSpace(txtCategoria.Text))
             {
                 MessageBox.Show("¡Ingrese el Nombre de la Categoría!");
                 return false;

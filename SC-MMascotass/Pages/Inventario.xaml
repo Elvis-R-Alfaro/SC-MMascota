@@ -75,7 +75,16 @@
             </Button>
         </StackPanel>
         <StackPanel Grid.Row="2">
-            <DataGrid Name="dgInventario" AutoGenerateColumns="True" IsReadOnly="True"></DataGrid>
+            <DataGrid Name="dgInventario" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Source=inventarios}" MaxHeight="310" ColumnWidth="*">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                    <DataGridTextColumn Header="Categoria" Binding="{Binding Categoria}" Width="120"/>
+                    <DataGridTextColumn Header="Nombre del Producto" Binding="{Binding Descripcion}" />
+                    <DataGridTextColumn Header="Stock" Binding="{Binding Stock}" Width="80"/>
+                    <DataGridTextColumn Header="Precio-Costo" Binding="{Binding PrecioCosto}" Width="100"/>
+                    <DataGridTextColumn Header="Precio-Venta" Binding="{Binding PrecioVenta}" Width="100"/>
+                </DataGrid.Columns>
+            </DataGrid>
         </StackPanel>
     </Grid>
 </UserControl>

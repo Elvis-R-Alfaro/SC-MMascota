@@ -97,3 +97,22 @@ ALTER TABLE Usuarios.Usuario WITH CHECK
 	CHECK (LEN(password) >= 6)
 GO
 
+---Ingresa Usuario Unico
+insert into Usuarios.Usuario
+values ('Administrador','admin','123456',1)
+
+select * from Usuarios.Usuario
+
+--Ingresar Categoria de Vacunas
+Insert into Veterinaria.Categoria
+values ('Vacunas')
+Select * from Veterinaria.Categoria
+
+
+-- El numero celular debe contener al menos 8 caracteres
+ALTER TABLE Veterinaria.Cliente WITH CHECK
+	ADD CONSTRAINT CHK_Veterinaria_Cliente$VerificarLongitudTelefono
+	CHECK (LEN(Telefono) >= 8)
+GO
+
+

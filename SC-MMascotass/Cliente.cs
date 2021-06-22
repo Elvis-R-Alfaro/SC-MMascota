@@ -16,17 +16,17 @@ namespace SC_MMascotass
         private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
         //Propiedades
-        public int IdCliente { get;  set; }
-        public string NombreCliente { get; set; }
-        public string Telefono { get; set; }
+        public int ID { get; set; }
+        public string Nombre_Cliente { get; set; }
+        public string Teléfono { get; set; }
 
         //Constructor
         public Cliente() { }
         public Cliente(int idcliente, string nombrecliente, string telefono)
         {
-            IdCliente = idcliente;
-            NombreCliente = nombrecliente;
-            Telefono = telefono;
+            ID = idcliente;
+            Nombre_Cliente = nombrecliente;
+            Teléfono = telefono;
         }
 
         //Metodos
@@ -50,8 +50,8 @@ namespace SC_MMascotass
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
 
                 //Establecer los valores de los paramawtros
-                sqlCommand.Parameters.AddWithValue("@NombreCliente", cliente.NombreCliente);
-                sqlCommand.Parameters.AddWithValue("@Telefono", cliente.Telefono);
+                sqlCommand.Parameters.AddWithValue("@NombreCliente", cliente.Nombre_Cliente);
+                sqlCommand.Parameters.AddWithValue("@Telefono", cliente.Teléfono);
 
                 //ejecutar el comando insertado
                 sqlCommand.ExecuteNonQuery();
@@ -92,9 +92,9 @@ namespace SC_MMascotass
                 {
                     while (rdr.Read())
                     {
-                        elCliente.IdCliente = Convert.ToInt32(rdr["IdCliente"]);
-                        elCliente.NombreCliente = rdr["NombreCliente"].ToString();
-                        elCliente.Telefono = rdr["Telefono"].ToString();
+                        elCliente.ID = Convert.ToInt32(rdr["IdCliente"]);
+                        elCliente.Nombre_Cliente = rdr["NombreCliente"].ToString();
+                        elCliente.Teléfono = rdr["Telefono"].ToString();
 
                     }
                 }
@@ -125,7 +125,7 @@ namespace SC_MMascotass
             try
             {
                 //Query de seleccion
-                string query = @"SELECT IdCliente, NombreCliente, Telefono
+                string query = @"SELECT IdCliente, NombreCliente , Telefono
                                 FROM Veterinaria.Cliente";
 
                 //Establcer la coneccion
@@ -139,7 +139,7 @@ namespace SC_MMascotass
                 {
                     while (rdr.Read())
                     {
-                        clientes.Add(new Cliente { IdCliente = Convert.ToInt32(rdr["IdCliente"]), NombreCliente = rdr["NombreCliente"].ToString(), Telefono = rdr["Telefono"].ToString() });
+                        clientes.Add(new Cliente { ID = Convert.ToInt32(rdr["IdCliente"]), Nombre_Cliente = rdr["NombreCliente"].ToString(), Teléfono = rdr["Telefono"].ToString() });
                     }
                 }
                 return clientes;
@@ -184,9 +184,9 @@ namespace SC_MMascotass
                 {
                     while (rdr.Read())
                     {
-                        elCliente.IdCliente = Convert.ToInt32(rdr["IdCliente"]);
-                        elCliente.NombreCliente = rdr["NombreCliente"].ToString();
-                        elCliente.Telefono = rdr["Telefono"].ToString();
+                        elCliente.ID = Convert.ToInt32(rdr["IdCliente"]);
+                        elCliente.Nombre_Cliente = rdr["NombreCliente"].ToString();
+                        elCliente.Teléfono = rdr["Telefono"].ToString();
 
                     }
                 }
@@ -222,9 +222,9 @@ namespace SC_MMascotass
                 SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
 
                 //Establecer los valores de los parametros
-                sqlCommand.Parameters.AddWithValue("@IdCliente", cliente.IdCliente);
-                sqlCommand.Parameters.AddWithValue("@NombreCliente", cliente.NombreCliente);
-                sqlCommand.Parameters.AddWithValue("@Telefono", cliente.Telefono);
+                sqlCommand.Parameters.AddWithValue("@IdCliente", cliente.ID);
+                sqlCommand.Parameters.AddWithValue("@NombreCliente", cliente.Nombre_Cliente);
+                sqlCommand.Parameters.AddWithValue("@Telefono", cliente.Teléfono);
 
                 //Ejecutar el comando de actualizar
                 sqlCommand.ExecuteNonQuery();

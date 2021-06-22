@@ -47,7 +47,7 @@ namespace SC_MMascotass
         private void btnEditar_Click(object sender, RoutedEventArgs e)
         {
             if (dgClientes.SelectedValue == null)
-                MessageBox.Show("Por favor selecciona una Categoria");
+                MessageBox.Show("Por favor selecciona una categoría");
             else
             {
                 FormCategorias.ides = Convert.ToInt32(dgClientes.SelectedValue);
@@ -62,7 +62,7 @@ namespace SC_MMascotass
             try
             {
                 if (dgClientes.SelectedValue == null)
-                    MessageBox.Show("Por favor selecciona una Categoria desde el listad");
+                    MessageBox.Show("Por favor, seleccione una categoría de la lista");
                 else
                 {
                     //Monstrar mensaje de confirmacion

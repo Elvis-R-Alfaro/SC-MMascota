@@ -21,6 +21,7 @@ namespace SC_MMascotass.Pages
 
         //Variable de id
         public static int ides;
+        bool vali;
         public FormCliente(bool visible)
         {
             InitializeComponent();
@@ -30,33 +31,42 @@ namespace SC_MMascotass.Pages
             if (ides != 0)
             {
                 cliente = cliente.BuscarCliente(ides);
-                txtNombre.Text = cliente.NombreCliente;
-                txtTelefono.Text = cliente.Telefono;
+                txtNombre.Text = cliente.Nombre_Cliente;
+                txtTelefono.Text = cliente.Teléfono;
                 
             }
         }
 
         private bool VerificarValores()
         {
-            if (txtNombre.Text == string.Empty)
+            if (string.IsNullOrWhiteSpace(txtNombre.Text))
             {
-                MessageBox.Show("¡Ingrese el Nombre del Usuario!");
+                MessageBox.Show("¡Ingrese el Nombre del Cliente!");
                 return false;
             }
-            if (txtTelefono.Text == string.Empty && txtTelefono.MaxLength == 8)
+          
+
+            if (string.IsNullOrWhiteSpace(txtTelefono.Text))
             {
-                MessageBox.Show("¡Ingrese el Telefono Corectamente!");
+                MessageBox.Show("¡Ingrese el Teléfono Corectamente!");
+                return false;
+            }
+
+            if (vali)
+            {
+                MessageBox.Show("¡El Teléfono debe ser numerico!");
                 return false;
             }
             return true;
         }
 
+
         //Obtener datos del formulario
         private void ObtenerValoresFormulario()
         {
-            cliente.NombreCliente = txtNombre.Text + ' ' + txtApellidos.Text;
-            cliente.Telefono = txtTelefono.Text;
-            cliente.IdCliente = Convert.ToInt32(ides);         
+            cliente.Nombre_Cliente = txtNombre.Text;
+            cliente.Teléfono = txtTelefono.Text;
+            cliente.ID = Convert.ToInt32(ides);         
         }
 
         //Vibilidad de los botones
@@ -68,8 +78,6 @@ namespace SC_MMascotass.Pages
                 spButton1.Visibility = Visibility.Hidden;
                 spEditarCategoria.Visibility = Visibility.Visible;
                 spButton2.Visibility = Visibility.Visible;
-                txtApellidos.Visibility = Visibility.Hidden;
-                lblapellido.Visibility = Visibility.Hidden;
             }
             else
             {
@@ -77,8 +85,6 @@ namespace SC_MMascotass.Pages
                 spButton1.Visibility = Visibility.Visible;
                 spEditarCategoria.Visibility = Visibility.Hidden;
                 spButton2.Visibility = Visibility.Hidden;
-                txtApellidos.Visibility = Visibility.Visible;
-                lblapellido.Visibility = Visibility.Visible;
             }
         }
 
@@ -96,25 +102,23 @@ namespace SC_MMascotass.Pages
 
                     //Mensaje de inserccion exito
                     MessageBox.Show("Datos insertados correctamente","Exito",MessageBoxButton.OK,MessageBoxImage.Information);
+                    Limpiar();
+                    this.Close();
 
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Ha ocurrido un error al momento de insertar el Cliente....");
+                    MessageBox.Show("Revise que los Campos esten Escritos Correctamente");
                     Console.WriteLine(ex.Message);
                 }
-                finally
-                {
-                    Limpiar();
-                    this.Close();             
-                }
+                
+
             }
         }
 
         //Metodo Limpiar
         private void Limpiar()
         {
-            txtApellidos.Text = string.Empty;
             txtNombre.Text = string.Empty;
             txtTelefono.Text = string.Empty;
         }
@@ -144,7 +148,7 @@ namespace SC_MMascotass.Pages
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error al momento de actualizar el Cliente....");
+                    MessageBox.Show("Revise que los Campos esten Escritos Correctamente");
                     Console.WriteLine(ex.Message);
                 }
             }
@@ -152,7 +156,17 @@ namespace SC_MMascotass.Pages
 
         private void btnRegresar_Click(object sender, RoutedEventArgs e)
         {
+            cliente = cliente.BuscarCliente(ides);
+            txtNombre.Text = cliente.Nombre_Cliente;
+            txtTelefono.Text = cliente.Teléfono;
+        }
 
+        private void txtTelefono_KeyDown_1(object sender, KeyEventArgs e)
+        {
+            if (e.Key >= Key.D0 && e.Key <= Key.D9 || e.Key >= Key.NumPad0 && e.Key <= Key.NumPad9)
+                vali = false;
+            else
+                vali = true;
         }
     }
 }

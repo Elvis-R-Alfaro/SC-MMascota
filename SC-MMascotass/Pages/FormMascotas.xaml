@@ -48,7 +48,7 @@
                         FontSize="14"
                         BorderThickness="0"
                         Name="btnRestablecer"
-                        Padding="10">
+                        Padding="10" Click="btnRestablecer_Click">
                 <StackPanel Orientation="Vertical" >
                     <Image Source="/Imagenes/iconos/recargar.png" HorizontalAlignment="Center" Width="25" Height="25"/>
                     <TextBlock Text="Restablecer" HorizontalAlignment="Center"/>
@@ -79,7 +79,7 @@
                         Padding="10" Click="btnRegresar_Click">
                 <StackPanel Orientation="Vertical" >
                     <Image Source="/Imagenes/iconos/recargar.png" HorizontalAlignment="Center" Width="25" Height="25"/>
-                    <TextBlock Text="Regresar" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Cancelar" HorizontalAlignment="Center"/>
 
                 </StackPanel>
 
@@ -131,7 +131,7 @@
 
                 <DockPanel Grid.Row="3" Grid.Column="1">
                     <Label Content="Fecha Nacimiento"  FontSize="15" VerticalAlignment="Center" Margin="0 4 0 0" DockPanel.Dock="Left"/>
-                    <DatePicker Name="dtpFechaNacimiento" FontSize="15" Margin="0 4 0 0" Width="auto"/>
+                    <DatePicker Name="dtpFechaNacimiento" FontSize="15" Margin="0 4 0 0" Width="auto" />
                 </DockPanel>
 
 

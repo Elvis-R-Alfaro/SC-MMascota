@@ -69,10 +69,10 @@
                         FontSize="14"
                         BorderThickness="0"
                         Name="btnRestablecer"
-                        Padding="10">
+                        Padding="10" Click="btnRestablecer_Click_1">
                 <StackPanel Orientation="Vertical" >
                     <Image Source="/Imagenes/iconos/recargar.png" HorizontalAlignment="Center" Width="25" Height="25"/>
-                    <TextBlock Text="Restablecer" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Limpiar" HorizontalAlignment="Center"/>
 
                 </StackPanel>
 
@@ -100,7 +100,7 @@
                 <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0">
                     <TextBox Width="300" Padding="5, 3, 5, 3" 
                              Name="txtAuCategoria" KeyUp="txtAuCategoria_KeyUp"/>
-                    <Button Width="50"  Grid.Column="2" ToolTip="Nuevo Cliente" Name="btnNuevoCategoria" Background="#FCA311" Click="btnNuevoCliente_Click">
+                    <Button Width="50"  Grid.Column="2" ToolTip="Nuevo Producto" Name="btnNuevoCategoria" Background="#FCA311" Click="btnNuevoCliente_Click">
                         <Image Source="/Imagenes/iconos/nuevo.png" Width="20"/>
                     </Button>
                 </StackPanel>

@@ -60,6 +60,8 @@ namespace SC_MMascotass
 
         private void btnCerrarSesion_Click(object sender, RoutedEventArgs e)
         {
+            IniciarSesion login = new IniciarSesion();
+            login.Show();
             this.Close();
         }
 

@@ -76,7 +76,15 @@
             </Button>
         </StackPanel>
         <StackPanel Grid.Row="2">
-            <DataGrid Name="dgClientes" AutoGenerateColumns="True" IsReadOnly="True">
+            <DataGrid Name="dgClientes" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Source=mascotas}" MaxHeight="310" ColumnWidth="*">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID de la Mascota" Binding="{Binding IdMascota}" />
+                    <DataGridTextColumn Header="Nombre de la Mascota" Binding="{Binding AliasMascota}" />
+                    <DataGridTextColumn Header="Especie" Binding="{Binding Especie}" Width="80"/>
+                    <DataGridTextColumn Header="Raza" Binding="{Binding Raza}" Width="80"/>
+                    <DataGridTextColumn Header="Color de Pelo" Binding="{Binding ColorPelo}" Width="120"/>
+                    <DataGridTextColumn Header="Fecha de Registro" Binding="{Binding Fecha, StringFormat='dd/MM/yyyy'}" />
+                </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
     </Grid>

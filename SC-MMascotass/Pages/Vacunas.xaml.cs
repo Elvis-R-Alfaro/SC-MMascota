@@ -47,10 +47,16 @@ namespace SC_MMascotass.Pages
 
         private void btnNuevoCliente_Click(object sender, RoutedEventArgs e)
         {
-
-            vacunas = vacuna.MonstrarRegistro(txtAuCliente.Text);
-            dgVacunas.SelectedValuePath = "Mascota";
-            dgVacunas.ItemsSource = vacunas;
+            if (string.IsNullOrWhiteSpace(txtAuCliente.Text))
+            {
+                MessageBox.Show("Ingrese una mascota a buscar");
+            }
+            else
+            {
+                vacunas = vacuna.MonstrarRegistro(txtAuCliente.Text);
+                dgVacunas.SelectedValuePath = "Mascota";
+                dgVacunas.ItemsSource = vacunas;
+            }
         }
 
         private void CargarVacunasCombo()
@@ -85,9 +91,25 @@ namespace SC_MMascotass.Pages
         }
 
 
+        private bool VerificarValores()
+        {
+            if (string.IsNullOrWhiteSpace(txtAuCliente.Text))
+            {
+                MessageBox.Show("¡Ingrese el Nombre de la Mascota!");
+                return false;
+            }
+            if (cmbVacuna.SelectedIndex.Equals(-1))
+            {
+                MessageBox.Show("Por favor seleccione una vacuna");
+                return false;
+            }
+
+            return true;
+        }
+
         private void btnAgregarVacuna_Click(object sender, RoutedEventArgs e)
         {
-            if (txtAuCliente.Text != string.Empty)
+            if (VerificarValores())
             {
 
 
@@ -116,11 +138,9 @@ namespace SC_MMascotass.Pages
                     vacunas = vacuna.MonstrarRegistro(txtAuCliente.Text);
                     dgVacunas.SelectedValuePath = "Mascota";
                     dgVacunas.ItemsSource = vacunas;
+                    cmbVacuna.Text = string.Empty;
+                    txtAuCliente.Text = string.Empty;
                 }
-            }
-            else
-            {
-                MessageBox.Show("Debe de Buscar el Historia de una Mascota para poder Agregar una Vacuna");
             }
         }
 

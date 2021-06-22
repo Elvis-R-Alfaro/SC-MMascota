@@ -19,14 +19,16 @@ namespace SC_MMascotass
         public int IdHistorialVacunacion { get; set; }
 
         public string Mascota { get; set; }
+        public string Cliente { get; set; }
         public string Producto { get; set; }
         public DateTime Fecha { get; set; }
 
         public HistorialVacunacion() { }
-        public HistorialVacunacion(int idhistorialvacunacion, string mascota, string producto, DateTime fecha)
+        public HistorialVacunacion(int idhistorialvacunacion, string mascota, string cliente, string producto, DateTime fecha)
         {
             IdHistorialVacunacion = idhistorialvacunacion;
             Mascota = mascota;
+            Cliente = cliente;
             Producto = producto;
             Fecha = fecha;
 
@@ -43,11 +45,13 @@ namespace SC_MMascotass
             try
             {
                 //Query de seleccion
-                string query = @"SELECT Veterinaria.Mascota.AliasMascota, Veterinaria.Inventario.NombreProducto, Veterinaria.HistorialVacunacion.Fecha, Veterinaria.HistorialVacunacion.IdHistorialVacunacion
-                        FROM     Veterinaria.Mascota INNER JOIN
-                                          Veterinaria.HistorialVacunacion ON Veterinaria.Mascota.IdMascota = Veterinaria.HistorialVacunacion.IdMascota INNER JOIN
-                                          Veterinaria.Inventario ON Veterinaria.HistorialVacunacion.IdProducto = Veterinaria.Inventario.IdProducto INNER JOIN
-                                          Veterinaria.Categoria ON Veterinaria.Inventario.IdCategoria = Veterinaria.Categoria.IdCategoria
+                string query = @"SELECT Veterinaria.Mascota.AliasMascota, Veterinaria.Inventario.NombreProducto, Veterinaria.HistorialVacunacion.Fecha, Veterinaria.HistorialVacunacion.IdHistorialVacunacion, Veterinaria.Cliente.NombreCliente, 
+                  Veterinaria.Cliente.IdCliente
+                 FROM     Veterinaria.Mascota INNER JOIN
+                  Veterinaria.HistorialVacunacion ON Veterinaria.Mascota.IdMascota = Veterinaria.HistorialVacunacion.IdMascota INNER JOIN
+                  Veterinaria.Inventario ON Veterinaria.HistorialVacunacion.IdProducto = Veterinaria.Inventario.IdProducto INNER JOIN
+                  Veterinaria.Categoria ON Veterinaria.Inventario.IdCategoria = Veterinaria.Categoria.IdCategoria INNER JOIN
+                  Veterinaria.Cliente ON Veterinaria.Mascota.IdCliente = Veterinaria.Cliente.IdCliente
                         WHERE  Veterinaria.Mascota.AliasMascota = @nombre";
 
                 //Establcer la coneccion
@@ -68,6 +72,7 @@ namespace SC_MMascotass
                         {
                             IdHistorialVacunacion =Convert.ToInt32(rdr["IdHistorialVacunacion"]),
                             Mascota = rdr["AliasMascota"].ToString(),
+                            Cliente = rdr["NombreCliente"].ToString(),
                             Producto =rdr["NombreProducto"].ToString(),
                             Fecha = (DateTime)rdr["Fecha"]
                         });

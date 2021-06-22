@@ -19,6 +19,7 @@ namespace SC_MMascotass.Pages
         private Mascota mascota = new Mascota();
         private Cliente cliente = new Cliente();
 
+
         //Variable de id
         public static int ides;
         public FormMascotas(bool visible)
@@ -44,7 +45,7 @@ namespace SC_MMascotass.Pages
                 dtpFechaNacimiento.Text = mascota.Fecha.ToString();
 
                 cliente = cliente.BuscarCliente(mascota.IdCliente);
-                txtAuCliente.Text = cliente.NombreCliente;
+                txtAuCliente.Text = cliente.Nombre_Cliente;
             }
 
         }
@@ -139,27 +140,27 @@ namespace SC_MMascotass.Pages
 
         private bool VerificarValores()
         {
-            if (txtAuCliente.Text == string.Empty)
+            if (string.IsNullOrWhiteSpace(txtAuCliente.Text))
             {
                 MessageBox.Show("¡Ingrese el Nombre del Cliente!");
                 return false;
             }
-            else if (txtAliasMascota.Text == string.Empty)
+            else if (string.IsNullOrWhiteSpace(txtAliasMascota.Text))
             {
                 MessageBox.Show("¡Ingrese el Nombre de la Mascota!");
                 return false;
             }
-            else if (txtEspecie.Text == string.Empty)
+            else if (string.IsNullOrWhiteSpace(txtEspecie.Text))
             {
                 MessageBox.Show("¡Ingrese la especie de la Mascota!");
                 return false;
             }
-            else if (txtRaza.Text == string.Empty)
+            else if (string.IsNullOrWhiteSpace(txtRaza.Text))
             {
                 MessageBox.Show("¡Ingrese la raza de la Mascota!");
                 return false;
             }
-            else if (txtColorPelo.Text == string.Empty)
+            else if (string.IsNullOrWhiteSpace(txtColorPelo.Text))
             {
                 MessageBox.Show("¡Ingrese el Color de Pelo de la mascota!");
                 return false;
@@ -176,13 +177,13 @@ namespace SC_MMascotass.Pages
             cliente = cliente.BuscarCliente(ides);
 
             cliente = cliente.BuscarClientID(txtAuCliente.Text);
-            mascota.IdCliente = cliente.IdCliente;
-            cliente.NombreCliente = txtAuCliente.Text;
+            mascota.IdCliente = cliente.ID;
+            cliente.Nombre_Cliente = txtAuCliente.Text;
             mascota.AliasMascota = txtAliasMascota.Text;
             mascota.ColorPelo = txtColorPelo.Text;
             mascota.Especie = txtEspecie.Text;
             mascota.Raza = txtRaza.Text;
-            mascota.Fecha = dtpFechaNacimiento.DisplayDate.Date;
+            mascota.Fecha = dtpFechaNacimiento.DisplayDate;
 
         }
         private void btnGuardar_Click(object sender, RoutedEventArgs e)
@@ -208,6 +209,7 @@ namespace SC_MMascotass.Pages
                 finally
                 {
                     Limpiar();
+                    this.Close();
                 }
             }
         }
@@ -261,6 +263,7 @@ namespace SC_MMascotass.Pages
                 finally
                 {
                     Limpiar();
+                    this.Close();
                 }
             }
         }
@@ -268,6 +271,11 @@ namespace SC_MMascotass.Pages
         private void btnRegresar_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void btnRestablecer_Click(object sender, RoutedEventArgs e)
+        {
+            Limpiar();
         }
     }
 }

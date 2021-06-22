@@ -75,7 +75,12 @@
             </Button>
         </StackPanel>
         <StackPanel Grid.Row="2">
-            <DataGrid Name="dgClientes" AutoGenerateColumns="True" IsReadOnly="True"></DataGrid>
+            <DataGrid Name="dgClientes" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding Source=categorias}" MaxHeight="310" ColumnWidth="*">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+                    <DataGridTextColumn Header="Nombre de la Categoría" Binding="{Binding NombreCategoria}" />
+                </DataGrid.Columns>
+            </DataGrid>
         </StackPanel>
     </Grid>
 </UserControl>

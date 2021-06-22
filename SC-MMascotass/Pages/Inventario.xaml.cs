@@ -46,7 +46,7 @@ namespace SC_MMascotass.Pages
         private void btnEditar_Click(object sender, RoutedEventArgs e)
         {
             if (dgInventario.SelectedValue == null)
-                MessageBox.Show("Por favor selecciona un Producto");
+                MessageBox.Show("Por favor selecciona un producto");
             else
             {
                 FormInventario.ides = Convert.ToInt32(dgInventario.SelectedValue);
@@ -60,7 +60,7 @@ namespace SC_MMascotass.Pages
             try
             {
                 if (dgInventario.SelectedValue == null)
-                    MessageBox.Show("Por favor selecciona un producto desde el listad");
+                    MessageBox.Show("Por favor, seleccione un producto de la lista");
                 else
                 {
                     //Monstrar mensjae de confirmacion

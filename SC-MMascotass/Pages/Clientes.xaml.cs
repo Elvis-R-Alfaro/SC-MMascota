@@ -35,14 +35,14 @@ namespace SC_MMascotass.Pages
         private void ObtenerClientes()
         {
             clientes = cliente.MonstrarCliente();
-            dgClientes.SelectedValuePath = "IdCliente";
+            dgClientes.SelectedValuePath = "ID";
             dgClientes.ItemsSource = clientes;
         }
 
         private void btnEditar_Click(object sender, RoutedEventArgs e)
         {
             if (dgClientes.SelectedValue == null)
-                MessageBox.Show("Por favor selecciona un Clientes");
+                MessageBox.Show("Por favor selecciona un cliente de la lista");
             else
             {
                 FormCliente.ides = Convert.ToInt32(dgClientes.SelectedValue);
@@ -56,11 +56,11 @@ namespace SC_MMascotass.Pages
             try
             {
                 if (dgClientes.SelectedValue == null)
-                    MessageBox.Show("Por favor selecciona un Cliente desde el listad");
+                    MessageBox.Show("Por favor selecciona un Cliente de la lista");
                 else
                 {
                     //Monstrar mensjae de confirmacion
-                    MessageBoxResult result = MessageBox.Show("¿Deseas eliminar el cliente?", "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                    MessageBoxResult result = MessageBox.Show("¿Deseas eliminar el Cliente?", "Confirmar", MessageBoxButton.YesNo, MessageBoxImage.Warning);
 
                     if (result == MessageBoxResult.Yes)
                     {
@@ -72,7 +72,7 @@ namespace SC_MMascotass.Pages
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Ha ocurrido un error al eliminar el cliente...");
+                MessageBox.Show("Ha ocurrido un error al Eliminar el cliente...");
                 Console.WriteLine(ex.Message);
             }
             finally
