@@ -14,7 +14,7 @@ namespace SC_MMascotass
     {
         //Variable miembro
         private static string connectionString = ConfigurationManager.ConnectionStrings["SC_MMascotass.Properties.Settings.MascotasConnectionString"].ConnectionString;
-        private SqlConnection SqlConnection = new SqlConnection(connectionString);
+        private SqlConnection sqlConnection = new SqlConnection(connectionString);
 
         //Propiedades
         public int Id { get; set; }
@@ -51,29 +51,25 @@ namespace SC_MMascotass
 
             try
             {
-                //Query de seleccion
-                string query = @"SELECT * FROM Usuarios.usuario
-                                WHERE username = @username";
-
-                SqlConnection.Open();
+                //Crear comando SQL
+                SqlCommand sqlCommand = new SqlCommand("BuscarUsuario", sqlConnection);
+                sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
 
                 //Establecer los valores de los parámetros
-                
-
-                //Crear comando SQL
-                SqlCommand sqlCommand = new SqlCommand(query, SqlConnection);
                 sqlCommand.Parameters.AddWithValue("@username", username);
+
+                sqlConnection.Open();
 
                 using (SqlDataReader rdr = sqlCommand.ExecuteReader())
                 {
                     while (rdr.Read())
                     {
                         //Obtener los valores del usuarios si la consulta retorna valores
-                        usuario.Id = Convert.ToInt32(rdr["id"]);
-                        usuario.NombreCompleto = rdr["nombreCompleto"].ToString();
-                        usuario.Username = rdr["username"].ToString();
-                        usuario.Password = rdr["password"].ToString();
-                        usuario.Estado = Convert.ToBoolean(rdr["estado"]);
+                        usuario.Id = Convert.ToInt32(rdr["IdUsuario"]);
+                        usuario.NombreCompleto = rdr["Nombre"].ToString();
+                        usuario.Username = rdr["Usuario"].ToString();
+                        usuario.Password = rdr["Clave"].ToString();
+                        usuario.Estado = Convert.ToBoolean(rdr["Estado"]);
                     }
 
                 }
@@ -87,7 +83,49 @@ namespace SC_MMascotass
             }
             finally {
                 //Cerrar la seccion
-                SqlConnection.Close();
+                sqlConnection.Close();
+            }
+        }
+
+        public List<Usuario> MostrarUsuario()
+        {
+            //Iniciamos la lista vacia de categorias
+            List<Usuario> usuarios = new List<Usuario>();
+
+            try
+            {
+                //Crear comando SQL
+                SqlCommand sqlCommand = new SqlCommand("MostrarUsuario", sqlConnection);
+                sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
+
+                //Establcer la coneccion
+                sqlConnection.Open();
+
+                //Obtener los datos de las categorias
+                using (SqlDataReader rdr = sqlCommand.ExecuteReader())
+                {
+                    while (rdr.Read())
+                    {
+                        usuarios.Add(new Usuario{ 
+                            Id = Convert.ToInt32(rdr["IdUsuario"]),
+                            NombreCompleto = rdr["Nombre"].ToString(), 
+                            Username = rdr["Usuario"].ToString(),
+                            Password = rdr["Clave"].ToString(),
+                            Estado = Convert.ToBoolean(rdr["Estado"])
+                        });
+                    }
+                }
+                return usuarios;
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            finally
+            {
+                //Cerrar la conexion
+                sqlConnection.Close();
             }
         }
 

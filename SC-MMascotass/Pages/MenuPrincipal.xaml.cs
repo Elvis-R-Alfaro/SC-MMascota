@@ -69,5 +69,20 @@ namespace SC_MMascotass
         {
             AgregarForm(new Pages.Vacunas());
         }
+
+        private void btnPersonal_Click(object sender, RoutedEventArgs e)
+        {
+            AgregarForm(new Pages.Personal());
+        }
+
+        private void btnUsuarios_Click(object sender, RoutedEventArgs e)
+        {
+            AgregarForm(new Pages.Usuarios());
+        }
+
+        private void btnReportes_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

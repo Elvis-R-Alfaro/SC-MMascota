@@ -32,7 +32,6 @@ namespace SC_MMascotass
 
         private void btnNuevo_Click(object sender, RoutedEventArgs e)
         {
-            FormCategorias.ides = '0';
             FormCategorias categoria = new FormCategorias(false);
             categoria.Show();
         }

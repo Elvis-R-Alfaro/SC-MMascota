@@ -115,13 +115,27 @@
                 <TextBox Name="txtAliasMascota" FontSize="15" Grid.Column="1" Grid.Row="1" Margin="0 4 0 0"/>
 
                 <DockPanel Grid.Row="2" Grid.Column="0">
-                    <Label Content="Especie"  FontSize="15" VerticalAlignment="Center" Margin="0 4 0 0" DockPanel.Dock="Left"/>
-                    <TextBox Name="txtEspecie" FontSize="15" Margin="0 4 4 0" Width="auto"/>
+                    <Label Content="Sexo"  FontSize="15" VerticalAlignment="Center" Margin="0 4 0 0" DockPanel.Dock="Left"/>
+                    <ComboBox Name="cmbsexo" FontSize="15" Margin="0 4 4 0" Width="auto">
+                        <ComboBoxItem>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock >Masculino</TextBlock>
+                            </StackPanel>
+                        </ComboBoxItem>
+                        <ComboBoxItem>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock>Femenino</TextBlock>
+                            </StackPanel>
+                        </ComboBoxItem>
+                    </ComboBox>
                 </DockPanel>
 
-                <DockPanel Grid.Row="2" Grid.Column="1">
-                    <Label Content="Raza"  FontSize="15" VerticalAlignment="Center" Margin="0 4 0 0" DockPanel.Dock="Left"/>
-                    <TextBox Name="txtRaza" FontSize="15" Margin="0 4 0 0" Width="auto"/>
+                <DockPanel Grid.Row="2" Grid.Column="1" >
+                    <Label Content="Raza"  FontSize="15" VerticalAlignment="Center" Margin="0 4 0 0" DockPanel.Dock="Left"  />
+                    <ComboBox Name="cmbraza" FontSize="15" Margin="0,4,0,0.4" Width="259" />
+                    <Button Width="50"  Grid.Column="2" ToolTip="Nueva Raza" Name="btnNuevaRaza" Background="#FCA311" Click="btnNuevaRaza_Click"  Margin="0 4 0 0" HorizontalAlignment="Left">
+                        <Image Source="/Imagenes/iconos/nuevo.png" Width="20"/>
+                    </Button>
                 </DockPanel>
 
                 <DockPanel Grid.Row="3" Grid.Column="0">
@@ -138,8 +152,8 @@
             </Grid>
         </StackPanel>
         <Border Height="150" BorderBrush="Black"   
-        BorderThickness="1" Margin="389,35,0,109" Grid.Row="2" Background="White">
-            <ScrollViewer VerticalScrollBarVisibility="Auto">
+        BorderThickness="1" Margin="389,34.8,-0.4,110.4" Grid.Row="2" Background="White">
+            <ScrollViewer VerticalScrollBarVisibility="Auto" Margin="389,34.8,-0.4,110.4">
                 <StackPanel Name="resultStack"></StackPanel>
             </ScrollViewer>
         </Border>

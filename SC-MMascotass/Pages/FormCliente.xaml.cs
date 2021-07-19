@@ -28,7 +28,7 @@ namespace SC_MMascotass.Pages
             MonstrarBotones(visible);
 
             //Validacion de cargar datos
-            if (ides != 0)
+            if (visible)
             {
                 cliente = cliente.BuscarCliente(ides);
                 txtNombre.Text = cliente.Nombre_Cliente;

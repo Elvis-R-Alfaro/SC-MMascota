@@ -42,7 +42,6 @@ namespace SC_MMascotass.Pages
             border.Visibility = System.Windows.Visibility.Collapsed;
 
             //Cargar el combobox
-            CargarVacunasCombo();
         }
 
         private void btnNuevoCliente_Click(object sender, RoutedEventArgs e)
@@ -59,48 +58,12 @@ namespace SC_MMascotass.Pages
             }
         }
 
-        private void CargarVacunasCombo()
-        {
-            
-            try
-            {
-                string query = "SELECT * FROM Veterinaria.Inventario INNER JOIN Veterinaria.Categoria ON Veterinaria.Categoria.IdCategoria = Veterinaria.Inventario.IdCategoria WHERE Veterinaria.Categoria.NombreCategoria = 'Vacunas'";
-
-                sqlConnection.Open();
-
-                //Crear el comando sql
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
-
-                SqlDataReader dr = sqlCommand.ExecuteReader();
-                while (dr.Read())
-                {
-                    cmbVacuna.Items.Add(dr["NombreProducto"].ToString());
-                    cmbVacuna.SelectedValuePath = dr["IdProducto"].ToString();
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-            finally
-            {
-                //Cerrar la conexion
-                sqlConnection.Close();
-            }
-
-        }
-
 
         private bool VerificarValores()
         {
             if (string.IsNullOrWhiteSpace(txtAuCliente.Text))
             {
                 MessageBox.Show("¡Ingrese el Nombre de la Mascota!");
-                return false;
-            }
-            if (cmbVacuna.SelectedIndex.Equals(-1))
-            {
-                MessageBox.Show("Por favor seleccione una vacuna");
                 return false;
             }
 
@@ -119,7 +82,6 @@ namespace SC_MMascotass.Pages
                     mascota = mascota.BuscarMascotaNombre(txtAuCliente.Text);
 
                     Vacunaciones.IdMascota = mascota.IdMascota;
-                    Vacunaciones.IdProducto = Convert.ToInt32(cmbVacuna.SelectedValuePath);
                     Vacunaciones.Fecha = DateTime.Now;
 
                     //Insertar los datos de la vacuna
@@ -138,7 +100,6 @@ namespace SC_MMascotass.Pages
                     vacunas = vacuna.MonstrarRegistro(txtAuCliente.Text);
                     dgVacunas.SelectedValuePath = "Mascota";
                     dgVacunas.ItemsSource = vacunas;
-                    cmbVacuna.Text = string.Empty;
                     txtAuCliente.Text = string.Empty;
                 }
             }
@@ -151,42 +112,7 @@ namespace SC_MMascotass.Pages
 
         private void txtAuCliente_KeyUp_1(object sender, KeyEventArgs e)
         {
-            bool found = false;
-            var border = (autoCompleteCategorias.Parent as ScrollViewer).Parent as Border;
-            var data = Mascota.MonstrarMascotas23();
-
-
-            string query = (sender as TextBox).Text;
-
-            if (query.Length == 0)
-            {
-                // Clear   
-                autoCompleteCategorias.Children.Clear();
-                border.Visibility = System.Windows.Visibility.Collapsed;
-            }
-            else
-            {
-                border.Visibility = System.Windows.Visibility.Visible;
-            }
-
-            // Clear the list   
-            autoCompleteCategorias.Children.Clear();
-
-            // Add the result   
-            foreach (var obj in data)
-            {
-                if (obj.ToLower().StartsWith(query.ToLower()))
-                {
-                    // The word starts with this... Autocomplete must work   
-                    addItem(obj);
-                    found = true;
-                }
-            }
-
-            if (!found)
-            {
-                autoCompleteCategorias.Children.Add(new TextBlock() { Text = "No se ha encontrado" });
-            }
+            
         }
 
         private void addItem(string text)
@@ -231,6 +157,46 @@ namespace SC_MMascotass.Pages
         private void txtVacuna_KeyUp(object sender, KeyEventArgs e)
         {
 
+        }
+
+        private void txtAuCliente_KeyUp(object sender, KeyEventArgs e)
+        {
+            bool found = false;
+            var border = (autoCompleteCategorias.Parent as ScrollViewer).Parent as Border;
+            var data = Mascota.MonstrarMascotas23();
+
+
+            string query = (sender as TextBox).Text;
+
+            if (query.Length == 0)
+            {
+                // Clear   
+                autoCompleteCategorias.Children.Clear();
+                border.Visibility = System.Windows.Visibility.Collapsed;
+            }
+            else
+            {
+                border.Visibility = System.Windows.Visibility.Visible;
+            }
+
+            // Clear the list   
+            autoCompleteCategorias.Children.Clear();
+
+            // Add the result   
+            foreach (var obj in data)
+            {
+                if (obj.ToLower().StartsWith(query.ToLower()))
+                {
+                    // The word starts with this... Autocomplete must work   
+                    addItem(obj);
+                    found = true;
+                }
+            }
+
+            if (!found)
+            {
+                autoCompleteCategorias.Children.Add(new TextBlock() { Text = "No se ha encontrado" });
+            }
         }
     }
 }

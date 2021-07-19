@@ -26,8 +26,8 @@ namespace SC_MMascotass.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source = (local)\\MSSQLSERVER2019; Initial Catalog = scmascotas; Integrated S" +
-            "ecurity = true")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source = (local)\\MSSQLSERVER2019; Initial Catalog = scmascotas2; Integrated " +
+            "Security = true")]
         public string MascotasConnectionString {
             get {
                 return ((string)(this["MascotasConnectionString"]));

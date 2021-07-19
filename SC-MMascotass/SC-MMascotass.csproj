@@ -35,6 +35,24 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1449.0\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1449.0\lib\net40\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Design, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1449.0\lib\net40\Microsoft.ReportViewer.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1449.0\lib\net40\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1449.0\lib\net40\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Configuration.ConfigurationManager, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -56,6 +74,7 @@
     </Reference>
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -76,13 +95,13 @@
     </ApplicationDefinition>
     <Compile Include="Cliente.cs" />
     <Compile Include="Categoria.cs" />
-    <Compile Include="Categorias.xaml.cs">
+    <Compile Include="Pages\Categorias.xaml.cs">
       <DependentUpon>Categorias.xaml</DependentUpon>
     </Compile>
     <Compile Include="HistorialVacunacion.cs" />
     <Compile Include="InventarioC.cs" />
     <Compile Include="Mascota.cs" />
-    <Compile Include="MenuPrincipal.xaml.cs">
+    <Compile Include="Pages\MenuPrincipal.xaml.cs">
       <DependentUpon>MenuPrincipal.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Clientes.xaml.cs">
@@ -94,11 +113,26 @@
     <Compile Include="Pages\FormCliente.xaml.cs">
       <DependentUpon>FormCliente.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\FormConsulta.xaml.cs">
+      <DependentUpon>FormConsulta.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\FormEspecie.xaml.cs">
+      <DependentUpon>FormEspecie.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\FormInventario.xaml.cs">
       <DependentUpon>FormInventario.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\FormMascotas.xaml.cs">
       <DependentUpon>FormMascotas.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\FormPersonal.xaml.cs">
+      <DependentUpon>FormPersonal.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\FormRaza.xaml.cs">
+      <DependentUpon>FormRaza.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\FormUsuarios.xaml.cs">
+      <DependentUpon>FormUsuarios.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Inventario.xaml.cs">
       <DependentUpon>Inventario.xaml</DependentUpon>
@@ -106,16 +140,40 @@
     <Compile Include="Pages\Mascotas.xaml.cs">
       <DependentUpon>Mascotas.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Personal.xaml.cs">
+      <DependentUpon>Personal.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Usuarios.xaml.cs">
+      <DependentUpon>Usuarios.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Vacunas.xaml.cs">
       <DependentUpon>Vacunas.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Reportes\BucarPersona.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reportes\BucarPersona.Designer.cs">
+      <DependentUpon>BucarPersona.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\DataSetPrincipal.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetPrincipal.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reportes\ReporteBuscarCargo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reportes\ReporteBuscarCargo.Designer.cs">
+      <DependentUpon>ReporteBuscarCargo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="vacunaciones.cs" />
-    <Page Include="Categorias.xaml">
+    <Page Include="Pages\Categorias.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="IniciarSesion.xaml">
+    <Page Include="Pages\IniciarSesion.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -123,11 +181,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="IniciarSesion.xaml.cs">
+    <Compile Include="Pages\IniciarSesion.xaml.cs">
       <DependentUpon>IniciarSesion.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="MenuPrincipal.xaml">
+    <Page Include="Pages\MenuPrincipal.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -143,6 +201,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\FormConsulta.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\FormEspecie.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\FormInventario.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -151,11 +217,31 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\FormPersonal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\FormRaza.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\FormUsuarios.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Inventario.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Mascotas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Personal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Usuarios.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -182,25 +268,55 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\BucarPersona.resx">
+      <DependentUpon>BucarPersona.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\ReporteBuscarCargo.resx">
+      <DependentUpon>ReporteBuscarCargo.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <None Include="README.md" />
+    <None Include="Reportes\DataSetPrincipal.xsc">
+      <DependentUpon>DataSetPrincipal.xsd</DependentUpon>
+    </None>
+    <None Include="Reportes\DataSetPrincipal.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetPrincipal.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Reportes\DataSetPrincipal.xss">
+      <DependentUpon>DataSetPrincipal.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="log-in.png" />
+    <Resource Include="Imagenes\log-in.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="crossed.png" />
+    <Resource Include="Imagenes\crossed.png" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
     <Content Include="database\databasequery.sql" />
+    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="SqlServerTypes\x64\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Imagenes\injection.png" />
     <Resource Include="Imagenes\iconos\buscarWH.png" />
     <Resource Include="Imagenes\iconos\editar.png" />

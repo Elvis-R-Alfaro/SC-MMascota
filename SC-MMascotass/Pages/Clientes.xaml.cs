@@ -26,9 +26,7 @@ namespace SC_MMascotass.Pages
 
         private void btnNuevo_Click(object sender, RoutedEventArgs e)
         {
-            FormCliente.ides = '0';
-            FormCliente cliente = new FormCliente(false);          
-           
+            FormCliente cliente = new FormCliente(false);                    
             cliente.Show();
         }
 

@@ -33,7 +33,7 @@ namespace SC_MMascotass.Pages
             border.Visibility = System.Windows.Visibility.Collapsed;
 
             //Validacion de cargar datos
-            if (ides != 0)
+            if (visible)
             {
                 inventario = inventario.BuscarProducto(ides);
                 categoria = categoria.BuscarCategoria(inventario.IdCategoria);

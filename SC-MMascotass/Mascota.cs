@@ -20,22 +20,30 @@ namespace SC_MMascotass
 
         public int IdMascota { get; set; }
         public int IdCliente { get; set; }
-        public string AliasMascota { get; set; }
-        public string Especie { get; set; }
-        public string Raza { get; set; }
-        public string ColorPelo { get; set; }
+        public string Cliente { get; set; }
+        public string NombreMascota { get; set; }
+        public int IdRaza { get; set; }
+        public string NombreRaza { get; set; }
+        public string Sexo { get; set; }
+        public int IdEspecie { get; set; }
+        public string Descripcion { get; set; }
+        public string Familia { get; set; }
         public DateTime Fecha { get; set; }
 
         //Constructor
         public Mascota() { }
-        public Mascota(int idmascota, int idcliente, string aliasmascota, string especie, string raza, string colorpelo, DateTime fecha)
+        public Mascota(int idmascota, int idcliente, string nombremascota, string cliente,string sexo, int idraza,  string nombreraza, int idespecie, string descripcion, string familia, DateTime fecha)
         {
             IdMascota = idmascota;
             IdCliente = idcliente;
-            AliasMascota = aliasmascota;
-            Especie = especie;
-            Raza = raza;
-            ColorPelo = colorpelo;
+            NombreMascota = nombremascota;
+            Cliente = cliente;
+            IdRaza = idraza;
+            NombreRaza = nombreraza;
+            Sexo = sexo;
+            IdEspecie = idespecie;
+            Descripcion = descripcion;
+            Familia = familia;
             Fecha = fecha;
         }
 
@@ -67,11 +75,99 @@ namespace SC_MMascotass
 
                 //Establecer los valores de los paramawtros
                 sqlCommand.Parameters.AddWithValue("@IdCliente", mascota.IdCliente);
-                sqlCommand.Parameters.AddWithValue("@AliasMascota", mascota.AliasMascota);
-                sqlCommand.Parameters.AddWithValue("@Especie", mascota.Especie);
-                sqlCommand.Parameters.AddWithValue("@Raza", mascota.Raza);
-                sqlCommand.Parameters.AddWithValue("@ColorPelo", mascota.ColorPelo);
+                sqlCommand.Parameters.AddWithValue("@AliasMascota", mascota.NombreMascota);
+                sqlCommand.Parameters.AddWithValue("@Raza", mascota.NombreRaza);
                 sqlCommand.Parameters.AddWithValue("@Fecha", mascota.Fecha);
+
+                //ejecutar el comando insertado
+                sqlCommand.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            finally
+            {
+                //Cerrar la conexion
+                sqlConnection.Close();
+            }
+        }
+
+        public void CrearEspecie(Mascota mascota)
+        {
+            try
+            {
+                //Crear el comando SQL
+                SqlCommand sqlCommand = new SqlCommand("CrearEspecie", sqlConnection);
+                sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
+
+                //Abrir conexion
+                sqlConnection.Open();
+
+                //Establecer los valores de los paramawtros
+                sqlCommand.Parameters.AddWithValue("@Descripcion", mascota.Descripcion);
+                sqlCommand.Parameters.AddWithValue("@Familia", mascota.Familia);
+
+                //ejecutar el comando insertado
+                sqlCommand.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            finally
+            {
+                //Cerrar la conexion
+                sqlConnection.Close();
+            }
+        }
+
+        public void EditarEspecie(Mascota mascota)
+        {
+            try
+            {
+                //Crear el comando SQL
+                SqlCommand sqlCommand = new SqlCommand("EditarEspecie", sqlConnection);
+                sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
+
+                //Abrir conexion
+                sqlConnection.Open();
+
+                //Establecer los valores de los paramawtros
+                sqlCommand.Parameters.AddWithValue("@Descripcion", mascota.Descripcion);
+                sqlCommand.Parameters.AddWithValue("@Familia", mascota.Familia);
+                sqlCommand.Parameters.AddWithValue("@IdEspecie", mascota.IdEspecie);
+
+                //ejecutar el comando insertado
+                sqlCommand.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            finally
+            {
+                //Cerrar la conexion
+                sqlConnection.Close();
+            }
+        }
+
+        public void EliminarEspecie(int id)
+        {
+            try
+            {
+                //Crear el comando SQL
+                SqlCommand sqlCommand = new SqlCommand("EliminarEspecie", sqlConnection);
+                sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
+
+                //Abrir conexion
+                sqlConnection.Open();
+
+                //Establecer los valores de los paramawtros
+                sqlCommand.Parameters.AddWithValue("@IdEspecie", id);
 
                 //ejecutar el comando insertado
                 sqlCommand.ExecuteNonQuery();
@@ -92,22 +188,19 @@ namespace SC_MMascotass
         /// Monstrar todas las categorias
         /// </summary>
         /// <returns>Listado de Categorias</returns>
-        public List<Mascota> MonstrarMascotas()
+        public List<Mascota> MostrarMascotas()
         {
             //Iniciamos la lista vacia de categorias
             List<Mascota> mascotas = new List<Mascota>();
 
             try
             {
-                //Query de seleccion
-                string query = @"SELECT *
-                                FROM Veterinaria.Mascota";
+                //Crear el comando SQL
+                SqlCommand sqlCommand = new SqlCommand("MostrarMascotas", sqlConnection);
+                sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
 
-                //Establcer la coneccion
+                //Abrir conexion
                 sqlConnection.Open();
-
-                //Crear el comando sql
-                SqlCommand sqlCommand = new SqlCommand(query, sqlConnection);
 
                 //Obtener los datos de las categorias
                 using (SqlDataReader rdr = sqlCommand.ExecuteReader())
@@ -116,11 +209,53 @@ namespace SC_MMascotass
                     {
                         mascotas.Add(new Mascota { IdMascota = Convert.ToInt32(rdr["IdMascota"]),
                             IdCliente = Convert.ToInt32(rdr["IdCliente"]),
-                            AliasMascota = rdr["AliasMascota"].ToString(),
-                            Especie = rdr["Especie"].ToString(),
-                            Raza = rdr["Raza"].ToString(),
-                            ColorPelo = rdr["ColorPelo"].ToString(),
-                            Fecha = (DateTime)rdr["Fecha"] });
+                            IdRaza = Convert.ToInt32(rdr["IdRaza"]),
+                            NombreMascota = rdr["NombreMascota"].ToString(),
+                            Cliente = rdr["NombreCliente"].ToString(),
+                            NombreRaza = rdr["NombreRaza"].ToString(),
+                            Sexo = rdr["Sexo"].ToString(),
+                            Fecha = (DateTime)rdr["FechaDeNacimiento"] });
+                    }
+                }
+                return mascotas;
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            finally
+            {
+                //Cerrar la conexion
+                sqlConnection.Close();
+            }
+        }
+
+        public List<Mascota> MostrarEspecies()
+        {
+            //Iniciamos la lista vacia de categorias
+            List<Mascota> mascotas = new List<Mascota>();
+
+            try
+            {
+                //Crear el comando SQL
+                SqlCommand sqlCommand = new SqlCommand("MostrarEspecies", sqlConnection);
+                sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
+
+                //Abrir conexion
+                sqlConnection.Open();
+
+                //Obtener los datos de las categorias
+                using (SqlDataReader rdr = sqlCommand.ExecuteReader())
+                {
+                    while (rdr.Read())
+                    {
+                        mascotas.Add(new Mascota
+                        {
+                            IdEspecie = Convert.ToInt32(rdr["IdEspecie"]),
+                            Descripcion = rdr["Descripcion"].ToString(),
+                            Familia = rdr["Familia"].ToString(),
+                        });
                     }
                 }
                 return mascotas;
@@ -252,10 +387,8 @@ namespace SC_MMascotass
                         laMascota.IdMascota = Convert.ToInt32(rdr["IdMascota"]);
                         laMascota.IdCliente = Convert.ToInt32(rdr["IdCliente"]);
 
-                        laMascota.AliasMascota = rdr["AliasMascota"].ToString();
-                        laMascota.Especie = rdr["Especie"].ToString();
-                        laMascota.Raza = rdr["Raza"].ToString();
-                        laMascota.ColorPelo = rdr["ColorPelo"].ToString();
+                        laMascota.NombreMascota = rdr["AliasMascota"].ToString();
+                        laMascota.NombreRaza = rdr["Raza"].ToString();
                         laMascota.Fecha = (DateTime)rdr["Fecha"];
                     }
                 }
@@ -342,10 +475,8 @@ namespace SC_MMascotass
                 //Establecer los valores de los parametros
                 sqlCommand.Parameters.AddWithValue("@IdMascota", mascota.IdMascota);
                 sqlCommand.Parameters.AddWithValue("@IdCliente", mascota.IdCliente);
-                sqlCommand.Parameters.AddWithValue("@AliasMascota", mascota.AliasMascota);
-                sqlCommand.Parameters.AddWithValue("@Especie", mascota.Especie);
-                sqlCommand.Parameters.AddWithValue("@Raza", mascota.Raza);
-                sqlCommand.Parameters.AddWithValue("@ColorPelo", mascota.ColorPelo);
+                sqlCommand.Parameters.AddWithValue("@AliasMascota", mascota.NombreMascota);
+                sqlCommand.Parameters.AddWithValue("@Raza", mascota.NombreRaza);
                 sqlCommand.Parameters.AddWithValue("@Fecha", mascota.Fecha);
 
                 //Ejecutar el comando de actualizar

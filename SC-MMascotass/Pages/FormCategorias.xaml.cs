@@ -26,7 +26,7 @@ namespace SC_MMascotass.Pages
             MonstrarBotones(visible);
 
             //Validacion de carga de datos
-            if (ides != 0)
+            if (visible)
             {
                 categoria = categoria.BuscarCategoria(ides);
                 txtCategoria.Text = categoria.NombreCategoria;

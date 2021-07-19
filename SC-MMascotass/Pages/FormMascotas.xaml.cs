@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+//Agregar los namespaces
+using System.Data.SqlClient;
+using System.Configuration;
 
 namespace SC_MMascotass.Pages
 {
@@ -19,12 +22,15 @@ namespace SC_MMascotass.Pages
         private Mascota mascota = new Mascota();
         private Cliente cliente = new Cliente();
 
+        private static string connectionString = ConfigurationManager.ConnectionStrings["SC_MMascotass.Properties.Settings.MascotasConnectionString"].ConnectionString;
+        private static SqlConnection sqlConnection = new SqlConnection(connectionString);
 
         //Variable de id
         public static int ides;
         public FormMascotas(bool visible)
         {
             InitializeComponent();
+            CargarRazasCombo();
 
             //Muestra u oculta los botones
             MonstrarBotones(visible);
@@ -34,14 +40,12 @@ namespace SC_MMascotass.Pages
             border.Visibility = System.Windows.Visibility.Collapsed;
 
             //VAlidacion de cargar los datos
-            if (ides != 0)
+            if (visible)
             {
                 mascota = mascota.BuscarMascota(ides);            
                 
-                txtAliasMascota.Text = mascota.AliasMascota;
-                txtColorPelo.Text = mascota.ColorPelo;
-                txtEspecie.Text = mascota.Especie;
-                txtRaza.Text = mascota.Raza;
+                txtAliasMascota.Text = mascota.NombreMascota;
+                //txtRaza.Text = mascota.Raza;
                 dtpFechaNacimiento.Text = mascota.Fecha.ToString();
 
                 cliente = cliente.BuscarCliente(mascota.IdCliente);
@@ -50,7 +54,36 @@ namespace SC_MMascotass.Pages
 
         }
 
-        
+        private void CargarRazasCombo()
+        {
+            try
+            {
+                //Crear el comando SQL
+                SqlCommand sqlCommand = new SqlCommand("CargarRazasCombo", sqlConnection);
+                sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
+
+                //Abrir conexion
+                sqlConnection.Open();
+
+                SqlDataReader dr = sqlCommand.ExecuteReader();
+                while (dr.Read())
+                {
+                    cmbraza.Items.Add(dr["NombreRaza"].ToString());
+                    cmbraza.SelectedValuePath = dr["IdRaza"].ToString();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                //Cerrar la conexion
+                sqlConnection.Close();
+            }
+        }
+
+
         //Autocompletar TextBox
         private void txtAuCliente_KeyUp(object sender, KeyEventArgs e)
         {
@@ -150,16 +183,16 @@ namespace SC_MMascotass.Pages
                 MessageBox.Show("¡Ingrese el Nombre de la Mascota!");
                 return false;
             }
-            else if (string.IsNullOrWhiteSpace(txtEspecie.Text))
-            {
-                MessageBox.Show("¡Ingrese la especie de la Mascota!");
-                return false;
-            }
-            else if (string.IsNullOrWhiteSpace(txtRaza.Text))
-            {
-                MessageBox.Show("¡Ingrese la raza de la Mascota!");
-                return false;
-            }
+            //else if (string.IsNullOrWhiteSpace(txtEspecie.Text))
+            //{
+            //    MessageBox.Show("¡Ingrese la especie de la Mascota!");
+            //    return false;
+            //}
+            //else if (string.IsNullOrWhiteSpace(txtRaza.Text))
+            //{
+            //    MessageBox.Show("¡Ingrese la raza de la Mascota!");
+            //    return false;
+            //}
             else if (string.IsNullOrWhiteSpace(txtColorPelo.Text))
             {
                 MessageBox.Show("¡Ingrese el Color de Pelo de la mascota!");
@@ -179,10 +212,8 @@ namespace SC_MMascotass.Pages
             cliente = cliente.BuscarClientID(txtAuCliente.Text);
             mascota.IdCliente = cliente.ID;
             cliente.Nombre_Cliente = txtAuCliente.Text;
-            mascota.AliasMascota = txtAliasMascota.Text;
-            mascota.ColorPelo = txtColorPelo.Text;
-            mascota.Especie = txtEspecie.Text;
-            mascota.Raza = txtRaza.Text;
+            mascota.NombreMascota = txtAliasMascota.Text;
+            //mascota.Raza = txtRaza.Text;
             mascota.Fecha = dtpFechaNacimiento.DisplayDate;
 
         }
@@ -237,8 +268,7 @@ namespace SC_MMascotass.Pages
             txtAliasMascota.Text = string.Empty;
             txtAuCliente.Text = string.Empty;
             txtColorPelo.Text = string.Empty;
-            txtEspecie.Text = string.Empty;
-            txtRaza.Text = string.Empty;
+            //txtRaza.Text = string.Empty;
         }
         private void btnAceptar_Click(object sender, RoutedEventArgs e)
         {
@@ -276,6 +306,12 @@ namespace SC_MMascotass.Pages
         private void btnRestablecer_Click(object sender, RoutedEventArgs e)
         {
             Limpiar();
+        }
+
+        private void btnNuevaRaza_Click(object sender, RoutedEventArgs e)
+        {
+            FormRaza raza = new FormRaza(false);
+            raza.Show();
         }
     }
 }

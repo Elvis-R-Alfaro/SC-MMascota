@@ -23,7 +23,7 @@
         <StackPanel Orientation="Vertical">
             
             <Label Content="Iniciar Sesión" FontSize="30"  HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Image Source="Imagenes/icono.png" Width="100"></Image>
+            <Image Source="/Imagenes/icono.png" Width="100"></Image>
             
         </StackPanel>
 
@@ -40,13 +40,13 @@
         <StackPanel Grid.Row="3" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Center" Margin="20">
             <Button Name="btnAceptar" Background="Transparent" FontSize="15" Grid.Row="3" Width="150" Height="75" Click="btnAceptar_Click" Margin="0 0 10 0">
                 <StackPanel>
-                    <Image Source="log-in.png" HorizontalAlignment="Center" Width="25" Height="25"/>
+                    <Image Source="/Imagenes/log-in.png" HorizontalAlignment="Center" Width="25" Height="25"/>
                     <TextBlock Text="Iniciar Sesión" HorizontalAlignment="Center"/>
                 </StackPanel>
             </Button>
             <Button Name="btnCerrar" FontSize="15" Grid.Row="3" Grid.Column="1" Width="150" Height="75" Background="Transparent" Click="btnCerrar_Click">
                 <StackPanel>
-                    <Image Source="crossed.png" HorizontalAlignment="Center" Width="25" Height="25"/>
+                    <Image Source="/Imagenes/crossed.png" HorizontalAlignment="Center" Width="25" Height="25"/>
                     <TextBlock Text="Cancelar" HorizontalAlignment="Center"/>
                 </StackPanel>
             </Button>

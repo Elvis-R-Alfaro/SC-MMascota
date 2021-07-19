@@ -21,8 +21,6 @@ namespace SC_MMascotass.Pages
     public partial class Mascotas : UserControl
     {
         private Mascota mascota = new Mascota();
-        
-        
         private List<Mascota> mascotas;
         public Mascotas()
         {
@@ -35,7 +33,6 @@ namespace SC_MMascotass.Pages
         private void btnNuevo_Click(object sender, RoutedEventArgs e)
         {
             // Mostrar el formulario de menú principal
-            FormMascotas.ides = '0';
             FormMascotas mascota = new FormMascotas(false);
             mascota.Show();
 
@@ -43,7 +40,7 @@ namespace SC_MMascotass.Pages
 
         private void ObtenerMascotas()
         {
-            mascotas = mascota.MonstrarMascotas();
+            mascotas = mascota.MostrarMascotas();
             dgClientes.SelectedValuePath = "IdMascota";
             dgClientes.ItemsSource = mascotas;
         }

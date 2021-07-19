@@ -76,6 +76,7 @@ CREATE TABLE Veterinaria.DetallesVenta(
 )
 GO
 
+
 CREATE TABLE Usuarios.Usuario (
 	id INT NOT NULL IDENTITY (500, 1),
 	nombreCompleto VARCHAR(255) NOT NULL,
@@ -85,6 +86,53 @@ CREATE TABLE Usuarios.Usuario (
 	CONSTRAINT PK_Usuario_id
 		PRIMARY KEY CLUSTERED (id)
 )
+
+CREATE TABLE Veterinaria.Razas(
+	IdRaza INT NOT NULL IDENTITY(1,1),
+	IdEspecie INT NOT NULL,
+	NombreRaza VARCHAR(50) NOT NULL,
+	Altura VARCHAR(50) NOT NULL,
+	RangoPeso VARCHAR(50) NOT NULL,
+	EsperanzaVida INT NOT NULL,
+	ActividadFisica VARCHAR(50) NOT NULL,
+	TipoDePelo VARCHAR(50) NOT NULL,
+)
+GO
+
+CREATE TABLE Veterinaria.Especies(
+	IdEspecie INT NOT NULL IDENTITY(1,1),
+	Descripcion VARCHAR(50) NOT NULL,
+	Familia VARCHAR(50) NOT NULL,
+)
+GO
+
+CREATE TABLE Veterinaria.ExpedienteAnimal(
+	IdExpedienteAnimal INT NOT NULL IDENTITY(1,1),
+	IdMascota INT NOT NULL,
+	FechaRegistro DATE NOT NULL,
+	IdUsuario INT NOT NULL,
+)
+GO
+
+CREATE TABLE Veterinaria.DetalleExpedienteAnimal(
+	IdDetalle INT NOT NULL IDENTITY(1,1),
+	IdExpediente INT NOT NULL,
+	Descripcion VARCHAR(50) NOT NULL,
+	Patologia VARCHAR(50) NOT NULL,
+	TratamientoRecomendado VARCHAR(50) NOT NULL,
+)
+GO
+
+CREATE TABLE Veterinaria.Personal(
+	IdUsuario INT NOT NULL IDENTITY(1,1),
+	Nombre VARCHAR(50) NOT NULL,
+	NumeroDeIdentidad VARCHAR(50) NOT NULL,
+	Telefono VARCHAR(50) NOT NULL,
+	Correo VARCHAR(50) NOT NULL,
+	Cargo VARCHAR(50) NOT NULL,
+)
+GO
+
 -- No puede existir nombres de usuarios repetidos
 ALTER TABLE Usuarios.Usuario
 	ADD CONSTRAINT AK_Usuarios_Usuario_username
